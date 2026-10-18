@@ -1,0 +1,68 @@
+/* Reset, tipografika, umumiy komponentlar (tugma, chip, eyebrow, reveal) */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 84px; }
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'cv11', 'ss03';
+  text-rendering: optimizeLegibility;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, p { margin: 0; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+::selection { background: var(--blue); color: #fff; }
+
+.container { width: 100%; max-width: calc(var(--maxw) + var(--gutter) * 2); margin: 0 auto; padding: 0 var(--gutter); }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  height: 52px; padding: 0 26px; border-radius: 999px;
+  font-size: 16px; font-weight: 600; letter-spacing: -0.01em; white-space: nowrap;
+  transition: background-color .25s var(--ease), color .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s;
+  will-change: transform;
+}
+.btn:active { transform: scale(.98); }
+.btn__arrow { display: inline-block; transition: transform .3s var(--ease); }
+.btn:hover .btn__arrow { transform: translateX(3px); }
+.btn--sm { height: 42px; padding: 0 18px; font-size: 14.5px; }
+.btn--block { width: 100%; }
+.btn--primary { background: var(--blue); color: #fff; box-shadow: 0 8px 24px -10px rgba(84, 88, 255, .7); }
+.btn--primary:hover { background: var(--blue-600); box-shadow: 0 12px 28px -10px rgba(84, 88, 255, .8); }
+.btn--ghost { background: rgba(255, 255, 255, .72); color: var(--ink); border: 1px solid rgba(11, 12, 22, .08); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.btn--ghost:hover { background: #fff; }
+.btn--light { background: #fff; color: var(--blue); }
+.btn--light:hover { background: var(--blue-50); }
+.btn--outline-light { color: #fff; border: 1px solid rgba(255, 255, 255, .45); }
+.btn--outline-light:hover { border-color: #fff; background: rgba(255, 255, 255, .08); }
+
+.link { font-weight: 600; color: var(--blue); transition: color .2s; }
+.link:hover { color: var(--blue-700); }
+
+.chip {
+  display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: 999px; white-space: nowrap; flex: none;
+  background: var(--blue-50); color: var(--blue); font-size: 12.5px; font-weight: 600; letter-spacing: .01em;
+}
+.chip--light { background: rgba(255, 255, 255, .16); color: #fff; }
+
+.eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; color: var(--ink-2); letter-spacing: -0.005em; }
+.eyebrow__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 4px rgba(84, 88, 255, .18); }
+
+/* ---------- reveal (IntersectionObserver, main.js) ---------- */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: var(--d, 0s); }
+.reveal.is-in { opacity: 1; transform: none; }
+
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}

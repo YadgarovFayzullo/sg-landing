@@ -1,0 +1,33 @@
+/* Yuqori menyu: sahna ustida shaffof, sahnadan keyin oq (.is-solid — main.js) */
+.nav { position: fixed; inset: 0 0 auto 0; z-index: 50; transition: background-color .35s var(--ease), box-shadow .35s var(--ease), transform .45s var(--ease); }
+.nav__inner { max-width: calc(var(--maxw) + var(--gutter) * 2); margin: 0 auto; padding: 0 var(--gutter); height: 76px; display: flex; align-items: center; gap: 40px; }
+.nav__logo { position: relative; display: block; }
+.nav__logo img { height: 33px; width: auto; }
+.nav__links { display: flex; gap: 30px; margin-left: 8px; }
+.nav__links a { font-size: 15px; font-weight: 500; color: var(--ink-2); transition: color .2s; }
+.nav__links a:hover { color: var(--blue); }
+.nav__cta { margin-left: auto; }
+.nav.is-solid { background: rgba(255, 255, 255, .86); backdrop-filter: saturate(1.6) blur(16px); -webkit-backdrop-filter: saturate(1.6) blur(16px); box-shadow: 0 1px 0 var(--line); }
+.nav__burger { display: none; width: 44px; height: 44px; margin-left: auto; position: relative; border-radius: 12px; }
+.nav__burger span { position: absolute; left: 12px; right: 12px; height: 2px; background: var(--ink); border-radius: 2px; transition: transform .3s var(--ease), top .3s var(--ease); }
+.nav__burger span:first-child { top: 17px; } .nav__burger span:last-child { top: 25px; }
+.nav.is-open .nav__burger span:first-child { top: 21px; transform: rotate(45deg); }
+.nav.is-open .nav__burger span:last-child { top: 21px; transform: rotate(-45deg); }
+.nav__mobile { display: none; }
+
+/* Logo: kunduzgi va tungi (och) variantlar — almashinuv theme-time.css da */
+.logo--night { position: absolute; left: 0; top: 0; opacity: 0; transition: opacity .9s var(--ease); }
+.logo--day { transition: opacity .9s var(--ease); }
+
+@media (max-width: 960px) {
+  .nav__links, .nav__cta { display: none; }
+  .nav__burger { display: block; }
+  .nav__mobile { display: flex; flex-direction: column; gap: 4px; padding: 8px var(--gutter) 22px; background: rgba(255, 255, 255, .96); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 0 20px 40px -24px rgba(0, 0, 0, .25); transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity .3s var(--ease), transform .3s var(--ease); position: absolute; left: 0; right: 0; top: 100%; }
+  .nav__mobile a:not(.btn) { padding: 12px 0; font-size: 18px; font-weight: 500; border-bottom: 1px solid var(--line); }
+  .nav__mobile .btn { margin-top: 14px; }
+  .nav.is-open { background: rgba(255, 255, 255, .96); }
+  .nav.is-open .nav__mobile { opacity: 1; transform: none; pointer-events: auto; }
+}
+@media (max-height: 520px) and (orientation: landscape) {
+  .nav__inner { height: 56px; }
+}

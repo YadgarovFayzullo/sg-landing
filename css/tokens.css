@@ -1,0 +1,21 @@
+/* =========================================================
+   Startup Garage — dizayn tokenlari
+   Shrift: Inter · Asosiy rang: #5458FF
+   ========================================================= */
+:root {
+  --blue: #5458FF;
+  --blue-600: #4347F0;
+  --blue-700: #3236D6;
+  --blue-50: #F0F1FF;
+  --blue-100: #E3E5FF;
+  --ink: #0B0C16;
+  --ink-2: #2A2C3A;
+  --muted: #6A6E82;
+  --line: #E7E8F0;
+  --bg: #FFFFFF;
+  --bg-soft: #F6F7FB;
+  --radius: 22px;
+  --gutter: clamp(16px, 4vw, 56px);
+  --maxw: 1240px;
+  --ease: cubic-bezier(.22, .8, .24, 1);
+}

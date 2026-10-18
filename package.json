@@ -1,0 +1,14 @@
+{
+  "name": "startup-garage-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Startup Garage — scroll-driven kanatli yo'l landing sahifasi",
+  "scripts": {
+    "dev": "python3 -m http.server 5180",
+    "format": "prettier --write \"**/*.{js,css,html,md}\"",
+    "check": "node --check js/main.js && node --check js/daytime.js && for f in js/data.js js/scene/*.js; do node --input-type=module --check < \"$f\" || exit 1; done"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  }
+}

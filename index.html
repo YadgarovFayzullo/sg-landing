@@ -7,19 +7,20 @@
   <meta name="description" content="Startup Garage — startaplar uchun to‘liq xizmat ko‘rsatuvchi venchur studio. G‘oyadan MVP’gacha, market fitdan investitsiyagacha — 18 oy davomida birga.">
   <meta name="theme-color" content="#5458FF">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/scene-1536.webp" fetchpriority="high">
-  <script>
-  // Kun vaqti: kun / kechqurun / tun — sahifa chizilishidan oldin o'rnatiladi (miltillashsiz)
-  (function () {
-    var q = (location.search.match(/[?&]time=(day|evening|night)/) || [])[1];
-    var h = new Date().getHours();
-    document.documentElement.dataset.time = q || (h >= 7 && h < 17 ? 'day' : h >= 17 && h < 20 ? 'evening' : h >= 5 && h < 7 ? 'evening' : 'night');
-  })();
-  </script>
-  <link rel="stylesheet" href="css/style.css">
+  <!-- kun vaqti — CSS dan oldin, blokirovchi: data-time birinchi kadrgacha o'rnatiladi -->
+  <script src="js/daytime.js"></script>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/stage.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/theme-time.css">
 </head>
 <body>
 
@@ -28,7 +29,7 @@
     <div class="nav__inner">
       <a class="nav__logo" href="#" aria-label="Startup Garage">
         <img class="logo logo--day" src="assets/logo.svg" alt="Startup Garage" width="112" height="33">
-        <img class="logo logo--neon" src="assets/logo-neon.svg" alt="" aria-hidden="true" width="112" height="33">
+        <img class="logo logo--night" src="assets/logo-light.svg" alt="" aria-hidden="true" width="112" height="33">
       </a>
       <nav class="nav__links" aria-label="Asosiy menyu">
         <a href="#biz">Biz haqimizda</a>
@@ -56,9 +57,7 @@
   <section class="journey" id="journey" aria-label="Startap sayohati">
     <div class="stage" id="stage">
       <canvas class="stage__canvas" id="scene" aria-hidden="true"></canvas>
-      <div class="stage__tint" aria-hidden="true"></div>
       <div class="stage__stars" aria-hidden="true"></div>
-      <canvas class="stage__sign" id="signGlow" aria-hidden="true"></canvas>
       <div class="stage__shade" aria-hidden="true"></div>
       <div class="stage__labels" id="labels" aria-hidden="true"></div>
 
@@ -82,7 +81,7 @@
         </div>
       </div>
 
-      <!-- stage card -->
+      <!-- stage card: matn #route dan olinadi (scene/overlay.js) -->
       <aside class="card" id="stageCard" aria-live="polite">
         <div class="card__top">
           <span class="chip" id="cardStep">Bosqich 01 / 05</span>
@@ -93,8 +92,8 @@
         </div>
         <div class="card__progress" id="cardProgress"><i></i><i></i><i></i><i></i><i></i></div>
         <div class="card__body" id="cardBody">
-          <h3 class="card__title" id="cardTitle">G‘oya</h3>
-          <p class="card__desc" id="cardDesc">Muammo va yechimni aniqlashtiramiz, bozorni tahlil qilamiz va g‘oyangizni real mijozlarda sinab ko‘ramiz.</p>
+          <h3 class="card__title" id="cardTitle"></h3>
+          <p class="card__desc" id="cardDesc"></p>
           <p class="card__label">Startup Garage yordami</p>
           <ul class="card__list" id="cardList"></ul>
           <p class="card__peers" id="cardPeers"></p>
@@ -123,7 +122,9 @@
       </div>
     </section>
 
-    <!-- ============ ROUTE / STAGES ============ -->
+    <!-- ============ ROUTE / STAGES ============
+         Bosqich matnlarining yagona manbasi: sahnadagi karta ham shu ro'yxatdan o'qiydi.
+         Tartib js/data.js dagi `stages` bilan bir xil bo'lishi shart. -->
     <section class="section section--soft" id="bosqichlar">
       <div class="container">
         <div class="head">
@@ -131,7 +132,48 @@
           <h2 class="h2 reveal">Besh bosqich. Bitta cho‘qqi.</h2>
           <p class="lead reveal">Startapingiz bosqichiga qarab g‘oyani aniqlashtirish, MVP, dastlabki foydalanuvchilar, o‘sish strategiyasi va investorlar bilan ishlashda yordam beramiz.</p>
         </div>
-        <ol class="route" id="route"></ol>
+        <ol class="route" id="route">
+          <li class="route__item reveal" style="--d:0s" data-peers-label="Bu bosqichda" data-peers="Echo, MedFinder">
+            <span class="route__n">01</span>
+            <span class="route__alt">0 m</span>
+            <h3>G‘oya</h3>
+            <p>Muammoni aniq belgilaymiz, bozorni tahlil qilamiz va g‘oyani real mijozlar bilan sinab ko‘ramiz.</p>
+            <ul><li>G‘oyani validatsiya qilish</li><li>Bozor va raqobat tahlili</li><li>Biznes modelni shakllantirish</li></ul>
+            <div class="route__bar"><span style="width:20%"></span></div>
+          </li>
+          <li class="route__item reveal" style="--d:.06s" data-peers-label="Bu bosqichda" data-peers="Zingo, Karmon AI, Edu Tizim">
+            <span class="route__n">02</span>
+            <span class="route__alt">1 200 m</span>
+            <h3>MVP</h3>
+            <p>Eng kerakli funksiyalar bilan mahsulotni tez ishga tushiramiz va birinchi foydalanuvchilarni topamiz.</p>
+            <ul><li>MVP’ni loyihalash va yaratish</li><li>Birinchi foydalanuvchilarni jalb qilish</li><li>Mahsulot metrikalari</li></ul>
+            <div class="route__bar"><span style="width:40%"></span></div>
+          </li>
+          <li class="route__item reveal" style="--d:.12s" data-peers-label="Bu bosqichdan o‘tganlar" data-peers="Braille Recognition, Xaridor, Dasyor">
+            <span class="route__n">03</span>
+            <span class="route__alt">2 400 m</span>
+            <h3>Market fit</h3>
+            <p>Mijozlar pul to‘lashga tayyor bo‘lgan qiymatni topamiz — narx va unit-ekonomikani sozlaymiz.</p>
+            <ul><li>Market fitni o‘lchash</li><li>Narx va unit-ekonomika</li><li>Mentorlik sessiyalari</li></ul>
+            <div class="route__bar"><span style="width:60%"></span></div>
+          </li>
+          <li class="route__item reveal" style="--d:.18s" data-peers-label="Bu bosqichda" data-peers="Magicbot, Kolingo, Darstop">
+            <span class="route__n">04</span>
+            <span class="route__alt">3 600 m</span>
+            <h3>O‘sish</h3>
+            <p>Marketing va sotuv tizimini quramiz, jamoani kengaytirib o‘sishni tezlashtiramiz.</p>
+            <ul><li>O‘sish strategiyasi</li><li>Marketing va sotuv tizimi</li><li>Jamoani kengaytirish</li></ul>
+            <div class="route__bar"><span style="width:80%"></span></div>
+          </li>
+          <li class="route__item reveal" style="--d:.24s" data-peers-label="Investitsiya olganlar" data-peers="Pulse EV, Mohirdev, Ish.uz">
+            <span class="route__n">05</span>
+            <span class="route__alt">4 800 m</span>
+            <h3>Investitsiya</h3>
+            <p>Pitch tayyorlaymiz, investorlar bilan uchrashuvlar tashkil qilamiz va xalqaro bozorga chiqishga yordam beramiz.</p>
+            <ul><li>Pitch-deck va Demo Day</li><li>Investorlar bilan uchrashuvlar</li><li>Xalqaro bozorga chiqish</li></ul>
+            <div class="route__bar"><span style="width:100%"></span></div>
+          </li>
+        </ol>
       </div>
     </section>
 
@@ -193,7 +235,28 @@
           <article class="win reveal"><span class="win__name">Magicbot</span><span class="win__sum">$150,000</span><span class="win__meta">ikki raund: $50K + $100K</span></article>
           <article class="win reveal"><span class="win__name">Ish.uz</span><span class="win__sum">$100,000</span><span class="win__meta">jalb qilingan investitsiya</span></article>
         </div>
-        <div class="peers reveal" id="peers"></div>
+        <div class="peers reveal">
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Zingo<small>EdTech · MVP</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Edu Tizim<small>EdTech · MVP</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Karmon AI<small>AI · MVP</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Magicbot<small>E-commerce · Growth</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">1pos<small>RetailTech · Scale</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">1clinic<small>MedTech · Scale</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Braille Recognition<small>AI · Growth</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Kolingo<small>AI, EdTech · Growth</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Darstop<small>EdTech · Growth</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Udemere<small>EdTech · Growth</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Wisdom<small>EdTech · Growth</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Xaridor<small>RetailTech · Growth</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">C-Control<small>PropTech · Growth</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Karly<small>Service · Growth</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Dasyor<small>E-commerce · Growth</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">NoteX<small>AI · MVP</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Secura<small>FinTech · MVP</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">MediCard<small>MedTech · MVP</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Dialix AI<small>AI · MVP</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Obuna24<small>SaaS · MVP</small></a>
+        </div>
       </div>
     </section>
 
@@ -263,7 +326,40 @@
           <p class="kicker reveal">FAQ</p>
           <h2 class="h2 reveal">Ko‘p beriladigan savollar.</h2>
         </div>
-        <div class="faq__list" id="faqList"></div>
+        <div class="faq__list">
+          <details class="faq__item reveal" open>
+            <summary>Startup Garage nima?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Startup Garage — startaplarning o‘sishini tezlashtirish uchun zarur vositalar, bilim va qo‘llab-quvvatlash bilan ta’minlaydigan intensiv, loyiha asosidagi dastur. Stenford Universitetining mashhur Startup Garage dasturidan ilhomlangan.</p>
+          </details>
+          <details class="faq__item reveal">
+            <summary>Startup Garage’ga kimlar murojaat qilishi mumkin?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Tadbirkorlikka ishtiyoqi bo‘lgan va innovatsion biznes g‘oyaga ega bo‘lgan har qanday shaxs. Biz barcha sohalardan va Markaziy Osiyodan kelgan tadbirkorlarni qabul qilamiz.</p>
+          </details>
+          <details class="faq__item reveal">
+            <summary>Dastur qancha davom etadi?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Rezidentlik dasturi 18 oy davomida startapingizni barqaror biznesga aylantirishga qaratilgan. Bootcamp dasturi startap yo‘lining barcha bosqichlarini — ideatsiyadan bozorga chiqishgacha qamrab oladi.</p>
+          </details>
+          <details class="faq__item reveal">
+            <summary>Dasturda qanday mavzular qamrab olinadi?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Startap asoslari, mahsulot rivojlanishi, mahsulotni ishga tushirish, moliya va mablag‘ yig‘ish, marketing va savdo, operatsiyalar va boshqaruv.</p>
+          </details>
+          <details class="faq__item reveal">
+            <summary>Qo‘shilish uchun to‘lov bormi?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Ha, dasturga qo‘shilish uchun to‘lov mavjud. Biroq va’da beruvchi tadbirkorlarni qo‘llab-quvvatlash uchun turli moliyalashtirish imkoniyatlari va stipendiyalar taklif qilamiz.</p>
+          </details>
+          <details class="faq__item reveal">
+            <summary>Tanlash jarayoni qanday?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Dastlabki ariza ko‘rib chiqiladi, so‘ngra qisqa ro‘yxatga kirgan nomzodlar bilan suhbat o‘tkaziladi. Biznes g‘oya, tadbirkorlik salohiyati va dasturga tayyorlik baholanadi.</p>
+          </details>
+          <details class="faq__item reveal">
+            <summary>Jamoa sifatida murojaat qilish mumkinmi?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Ha, individual ravishda yoki jamoa sifatida murojaat qilishingiz mumkin. Jamoa bo‘lsangiz, arizada barcha a’zolar haqidagi ma’lumotlarni kiriting.</p>
+          </details>
+          <details class="faq__item reveal">
+            <summary>Dastur tugagandan so‘ng nima bo‘ladi?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Ishtirokchilar o‘z bizneslarini potensial investorlarga taqdim etish imkoniyatiga ega bo‘ladi. Bitiruvchilarga doimiy qo‘llab-quvvatlash va resurslar taklif qilinadi.</p>
+          </details>
+        </div>
       </div>
     </section>
 
@@ -284,8 +380,7 @@
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__brand">
-        <img class="logo logo--day" src="assets/logo.svg" alt="Startup Garage" width="112" height="33">
-        <img class="logo logo--neon" src="assets/logo-neon.svg" alt="" aria-hidden="true" width="112" height="33">
+        <img src="assets/logo.svg" alt="Startup Garage" width="112" height="33">
         <p>Toshkent — Doha — Kasablanka</p>
       </div>
       <div class="footer__col">
@@ -314,8 +409,7 @@
     </div>
   </footer>
 
-  <script src="js/data.js"></script>
-  <script src="js/scene.js"></script>
-  <script src="js/main.js"></script>
+  <script type="module" src="js/scene/index.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
