@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Startup Garage — startapingizni cho‘qqiga olib chiqamiz</title>
+  <meta name="description" content="Startup Garage — startaplar uchun to‘liq xizmat ko‘rsatuvchi venchur studio. G‘oyadan MVP’gacha, market fitdan investitsiyagacha — 18 oy davomida birga.">
+  <meta name="theme-color" content="#5458FF">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/scene-1536.webp" fetchpriority="high">
+  <script>
+  // Kun vaqti: kun / kechqurun / tun — sahifa chizilishidan oldin o'rnatiladi (miltillashsiz)
+  (function () {
+    var q = (location.search.match(/[?&]time=(day|evening|night)/) || [])[1];
+    var h = new Date().getHours();
+    document.documentElement.dataset.time = q || (h >= 7 && h < 17 ? 'day' : h >= 17 && h < 20 ? 'evening' : h >= 5 && h < 7 ? 'evening' : 'night');
+  })();
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="nav__logo" href="#" aria-label="Startup Garage">
+        <img class="logo logo--day" src="assets/logo.svg" alt="Startup Garage" width="112" height="33">
+        <img class="logo logo--neon" src="assets/logo-neon.svg" alt="" aria-hidden="true" width="112" height="33">
+      </a>
+      <nav class="nav__links" aria-label="Asosiy menyu">
+        <a href="#biz">Biz haqimizda</a>
+        <a href="#bosqichlar">Bosqichlar</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#dasturlar">Dasturlar</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="btn btn--primary btn--sm nav__cta" href="https://startupgarage.uz/uz/application" target="_blank" rel="noopener">
+        Ariza qoldirish <span class="btn__arrow" aria-hidden="true">→</span>
+      </a>
+      <button class="nav__burger" id="burger" aria-label="Menyu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+    <div class="nav__mobile" id="mobileMenu">
+      <a href="#biz">Biz haqimizda</a>
+      <a href="#bosqichlar">Bosqichlar</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#dasturlar">Dasturlar</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn--primary" href="https://startupgarage.uz/uz/application" target="_blank" rel="noopener">Ariza qoldirish →</a>
+    </div>
+  </header>
+
+  <!-- ============ JOURNEY (scroll-driven cable car) ============ -->
+  <section class="journey" id="journey" aria-label="Startap sayohati">
+    <div class="stage" id="stage">
+      <canvas class="stage__canvas" id="scene" aria-hidden="true"></canvas>
+      <div class="stage__tint" aria-hidden="true"></div>
+      <div class="stage__stars" aria-hidden="true"></div>
+      <canvas class="stage__sign" id="signGlow" aria-hidden="true"></canvas>
+      <div class="stage__shade" aria-hidden="true"></div>
+      <div class="stage__labels" id="labels" aria-hidden="true"></div>
+
+      <!-- hero copy -->
+      <div class="hero" id="heroCopy">
+        <p class="eyebrow"><span class="eyebrow__dot"></span>Startaplar uchun venchur studio</p>
+        <h1 class="hero__title">Startapingizni yangi cho‘qqiga olib chiqamiz.</h1>
+        <p class="hero__lead">G‘oyadan MVP’gacha, market fitdan investitsiyagacha — 18&nbsp;oy davomida har bir bosqichda yoningizdamiz.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="https://startupgarage.uz/uz/application" target="_blank" rel="noopener">Rezident bo‘lish <span class="btn__arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <!-- summit copy -->
+      <div class="summit" id="summitCopy" aria-hidden="true">
+        <p class="eyebrow"><span class="eyebrow__dot"></span>Cho‘qqi</p>
+        <h2 class="summit__title">Keyingi cho‘qqi — sizniki.</h2>
+        <p class="summit__lead">Startup Garage loyihalari uchun <strong>$2,500,000+</strong> investitsiya jalb qilingan. Navbatdagi muvaffaqiyat tarixi sizniki bo‘lishi mumkin.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="https://startupgarage.uz/uz/application" target="_blank" rel="noopener">Rezidentlikka ariza <span class="btn__arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <!-- stage card -->
+      <aside class="card" id="stageCard" aria-live="polite">
+        <div class="card__top">
+          <span class="chip" id="cardStep">Bosqich 01 / 05</span>
+          <span class="card__cabin">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2v5M7 7h10a3 3 0 0 1 3 3v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5v-6a3 3 0 0 1 3-3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M4 13h16" stroke="currentColor" stroke-width="1.8"/></svg>
+            Sizning startapingiz
+          </span>
+        </div>
+        <div class="card__progress" id="cardProgress"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="card__body" id="cardBody">
+          <h3 class="card__title" id="cardTitle">G‘oya</h3>
+          <p class="card__desc" id="cardDesc">Muammo va yechimni aniqlashtiramiz, bozorni tahlil qilamiz va g‘oyangizni real mijozlarda sinab ko‘ramiz.</p>
+          <p class="card__label">Startup Garage yordami</p>
+          <ul class="card__list" id="cardList"></ul>
+          <p class="card__peers" id="cardPeers"></p>
+        </div>
+      </aside>
+
+      <div class="stage__foot">
+        <p class="stage__caption"><span class="stage__line"></span>Har bir kabinada — bir startap tarixi.</p>
+        <p class="stage__hint" id="scrollHint"><span class="hint-d">Pastga aylantiring</span><span class="hint-m">Pastga suring</span><span class="stage__mouse"><i></i></span><span class="stage__chev" aria-hidden="true"></span></p>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <!-- ============ ABOUT ============ -->
+    <section class="section section--after-stage" id="biz">
+      <div class="container">
+        <p class="kicker reveal">Biz haqimizda</p>
+        <p class="statement reveal">Startup Garage — startaplar uchun to‘liq xizmat ko‘rsatuvchi <span class="hl">venchur studio</span>. 8 yillik tajribaga ega ekspertlar g‘oyangizni MVP darajasiga olib chiqish, investitsiya jalb qilish va loyihani kengaytirishda yoningizda bo‘ladi.</p>
+        <div class="stats">
+          <div class="stat reveal"><span class="stat__num">18 oy</span><span class="stat__txt">startapni barqaror biznesga aylantirish dasturi</span></div>
+          <div class="stat reveal"><span class="stat__num">8 yil</span><span class="stat__txt">ekspert va murabbiylarimiz tajribasi</span></div>
+          <div class="stat reveal"><span class="stat__num">1000+</span><span class="stat__txt">dasturlarimizdan o‘tgan o‘quvchilar</span></div>
+          <div class="stat reveal"><span class="stat__num">$2.5M+</span><span class="stat__txt">loyihalar uchun jalb qilingan investitsiya</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ROUTE / STAGES ============ -->
+    <section class="section section--soft" id="bosqichlar">
+      <div class="container">
+        <div class="head">
+          <p class="kicker reveal">Yo‘l xaritasi</p>
+          <h2 class="h2 reveal">Besh bosqich. Bitta cho‘qqi.</h2>
+          <p class="lead reveal">Startapingiz bosqichiga qarab g‘oyani aniqlashtirish, MVP, dastlabki foydalanuvchilar, o‘sish strategiyasi va investorlar bilan ishlashda yordam beramiz.</p>
+        </div>
+        <ol class="route" id="route"></ol>
+      </div>
+    </section>
+
+    <!-- ============ HELP ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="head">
+          <p class="kicker reveal">Nimalar bilan yordam beramiz</p>
+          <h2 class="h2 reveal">Startapingiz uchun hamma narsa — bir joyda.</h2>
+        </div>
+        <div class="help">
+          <article class="help__item reveal">
+            <span class="help__num">01</span>
+            <h3>Barcha bosqichlarda qo‘llab-quvvatlash</h3>
+            <p>G‘oyadan bozorga chiqishgacha — har bir bosqichda aniq reja va natijaga yo‘naltirilgan tracking.</p>
+          </article>
+          <article class="help__item reveal">
+            <span class="help__num">02</span>
+            <h3>Netvorking va resurslar</h3>
+            <p>Founderlar hamjamiyati, sanoat ekspertlari va hamkor kompaniyalar bilan to‘g‘ridan-to‘g‘ri aloqa.</p>
+          </article>
+          <article class="help__item reveal">
+            <span class="help__num">03</span>
+            <h3>Individual kouching va mentorlik</h3>
+            <p>Mohirdev, Magicbot, Pulse EV kabi loyihalar asoschilaridan shaxsiy mentorlik sessiyalari.</p>
+          </article>
+          <article class="help__item reveal">
+            <span class="help__num">04</span>
+            <h3>Professional biznes ta’lim</h3>
+            <p>Mahsulot, marketing, sotuv, moliya va boshqaruv bo‘yicha amaliy o‘quv dasturi.</p>
+          </article>
+          <article class="help__item reveal">
+            <span class="help__num">05</span>
+            <h3>Investitsiya jalb qilish</h3>
+            <p>Pitch tayyorlash, investorlar bilan uchrashuvlar va xalqaro bozorga chiqishda ko‘mak.</p>
+          </article>
+          <a class="help__item help__item--cta reveal" href="https://startupgarage.uz/uz/application" target="_blank" rel="noopener">
+            <span class="help__num">→</span>
+            <h3>Startapingiz qaysi bosqichda?</h3>
+            <p>Ariza qoldiring — jamoamiz siz bilan bog‘lanib, mos yo‘lni taklif qiladi.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PORTFOLIO ============ -->
+    <section class="section section--soft" id="portfolio">
+      <div class="container">
+        <div class="head head--row">
+          <div>
+            <p class="kicker reveal">Portfolio</p>
+            <h2 class="h2 reveal">Cho‘qqiga chiqqanlar.</h2>
+          </div>
+          <a class="link reveal" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Barcha loyihalar →</a>
+        </div>
+        <div class="wins">
+          <article class="win reveal"><span class="win__name">Pulse EV</span><span class="win__sum">$780,000</span><span class="win__meta">jalb qilingan investitsiya</span></article>
+          <article class="win reveal"><span class="win__name">Mohirdev</span><span class="win__sum">$750,000</span><span class="win__meta">jalb qilingan investitsiya</span></article>
+          <article class="win reveal"><span class="win__name">Magicbot</span><span class="win__sum">$150,000</span><span class="win__meta">ikki raund: $50K + $100K</span></article>
+          <article class="win reveal"><span class="win__name">Ish.uz</span><span class="win__sum">$100,000</span><span class="win__meta">jalb qilingan investitsiya</span></article>
+        </div>
+        <div class="peers reveal" id="peers"></div>
+      </div>
+    </section>
+
+    <!-- ============ PROGRAMS ============ -->
+    <section class="section" id="dasturlar">
+      <div class="container">
+        <div class="head">
+          <p class="kicker reveal">Dasturlar</p>
+          <h2 class="h2 reveal">O‘zingizga mos yo‘lni tanlang.</h2>
+        </div>
+        <div class="programs">
+          <article class="program program--main reveal">
+            <span class="chip chip--light">18 oy</span>
+            <h3>Rezidentlik</h3>
+            <p>Startapingizni barqaror biznesga aylantirish uchun to‘liq dastur: ofis, mentorlik, tracking va investorlar bilan uchrashuvlar.</p>
+            <a class="btn btn--light" href="https://startupgarage.uz/uz/application" target="_blank" rel="noopener">Rezident bo‘lish <span class="btn__arrow" aria-hidden="true">→</span></a>
+          </article>
+          <article class="program reveal">
+            <span class="chip">Ta’lim</span>
+            <h3>Founders School</h3>
+            <p>Startap boshlamoqchi bo‘lganlar va tajribali tadbirkorlar uchun keng qamrovli o‘quv dasturi: yaratish, boshqarish va kengaytirish.</p>
+            <a class="link" href="https://sgfounders.school/" target="_blank" rel="noopener">Batafsil →</a>
+          </article>
+          <article class="program reveal">
+            <span class="chip">Tracking</span>
+            <h3>Startup Tracking</h3>
+            <p>Bosqichingizga qarab individual yo‘l: bozor tahlili, MVP, dastlabki foydalanuvchilar va o‘sish strategiyasi.</p>
+            <a class="link" href="https://startupgarage.uz/uz/application" target="_blank" rel="noopener">Ro‘yxatdan o‘tish →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ OFFICE ============ -->
+    <section class="section section--soft">
+      <div class="container office">
+        <div class="office__head">
+          <p class="kicker reveal">Ofis</p>
+          <h2 class="h2 reveal"><span class="hl">600 m²</span> — startapingiz uchun barcha qulayliklar.</h2>
+          <p class="lead reveal">Toshkent shahar, Mirzo Ulug‘bek tumani, Oq terak ko‘chasi, 13-uy.</p>
+        </div>
+        <ul class="office__grid">
+          <li class="reveal"><b>2 qavat</b><span>dan iborat bino</span></li>
+          <li class="reveal"><b>16 kishilik</b><span>startap jamoalar xonalari</span></li>
+          <li class="reveal"><b>50 kishilik</b><span>anjuman zali</span></li>
+          <li class="reveal"><b>12 kishilik</b><span>majlis xonalari</span></li>
+          <li class="reveal"><b>40 kishilik</b><span>oshxona</span></li>
+          <li class="reveal"><b>70 kishilik</b><span>hovli</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ PARTNERS ============ -->
+    <section class="section section--tight">
+      <div class="container">
+        <p class="kicker kicker--center reveal">Hamkorlarimiz</p>
+        <div class="partners reveal">
+          <span>AloqaVentures</span><span>UzVC</span><span>Sturgeon</span><span>SQB</span><span>Digital.uz</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="section section--soft" id="faq">
+      <div class="container faq">
+        <div class="faq__head">
+          <p class="kicker reveal">FAQ</p>
+          <h2 class="h2 reveal">Ko‘p beriladigan savollar.</h2>
+        </div>
+        <div class="faq__list" id="faqList"></div>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="cta">
+      <div class="container cta__inner">
+        <h2 class="cta__title reveal">Cho‘qqiga birga chiqamiz.</h2>
+        <p class="cta__lead reveal">Ariza qoldiring — menejerlarimiz siz bilan bog‘lanib, startapingiz uchun mos yo‘lni taklif qilishadi.</p>
+        <div class="cta__actions reveal">
+          <a class="btn btn--light" href="https://startupgarage.uz/uz/application" target="_blank" rel="noopener">Rezident bo‘lish <span class="btn__arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn--outline-light" href="tel:+998900313881">+998 90 031 38 81</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img class="logo logo--day" src="assets/logo.svg" alt="Startup Garage" width="112" height="33">
+        <img class="logo logo--neon" src="assets/logo-neon.svg" alt="" aria-hidden="true" width="112" height="33">
+        <p>Toshkent — Doha — Kasablanka</p>
+      </div>
+      <div class="footer__col">
+        <p class="footer__title">Manzil</p>
+        <p>Toshkent shahar, Mirzo Ulug‘bek tumani, Oq terak ko‘chasi, 13-uy</p>
+        <a href="tel:+998900313881">+998 90 031 38 81</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__title">Ekosistema</p>
+        <a href="https://sgfounders.school/" target="_blank" rel="noopener">Founders School</a>
+        <a href="https://startupgarage.uz/uz/books" target="_blank" rel="noopener">Kitoblar</a>
+        <a href="https://startupgarage.uz/sgwomen" target="_blank" rel="noopener">SG Women</a>
+        <a href="https://startupgarage.uz/uz/blog" target="_blank" rel="noopener">Blog</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__title">Ijtimoiy tarmoqlar</p>
+        <a href="https://t.me/startupgarage_uz" target="_blank" rel="noopener">Telegram</a>
+        <a href="https://www.instagram.com/startupgarage_uz/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.linkedin.com/company/startupgarageuz" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.youtube.com/@startupgarage_uz" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <p>© <span id="year">2026</span> Startup Garage. Barcha huquqlar himoyalangan.</p>
+      <a href="https://startupgarage.uz/" target="_blank" rel="noopener">startupgarage.uz</a>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/scene.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
