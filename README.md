@@ -27,7 +27,9 @@ Dev rejimi (URL parametri):
 
 - `?time=night` (yoki `dawn`, `sunrise`, `day`, `evening`) — fazani qotirish
 - `?time=5` — soatni qotirish (0–23)
-- `?time=lapse` yoki `?time=lapse:2` — taymlaps: fazalar ketma-ket almashadi (default 4 s), pastki chapda joriy faza belgisi
+- `?time=lapse` yoki `?time=lapse:3` — taymlaps: fazalar ketma-ket almashadi (default 6 s), pastki chapda joriy faza belgisi
+
+Fazalar orasidagi o‘tish ≈ 3 s (`THEME_FADE` — `js/scene/config.js`, `--t-fade` — `css/theme-time.css`; ikkalasi bir xil bo‘lishi kerak).
 
 ## Tuzilma
 

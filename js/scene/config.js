@@ -53,6 +53,8 @@ export const TINT = {
   sunrise: ['#AFC2F5', '#F7C1CC', '#FFC9A0', '#FFE0B8'],   // quyosh chiqishi: och ko'k → pushti → oltin
   evening: ['#FFB07A', '#FF9A8B', '#D9A0C8', '#B7A6E0']    // quyosh botishi
 };
+// Fazalar orasidagi o'tish davomiyligi (soniya, ease-in-out) — CSS theme-time.css dagi --t-fade bilan bir xil
+export const THEME_FADE = 3;
 // Bino neon yozuvining yorqinligi har fazada (0..1)
 export const SIGN_GLOW = { night: 1, dawn: 0.7, sunrise: 0.2, evening: 0.3 };
 

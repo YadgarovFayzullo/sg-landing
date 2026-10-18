@@ -15,12 +15,18 @@
 .stage.is-booted .hero > :nth-child(4) { animation-delay: .43s; }
 @keyframes rise { to { opacity: 1; transform: none; } }
 
-/* tepadagi oqartiruvchi soya (--shade) va pastki vinyetka (--vig) — overlay.js boshqaradi */
+/* tepadagi oqartiruvchi soya (--shade) va pastki vinyetka (--vig) — overlay.js boshqaradi.
+   Ranglar — @property o'zgaruvchilar (--sh-*): gradientning o'zi animatsiya qilinmaydi,
+   ranglari esa silliq o'tadi; fazalar bo'yicha qiymatlar theme-time.css da */
+@property --sh-top { syntax: '<color>'; inherits: true; initial-value: rgba(244, 247, 252, .78); }
+@property --sh-mid { syntax: '<color>'; inherits: true; initial-value: rgba(244, 247, 252, .65); }
+@property --sh-side { syntax: '<color>'; inherits: true; initial-value: rgba(246, 248, 253, .82); }
+@property --sh-side2 { syntax: '<color>'; inherits: true; initial-value: rgba(246, 248, 253, .55); }
 .stage__shade {
   position: absolute; inset: 0; pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(244, 247, 252, .78) 0%, rgba(244, 247, 252, 0) 18%),
-    radial-gradient(120% 90% at 0% 18%, rgba(246, 248, 253, .82) 0%, rgba(246, 248, 253, .55) 30%, rgba(246, 248, 253, 0) 58%);
+    linear-gradient(180deg, var(--sh-top) 0%, transparent 20%),
+    radial-gradient(120% 90% at 0% 18%, var(--sh-side) 0%, var(--sh-side2) 30%, transparent 58%);
   opacity: var(--shade, 1);
 }
 .stage__shade::after {
@@ -158,8 +164,7 @@
   .summit .hero__actions { margin-top: 14px; }
   .summit .btn { height: 46px; padding: 0 20px; font-size: 15px; }
   .hero__lead, .summit__lead { max-width: 520px; }
-  .stage__shade { background:
-    linear-gradient(180deg, rgba(244, 247, 252, .9) 0%, rgba(244, 247, 252, .65) 34%, rgba(244, 247, 252, 0) 56%); }
+  .stage__shade { background: linear-gradient(180deg, var(--sh-top) 0%, var(--sh-mid) 34%, transparent 56%); }
   .stage__shade::after { background: linear-gradient(0deg, rgba(10, 14, 30, .3) 0%, rgba(10, 14, 30, 0) 30%); }
   .card { left: var(--gutter); right: var(--gutter); width: auto; bottom: 16px; padding: 16px 18px 14px; border-radius: 22px; }
   .card__label, .card__list, .card__peers { display: none; }

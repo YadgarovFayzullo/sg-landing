@@ -1,13 +1,15 @@
 /* =========================================================
    KUN VAQTI — html[data-time="night|dawn|sunrise|day|evening"] (js/daytime.js)
-   Sahna tonlari canvas ichida (scene/render.js, config.TINT);
+   Sahna tonlari canvas ichida (scene/render.js, config.TINT, THEME_FADE);
    bu yerda — DOM qatlamlari: yulduzlar, soya, matn, karta, menyu.
    Qorong'i fazalar (och matn): night, dawn. Yorug' fazalar: sunrise, day, evening.
+   Hamma o'tishlar --t-fade bilan — canvas bilan bir vaqtda.
    ========================================================= */
+:root { --t-fade: 3s; }
 
 /* yulduzlar — tunda to'liq, rassvetda so'nmoqda */
 .stage__stars {
-  position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 1.2s var(--ease);
+  position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity var(--t-fade) ease-in-out;
   background:
     radial-gradient(1.4px 1.4px at 8% 12%, #fff, transparent), radial-gradient(1px 1px at 17% 31%, #fff, transparent),
     radial-gradient(1.6px 1.6px at 26% 8%, #fff, transparent), radial-gradient(1px 1px at 35% 22%, #fff, transparent),
@@ -23,20 +25,20 @@
 html[data-time="night"] .stage__stars { opacity: 1; }
 html[data-time="dawn"] .stage__stars { opacity: .45; }
 
-/* tepadagi soya — har faza o'z rangida (canvas tint bilan uyg'un) */
-.stage__shade { transition: background .9s var(--ease); }
-html[data-time="evening"] .stage__shade { background:
-  linear-gradient(180deg, rgba(255, 226, 205, .55) 0%, rgba(255, 226, 205, 0) 18%),
-  radial-gradient(120% 90% at 0% 18%, rgba(255, 238, 226, .7) 0%, rgba(255, 238, 226, .42) 30%, rgba(255, 238, 226, 0) 58%); }
-html[data-time="sunrise"] .stage__shade { background:
-  linear-gradient(180deg, rgba(236, 232, 255, .6) 0%, rgba(236, 232, 255, 0) 18%),
-  radial-gradient(120% 90% at 0% 18%, rgba(255, 240, 236, .72) 0%, rgba(255, 240, 236, .44) 30%, rgba(255, 240, 236, 0) 58%); }
-html[data-time="dawn"] .stage__shade { background:
-  linear-gradient(180deg, rgba(22, 18, 56, .62) 0%, rgba(22, 18, 56, 0) 24%),
-  radial-gradient(120% 90% at 0% 18%, rgba(30, 22, 64, .66) 0%, rgba(30, 22, 64, .38) 30%, rgba(30, 22, 64, 0) 58%); }
-html[data-time="night"] .stage__shade { background:
-  linear-gradient(180deg, rgba(6, 9, 30, .7) 0%, rgba(6, 9, 30, 0) 24%),
-  radial-gradient(120% 90% at 0% 18%, rgba(8, 11, 36, .72) 0%, rgba(8, 11, 36, .42) 30%, rgba(8, 11, 36, 0) 58%); }
+/* tepadagi soya — ranglar @property orqali silliq o'tadi (stage.css) */
+.stage__shade { transition: --sh-top var(--t-fade) ease-in-out, --sh-mid var(--t-fade) ease-in-out, --sh-side var(--t-fade) ease-in-out, --sh-side2 var(--t-fade) ease-in-out; }
+html[data-time="evening"] { --sh-top: rgba(255, 226, 205, .55); --sh-mid: rgba(255, 226, 205, .4); --sh-side: rgba(255, 238, 226, .7); --sh-side2: rgba(255, 238, 226, .42); }
+html[data-time="sunrise"] { --sh-top: rgba(236, 232, 255, .6); --sh-mid: rgba(236, 232, 255, .42); --sh-side: rgba(255, 240, 236, .72); --sh-side2: rgba(255, 240, 236, .44); }
+html[data-time="dawn"] { --sh-top: rgba(22, 18, 56, .62); --sh-mid: rgba(22, 18, 56, .38); --sh-side: rgba(30, 22, 64, .66); --sh-side2: rgba(30, 22, 64, .38); }
+html[data-time="night"] { --sh-top: rgba(6, 9, 30, .7); --sh-mid: rgba(6, 9, 30, .42); --sh-side: rgba(8, 11, 36, .72); --sh-side2: rgba(8, 11, 36, .42); }
+
+/* o'tishlar — rang o'zgaradigan hamma elementlar */
+.hero__title, .summit__title, .hero__lead, .summit__lead, .eyebrow, .summit__lead strong,
+.card__title, .card__desc, .card__list li, .card__peers, .card__peers b, .card__cabin, .card .chip, .card__label,
+.nav__links a, .nav__burger span { transition: color var(--t-fade) ease-in-out, background-color var(--t-fade) ease-in-out, border-color var(--t-fade) ease-in-out; }
+.card { transition: background-color var(--t-fade) ease-in-out, box-shadow var(--t-fade) ease-in-out; }
+.card__progress i { transition: background-color var(--t-fade) ease-in-out; }
+.logo--day, .logo--night { transition-duration: var(--t-fade); }
 
 /* --- qorong'i fazalar: och matn, qorong'i karta, och menyu --- */
 html:is([data-time="night"], [data-time="dawn"]) .hero__title,
@@ -65,6 +67,7 @@ html:is([data-time="night"], [data-time="dawn"]) .nav:not(.is-solid):not(.is-ope
 
 @media (max-width: 960px) {
   /* telefonda cho'qqi matni oq kartada — qorong'i fazalarda karta ham qorong'i */
+  .summit { transition: background-color var(--t-fade) ease-in-out, box-shadow var(--t-fade) ease-in-out; }
   html:is([data-time="night"], [data-time="dawn"]) .summit { background: rgba(16, 20, 54, .88); box-shadow: 0 30px 60px -28px rgba(0, 0, 0, .6); }
 }
 @media (max-height: 520px) and (orientation: landscape) {

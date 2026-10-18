@@ -55,7 +55,7 @@ function frame(now) {
 
   physics(dt);
   updateCamera();
-  render();
+  render(dt);
   updateLabels();
   updateCard();
   updateCopy();

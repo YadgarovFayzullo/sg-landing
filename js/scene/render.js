@@ -1,6 +1,6 @@
 /* Canvas renderer. Hamma narsa sahna koordinatalarida (1536×1024) chiziladi,
    kamera — bitta setTransform. Qatlamlar tartibi render() da. */
-import { IMG_W, IMG_H, SKY_EXT, SKY_OVER, SPR, UNI, SIGN, WHITE_TOP, WHITE_STOPS, MIST_BACK, MIST_FRONT, GAP, TINT, SIGN_GLOW } from './config.js';
+import { IMG_W, IMG_H, SKY_EXT, SKY_OVER, SPR, UNI, SIGN, WHITE_TOP, WHITE_STOPS, MIST_BACK, MIST_FRONT, GAP, TINT, SIGN_GLOW, THEME_FADE } from './config.js';
 import { clamp, smooth, pointAt } from './math.js';
 import { S, cam, P, imgs, UP, DOWN, REDUCED, theme, PHASES, themePhase } from './state.js';
 import { front } from './entities.js';
@@ -117,10 +117,14 @@ function cabinAlpha(t) {
 }
 
 /* ---------- Kun vaqti ---------- */
-// Tonlar silliq o'zgaradi (≈1.2s); CSS qatlamlari bilan bir xil ranglar (config.TINT)
-function updateTheme() {
-  const cur = themePhase();
-  for (const k of PHASES) theme[k] += ((k === cur ? 1 : 0) - theme[k]) * 0.04;
+// Tonlar vaqt bo'yicha o'zgaradi: chiziqli progress (THEME_FADE soniya) → smoothstep = CSS ease-in-out bilan bir xil his
+const themeRaw = Object.fromEntries(PHASES.map((k) => [k, 0]));
+function updateTheme(dt) {
+  const cur = themePhase(), step = dt / THEME_FADE;
+  for (const k of PHASES) {
+    const u = themeRaw[k] = clamp(themeRaw[k] + clamp((k === cur ? 1 : 0) - themeRaw[k], -step, step));
+    theme[k] = u * u * (3 - 2 * u);
+  }
 }
 // Rasm maydoni ustiga multiply gradient — faqat rasm ichida (tashqarisi oq qoladi)
 function drawTint() {
@@ -152,8 +156,8 @@ function drawSign() {
 
 /* ---------- Kadr ---------- */
 const drawList = [];
-export function render() {
-  updateTheme();
+export function render(dt) {
+  updateTheme(dt);
   const s = cam.s * S.dpr;
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, canvas.width, canvas.height);   // rasmdan tashqari — oq

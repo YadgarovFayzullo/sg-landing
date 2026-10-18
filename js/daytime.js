@@ -5,7 +5,7 @@
    Dev rejimi (URL):
      ?time=night | dawn | sunrise | day | evening   — fazani qotirish
      ?time=5                                        — soatni qotirish (0–23)
-     ?time=lapse  yoki  ?time=lapse:2               — taymlaps: har N soniyada keyingi faza (default 4s) */
+     ?time=lapse  yoki  ?time=lapse:3               — taymlaps: har N soniyada keyingi faza (default 6s) */
 (function () {
   var PHASES = ['night', 'dawn', 'sunrise', 'day', 'evening'];
   var q = (location.search.match(/[?&]time=([^&]+)/) || [])[1] || '';
@@ -30,7 +30,7 @@
 
   if (/^lapse/.test(q)) {
     // taymlaps: fazalar ketma-ket, yumshoq o'tishlar ko'rinadi
-    var sec = +(q.split(':')[1]) || 4, i = 0;
+    var sec = +(q.split(':')[1]) || 6, i = 0;   // o'tish ~2.4s (THEME_FADE) — faza kamida shuncha turishi kerak
     set(PHASES[0]);
     document.addEventListener('DOMContentLoaded', showBadge);
     setInterval(function () { i = (i + 1) % PHASES.length; set(PHASES[i]); }, sec * 1000);
