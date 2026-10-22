@@ -28,4 +28,14 @@ const io = new IntersectionObserver((ents) => {
 }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
+
+/* portfolio: startaplar lentasini nusxalash — cheksiz aylanish uchun (nusxa ekran o'qigichlarga ko'rinmaydi) */
+const peersTrack = document.querySelector('.peers__track');
+[...peersTrack.children].forEach((el) => {
+  const copy = el.cloneNode(true);
+  copy.setAttribute('aria-hidden', 'true');
+  copy.tabIndex = -1;
+  peersTrack.appendChild(copy);
+});
+
 document.getElementById('year').textContent = new Date().getFullYear();

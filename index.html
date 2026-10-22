@@ -11,7 +11,7 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/scene-1536.webp" fetchpriority="high">
   <!-- kun vaqti — CSS dan oldin, blokirovchi: data-time birinchi kadrgacha o'rnatiladi -->
   <script src="js/daytime.js"></script>
@@ -75,7 +75,7 @@
       <div class="summit" id="summitCopy" aria-hidden="true">
         <p class="eyebrow"><span class="eyebrow__dot"></span>Cho‘qqi</p>
         <h2 class="summit__title">Keyingi cho‘qqi — sizniki.</h2>
-        <p class="summit__lead">Startup Garage loyihalari uchun <strong>$2,500,000+</strong> investitsiya jalb qilingan. Navbatdagi muvaffaqiyat tarixi sizniki bo‘lishi mumkin.</p>
+        <p class="summit__lead">Startup Garage loyihalari uchun <strong>$4,550,000+</strong> investitsiya jalb qilingan. Navbatdagi muvaffaqiyat tarixi sizniki bo‘lishi mumkin.</p>
         <div class="hero__actions">
           <a class="btn btn--primary" href="https://startupgarage.uz/uz/application" target="_blank" rel="noopener">Rezidentlikka ariza <span class="btn__arrow" aria-hidden="true">→</span></a>
         </div>
@@ -117,7 +117,7 @@
           <div class="stat reveal"><span class="stat__num">18 oy</span><span class="stat__txt">startapni barqaror biznesga aylantirish dasturi</span></div>
           <div class="stat reveal"><span class="stat__num">8 yil</span><span class="stat__txt">ekspert va murabbiylarimiz tajribasi</span></div>
           <div class="stat reveal"><span class="stat__num">1000+</span><span class="stat__txt">dasturlarimizdan o‘tgan o‘quvchilar</span></div>
-          <div class="stat reveal"><span class="stat__num">$2.5M+</span><span class="stat__txt">loyihalar uchun jalb qilingan investitsiya</span></div>
+          <div class="stat reveal"><span class="stat__num">$4.55M+</span><span class="stat__txt">loyihalar uchun jalb qilingan investitsiya</span></div>
         </div>
       </div>
     </section>
@@ -229,33 +229,55 @@
           </div>
           <a class="link reveal" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Barcha loyihalar →</a>
         </div>
-        <div class="wins">
-          <article class="win reveal"><span class="win__name">Pulse EV</span><span class="win__sum">$780,000</span><span class="win__meta">jalb qilingan investitsiya</span></article>
-          <article class="win reveal"><span class="win__name">Mohirdev</span><span class="win__sum">$750,000</span><span class="win__meta">jalb qilingan investitsiya</span></article>
-          <article class="win reveal"><span class="win__name">Magicbot</span><span class="win__sum">$150,000</span><span class="win__meta">ikki raund: $50K + $100K</span></article>
-          <article class="win reveal"><span class="win__name">Ish.uz</span><span class="win__sum">$100,000</span><span class="win__meta">jalb qilingan investitsiya</span></article>
+        <div class="wins" id="winsTrack">
+          <div class="win-stat win-stat--big">
+            <span class="win-stat__label">Tushgan investitsiya</span>
+            <div><span class="win-stat__num">$4.55M+</span><span class="win-stat__txt">rezidentlar uchun jalb qilingan investitsiya</span></div>
+          </div>
+          <div class="win-stat win-stat--grant">
+            <span class="win-stat__label">Grantlar</span>
+            <div><span class="win-stat__num">$662K</span><span class="win-stat__txt">grant sifatida olingan</span></div>
+          </div>
+          <article class="win" style="--d:0s">
+            <div class="win__who"><span class="peer__logo" aria-hidden="true">B<img src="assets/logos/bito.png" alt="" loading="lazy" onerror="this.remove()"></span><div><span class="win__name">Bito</span></div></div>
+            <div class="win__money"><span class="win__sum">$630,000</span><span class="win__meta">Investitsiya $600K · Grant $30K</span><span class="win__inv">Aloqa Ventures, IT Park Ventures, President Tech Award</span></div>
+          </article>
+          <article class="win" style="--d:0.12s">
+            <div class="win__who"><span class="peer__logo" aria-hidden="true">B<img src="assets/logos/bigmart.png" alt="" loading="lazy" onerror="this.remove()"></span><div><span class="win__name">BigMart</span></div></div>
+            <div class="win__money"><span class="win__sum">$500,000</span><span class="win__meta">Investitsiya $500K</span><span class="win__inv">Aloqa Ventures, Imkon Ventures, IT Park Ventures, United Ventures</span></div>
+          </article>
+          <article class="win" style="--d:0.24s">
+            <div class="win__who"><span class="peer__logo" aria-hidden="true">A<img src="assets/logos/alipos.png" alt="" loading="lazy" onerror="this.remove()"></span><div><span class="win__name">Alipos</span></div></div>
+            <div class="win__money"><span class="win__sum">$280,000</span><span class="win__meta">Investitsiya $280K</span><span class="win__inv">AloqaVentures, Imkon, Nexus</span></div>
+          </article>
+          <article class="win" style="--d:0.36s">
+            <div class="win__who"><span class="peer__logo" aria-hidden="true">K<img src="assets/logos/karmon-ai.png" alt="" loading="lazy" onerror="this.remove()"></span><div><span class="win__name">Karmon AI</span><span class="win__tag">AI · MVP</span></div></div>
+            <div class="win__money"><span class="win__sum">$170,000</span><span class="win__meta">Investitsiya $50K · Grant $120K</span><span class="win__inv">AloqaVentures, Imkon Ventures</span></div>
+          </article>
         </div>
         <div class="peers reveal">
-          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Zingo<small>EdTech · MVP</small></a>
-          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Edu Tizim<small>EdTech · MVP</small></a>
-          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Karmon AI<small>AI · MVP</small></a>
-          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Magicbot<small>E-commerce · Growth</small></a>
-          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">1pos<small>RetailTech · Scale</small></a>
-          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">1clinic<small>MedTech · Scale</small></a>
-          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Braille Recognition<small>AI · Growth</small></a>
-          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Kolingo<small>AI, EdTech · Growth</small></a>
-          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Darstop<small>EdTech · Growth</small></a>
-          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Udemere<small>EdTech · Growth</small></a>
-          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Wisdom<small>EdTech · Growth</small></a>
-          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Xaridor<small>RetailTech · Growth</small></a>
-          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">C-Control<small>PropTech · Growth</small></a>
-          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Karly<small>Service · Growth</small></a>
-          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Dasyor<small>E-commerce · Growth</small></a>
-          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">NoteX<small>AI · MVP</small></a>
-          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Secura<small>FinTech · MVP</small></a>
-          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">MediCard<small>MedTech · MVP</small></a>
-          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Dialix AI<small>AI · MVP</small></a>
-          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener">Obuna24<small>SaaS · MVP</small></a>
+          <div class="peers__track">
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener"><span class="peer__logo" aria-hidden="true">Z<img src="assets/logos/zingo.png" alt="" loading="lazy" onerror="this.remove()"></span>Zingo<small>EdTech · MVP</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener"><span class="peer__logo" aria-hidden="true">E<img src="assets/logos/edu-tizim.png" alt="" loading="lazy" onerror="this.remove()"></span>Edu Tizim<small>EdTech · MVP</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener"><span class="peer__logo" aria-hidden="true">K<img src="assets/logos/karmon-ai.png" alt="" loading="lazy" onerror="this.remove()"></span>Karmon AI<small>AI · MVP</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener"><span class="peer__logo" aria-hidden="true">M<img src="assets/logos/magicbot.png" alt="" loading="lazy" onerror="this.remove()"></span>Magicbot<small>E-commerce · Growth</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener"><span class="peer__logo" aria-hidden="true">1<img src="assets/logos/1pos.png" alt="" loading="lazy" onerror="this.remove()"></span>1pos<small>RetailTech · Scale</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener"><span class="peer__logo" aria-hidden="true">1<img src="assets/logos/1clinic.png" alt="" loading="lazy" onerror="this.remove()"></span>1clinic<small>MedTech · Scale</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener"><span class="peer__logo" aria-hidden="true">B<img src="assets/logos/braille-recognition.png" alt="" loading="lazy" onerror="this.remove()"></span>Braille Recognition<small>AI · Growth</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener"><span class="peer__logo" aria-hidden="true">K<img src="assets/logos/kolingo.png" alt="" loading="lazy" onerror="this.remove()"></span>Kolingo<small>AI, EdTech · Growth</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener"><span class="peer__logo" aria-hidden="true">D<img src="assets/logos/darstop.png" alt="" loading="lazy" onerror="this.remove()"></span>Darstop<small>EdTech · Growth</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener"><span class="peer__logo" aria-hidden="true">U<img src="assets/logos/udemere.png" alt="" loading="lazy" onerror="this.remove()"></span>Udemere<small>EdTech · Growth</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener"><span class="peer__logo" aria-hidden="true">W<img src="assets/logos/wisdom.png" alt="" loading="lazy" onerror="this.remove()"></span>Wisdom<small>EdTech · Growth</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener"><span class="peer__logo" aria-hidden="true">X<img src="assets/logos/xaridor.png" alt="" loading="lazy" onerror="this.remove()"></span>Xaridor<small>RetailTech · Growth</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener"><span class="peer__logo" aria-hidden="true">C<img src="assets/logos/c-control.png" alt="" loading="lazy" onerror="this.remove()"></span>C-Control<small>PropTech · Growth</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener"><span class="peer__logo" aria-hidden="true">K<img src="assets/logos/karly.png" alt="" loading="lazy" onerror="this.remove()"></span>Karly<small>Service · Growth</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener"><span class="peer__logo" aria-hidden="true">D<img src="assets/logos/dasyor.png" alt="" loading="lazy" onerror="this.remove()"></span>Dasyor<small>E-commerce · Growth</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener"><span class="peer__logo" aria-hidden="true">N<img src="assets/logos/notex.png" alt="" loading="lazy" onerror="this.remove()"></span>NoteX<small>AI · MVP</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener"><span class="peer__logo" aria-hidden="true">S<img src="assets/logos/secura.png" alt="" loading="lazy" onerror="this.remove()"></span>Secura<small>FinTech · MVP</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener"><span class="peer__logo" aria-hidden="true">M<img src="assets/logos/medicard.png" alt="" loading="lazy" onerror="this.remove()"></span>MediCard<small>MedTech · MVP</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener"><span class="peer__logo" aria-hidden="true">D<img src="assets/logos/dialix-ai.png" alt="" loading="lazy" onerror="this.remove()"></span>Dialix AI<small>AI · MVP</small></a>
+          <a class="peer" href="https://startupgarage.uz/uz/portfolio" target="_blank" rel="noopener"><span class="peer__logo" aria-hidden="true">O<img src="assets/logos/obuna24.png" alt="" loading="lazy" onerror="this.remove()"></span>Obuna24<small>SaaS · MVP</small></a>
+          </div>
         </div>
       </div>
     </section>
@@ -290,25 +312,6 @@
       </div>
     </section>
 
-    <!-- ============ OFFICE ============ -->
-    <section class="section section--soft">
-      <div class="container office">
-        <div class="office__head">
-          <p class="kicker reveal">Ofis</p>
-          <h2 class="h2 reveal"><span class="hl">600 m²</span> — startapingiz uchun barcha qulayliklar.</h2>
-          <p class="lead reveal">Toshkent shahar, Mirzo Ulug‘bek tumani, Oq terak ko‘chasi, 13-uy.</p>
-        </div>
-        <ul class="office__grid">
-          <li class="reveal"><b>2 qavat</b><span>dan iborat bino</span></li>
-          <li class="reveal"><b>16 kishilik</b><span>startap jamoalar xonalari</span></li>
-          <li class="reveal"><b>50 kishilik</b><span>anjuman zali</span></li>
-          <li class="reveal"><b>12 kishilik</b><span>majlis xonalari</span></li>
-          <li class="reveal"><b>40 kishilik</b><span>oshxona</span></li>
-          <li class="reveal"><b>70 kishilik</b><span>hovli</span></li>
-        </ul>
-      </div>
-    </section>
-
     <!-- ============ PARTNERS ============ -->
     <section class="section section--tight">
       <div class="container">
@@ -327,35 +330,35 @@
           <h2 class="h2 reveal">Ko‘p beriladigan savollar.</h2>
         </div>
         <div class="faq__list">
-          <details class="faq__item reveal" open>
+          <details class="faq__item reveal" name="faq" open>
             <summary>Startup Garage nima?<span class="faq__plus" aria-hidden="true"></span></summary>
             <p>Startup Garage — startaplarning o‘sishini tezlashtirish uchun zarur vositalar, bilim va qo‘llab-quvvatlash bilan ta’minlaydigan intensiv, loyiha asosidagi dastur. Stenford Universitetining mashhur Startup Garage dasturidan ilhomlangan.</p>
           </details>
-          <details class="faq__item reveal">
+          <details class="faq__item reveal" name="faq">
             <summary>Startup Garage’ga kimlar murojaat qilishi mumkin?<span class="faq__plus" aria-hidden="true"></span></summary>
             <p>Tadbirkorlikka ishtiyoqi bo‘lgan va innovatsion biznes g‘oyaga ega bo‘lgan har qanday shaxs. Biz barcha sohalardan va Markaziy Osiyodan kelgan tadbirkorlarni qabul qilamiz.</p>
           </details>
-          <details class="faq__item reveal">
+          <details class="faq__item reveal" name="faq">
             <summary>Dastur qancha davom etadi?<span class="faq__plus" aria-hidden="true"></span></summary>
             <p>Rezidentlik dasturi 18 oy davomida startapingizni barqaror biznesga aylantirishga qaratilgan. Bootcamp dasturi startap yo‘lining barcha bosqichlarini — ideatsiyadan bozorga chiqishgacha qamrab oladi.</p>
           </details>
-          <details class="faq__item reveal">
+          <details class="faq__item reveal" name="faq">
             <summary>Dasturda qanday mavzular qamrab olinadi?<span class="faq__plus" aria-hidden="true"></span></summary>
             <p>Startap asoslari, mahsulot rivojlanishi, mahsulotni ishga tushirish, moliya va mablag‘ yig‘ish, marketing va savdo, operatsiyalar va boshqaruv.</p>
           </details>
-          <details class="faq__item reveal">
+          <details class="faq__item reveal" name="faq">
             <summary>Qo‘shilish uchun to‘lov bormi?<span class="faq__plus" aria-hidden="true"></span></summary>
             <p>Ha, dasturga qo‘shilish uchun to‘lov mavjud. Biroq va’da beruvchi tadbirkorlarni qo‘llab-quvvatlash uchun turli moliyalashtirish imkoniyatlari va stipendiyalar taklif qilamiz.</p>
           </details>
-          <details class="faq__item reveal">
+          <details class="faq__item reveal" name="faq">
             <summary>Tanlash jarayoni qanday?<span class="faq__plus" aria-hidden="true"></span></summary>
             <p>Dastlabki ariza ko‘rib chiqiladi, so‘ngra qisqa ro‘yxatga kirgan nomzodlar bilan suhbat o‘tkaziladi. Biznes g‘oya, tadbirkorlik salohiyati va dasturga tayyorlik baholanadi.</p>
           </details>
-          <details class="faq__item reveal">
+          <details class="faq__item reveal" name="faq">
             <summary>Jamoa sifatida murojaat qilish mumkinmi?<span class="faq__plus" aria-hidden="true"></span></summary>
             <p>Ha, individual ravishda yoki jamoa sifatida murojaat qilishingiz mumkin. Jamoa bo‘lsangiz, arizada barcha a’zolar haqidagi ma’lumotlarni kiriting.</p>
           </details>
-          <details class="faq__item reveal">
+          <details class="faq__item reveal" name="faq">
             <summary>Dastur tugagandan so‘ng nima bo‘ladi?<span class="faq__plus" aria-hidden="true"></span></summary>
             <p>Ishtirokchilar o‘z bizneslarini potensial investorlarga taqdim etish imkoniyatiga ega bo‘ladi. Bitiruvchilarga doimiy qo‘llab-quvvatlash va resurslar taklif qilinadi.</p>
           </details>
