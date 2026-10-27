@@ -3,7 +3,7 @@
 .nav__inner { max-width: calc(var(--maxw) + var(--gutter) * 2); margin: 0 auto; padding: 0 var(--gutter); height: 76px; display: flex; align-items: center; gap: 40px; }
 .nav__logo { position: relative; display: block; }
 .nav__logo img { height: 33px; width: auto; }
-.nav__links { display: flex; gap: 30px; margin-left: 8px; }
+.nav__links { display: flex; gap: clamp(18px, 2vw, 30px); margin-left: 8px; }
 .nav__links a { font-size: 15px; font-weight: 500; color: var(--ink-2); transition: color .2s; }
 .nav__links a:hover { color: var(--blue); }
 .nav__cta { margin-left: auto; }
