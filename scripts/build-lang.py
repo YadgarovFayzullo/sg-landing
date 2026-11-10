@@ -37,10 +37,10 @@ def fill_funds(html):
     return re.sub(r'<!-- funds:start -->.*?<!-- funds:end -->', lambda m: '<!-- funds:start -->' + funds_html() + '<!-- funds:end -->', html, flags=re.S)
 
 def fill_mq(html):
-    cards = re.findall(r'<li class="rcard"[^>]*><span class="rcard__logo"><img src="([^"]+)" alt="([^"]*)"', html)
+    cards = [(u, n, w) for (w, u, n) in re.findall(r'<li class="rcard"(?: data-name="[^"]*")?(?: data-wm="([^"]*)")?[^>]*><span class="rcard__logo[^"]*"><img src="([^"]+)" alt="([^"]*)"', html)]
     half = (len(cards) + 1) // 2
     def row(items, cls=''):
-        lis = ''.join(f'<li><img src="{u}" alt="" loading="lazy"></li>' for u, _ in items)
+        lis = ''.join(f'<li><img src="{u}" alt="" loading="lazy">' + (f'<span class="mq__wm">{w}</span>' if w else '') + '</li>' for u, _, w in items)
         return f'<div class="mq__row{cls}"><ul class="mq__track">{lis}</ul></div>'
     body = f'<div class="mq" aria-hidden="true">{row(cards[:half])}{row(cards[half:], " mq__row--rev")}</div>'
     return re.sub(r'<!-- mq:start -->.*?<!-- mq:end -->', lambda m: '<!-- mq:start -->' + body + '<!-- mq:end -->', html, flags=re.S)

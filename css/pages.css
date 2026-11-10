@@ -466,3 +466,12 @@
 .gseason table { table-layout: fixed; }
 .gseason thead th:nth-child(1) { width: 22%; } .gseason thead th:nth-child(2) { width: 20%; }
 @media (max-width: 760px) { .gseason table { table-layout: auto; } }
+
+/* Gradly: yumaloq belgi + yozuv */
+.rcard__logo--wm { display: flex; align-items: center; justify-content: center; gap: 12px; }
+.rcard__logo--wm img { width: 52px; height: 52px; max-height: none; border-radius: 14px; object-fit: cover; flex: none; }
+.rcard__wm { font-size: 26px; font-weight: 700; letter-spacing: -0.035em; color: var(--ink); }
+.mq li:has(.mq__wm) { gap: 8px; display: flex; align-items: center; justify-content: center; }
+.mq img[src*="gradly"] { width: 30px; height: 30px; max-height: none; border-radius: 9px; flex: none; }
+.mq__wm { font-size: 19px; font-weight: 700; letter-spacing: -0.03em; color: var(--ink); }
+@media (max-width: 640px) { .rcard__logo--wm img { width: 40px; height: 40px; border-radius: 11px; } .rcard__wm { font-size: 20px; } }
