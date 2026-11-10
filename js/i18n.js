@@ -29,8 +29,8 @@ if (EN) {
     const lead = n.nodeValue.match(/^\s*/)[0], trail = n.nodeValue.match(/\s*$/)[0];
     n.nodeValue = lead + v + trail;
   }
-  for (const el of document.querySelectorAll('[alt],[aria-label],[title],[data-peers-label]')) {
-    for (const a of ['alt', 'aria-label', 'title', 'data-peers-label']) {
+  for (const el of document.querySelectorAll('[alt],[aria-label],[title],[data-peers-label],[placeholder]')) {
+    for (const a of ['alt', 'aria-label', 'title', 'data-peers-label', 'placeholder']) {
       const v = el.getAttribute(a);
       if (v && EN[norm(v)]) el.setAttribute(a, EN[norm(v)]);
     }

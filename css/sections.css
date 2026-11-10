@@ -54,7 +54,7 @@
 .win-stat__label { font-size: 14px; font-weight: 500; opacity: .85; }
 .win-stat__num { font-size: clamp(56px, 7vw, 116px); font-weight: 600; letter-spacing: -0.05em; line-height: .95; font-feature-settings: 'tnum'; }
 .win-stat__txt { display: block; font-size: 15px; opacity: .9; max-width: 340px; margin-top: 10px; }
-.wins__last { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+.wins__last { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
 .wins__last .win__who--wide { flex-wrap: wrap; gap: 10px; justify-content: flex-start; }
 .wins__last .win__who--wide .peer__logo { width: 100%; }
 .win-stat--grant .win-stat__num { color: var(--blue); font-size: clamp(40px, 4vw, 64px); }
@@ -216,3 +216,8 @@
   .footer__brand { grid-column: 1 / -1; }
   .footer__bottom { margin-top: 40px; }
 }
+
+/* portfolio izohi */
+.pf-note { display: flex; align-items: center; gap: 12px; margin: 0 0 20px; font-size: 15px; color: var(--ink-2); }
+.pf-note b { flex: none; padding: 5px 12px; border-radius: 999px; background: var(--blue-50); color: var(--blue); font-size: 14px; font-weight: 700; font-feature-settings: 'tnum'; }
+@media (max-width: 640px) { .pf-note { align-items: flex-start; font-size: 14px; } }

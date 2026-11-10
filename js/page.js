@@ -85,3 +85,11 @@ document.addEventListener('click', (e) => {
 });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && owner) { const o = owner; closeBubble(); o.focus(); } });
 addEventListener('resize', closeBubble);
+
+/* nav: "Kompaniya" ochiladigan menyusi (bosish / Escape) */
+document.querySelectorAll('.nav__dd').forEach((dd) => {
+  const b = dd.querySelector('.nav__dd-btn');
+  b.addEventListener('click', () => { const o = !dd.classList.contains('is-open'); dd.classList.toggle('is-open', o); b.setAttribute('aria-expanded', String(o)); });
+  document.addEventListener('click', (e) => { if (!dd.contains(e.target)) { dd.classList.remove('is-open'); b.setAttribute('aria-expanded', 'false'); } });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { dd.classList.remove('is-open'); b.setAttribute('aria-expanded', 'false'); } });
+});
