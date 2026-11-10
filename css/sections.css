@@ -221,3 +221,17 @@
 .pf-note { display: flex; align-items: center; gap: 12px; margin: 0 0 20px; font-size: 15px; color: var(--ink-2); }
 .pf-note b { flex: none; padding: 5px 12px; border-radius: 999px; background: var(--blue-50); color: var(--blue); font-size: 14px; font-weight: 700; font-feature-settings: 'tnum'; }
 @media (max-width: 640px) { .pf-note { align-items: flex-start; font-size: 14px; } }
+
+/* bosh sahifa: Grand Demo Day */
+.gdd-home__grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(28px, 5vw, 80px); align-items: center; }
+.gdd-home__txt { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+.gdd-home__stat { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.gdd-home__stat b { font-size: clamp(32px, 3.4vw, 48px); font-weight: 600; letter-spacing: -0.05em; color: var(--blue); }
+.gdd-home__stat span { color: var(--muted); font-size: 15px; }
+.gdd-home__ph { position: relative; aspect-ratio: 1.15 / 1; }
+.gdd-home__ph img { position: absolute; object-fit: cover; border-radius: 22px; box-shadow: 0 24px 50px -22px rgba(11,12,22,.45); transition: transform .5s var(--ease); }
+.gdd-home__ph .p1 { left: 0; top: 0; width: 66%; height: 62%; }
+.gdd-home__ph .p2 { right: 0; top: 14%; width: 38%; height: 70%; }
+.gdd-home__ph .p3 { left: 18%; bottom: 0; width: 46%; height: 46%; border: 4px solid #fff; }
+.gdd-home__ph:hover .p1 { transform: translate(-6px, -6px) rotate(-1.5deg); } .gdd-home__ph:hover .p2 { transform: translate(6px, -4px) rotate(2deg); } .gdd-home__ph:hover .p3 { transform: translate(0, 6px) rotate(-1deg); }
+@media (max-width: 960px) { .gdd-home__grid { grid-template-columns: 1fr; } .gdd-home__ph { max-width: 560px; } }
