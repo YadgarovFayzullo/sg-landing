@@ -38,6 +38,10 @@ def fill_funds(html):
 
 def fill_mq(html):
     cards = [(u, n, w) for (w, u, n) in re.findall(r'<li class="rcard"(?: data-name="[^"]*")?(?: data-wm="([^"]*)")?[^>]*><span class="rcard__logo[^"]*"><img src="([^"]+)" alt="([^"]*)"', html)]
+    extras = json.load(open(os.path.join(ROOT, 'data', 'marquee-extra.json'), encoding='utf-8'))
+    for e in extras:  # faqat lentada ko'rinadigan qo'shimcha belgilar (ro'yxatda yo'q), alifbo tartibida
+        pos = next((i for i, c in enumerate(cards) if c[1].lower() > e['name'].lower()), len(cards))
+        cards.insert(pos, (e['src'], e['name'], e.get('wm', '')))
     half = (len(cards) + 1) // 2
     def row(items, cls=''):
         lis = ''.join(f'<li><img src="{u}" alt="" loading="lazy">' + (f'<span class="mq__wm">{w}</span>' if w else '') + '</li>' for u, _, w in items)
