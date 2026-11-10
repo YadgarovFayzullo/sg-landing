@@ -447,3 +447,30 @@
 .bp__ex { color: var(--ink-2); font-size: 15px; }
 .bp__go { margin-top: auto; padding-top: 6px; font-size: 15px; font-weight: 600; color: var(--blue); }
 @media (max-width: 640px) { .bposts { grid-template-columns: 1fr; } .bp > a { border-radius: 20px; } }
+
+/* GDD natijalar: mavsumlar */
+.gdd-facts--res { margin-bottom: 8px; } .gdd-facts--res li { background: #fff; text-align: left; }
+.gseason { margin-top: 18px; background: #fff; border: 1px solid var(--line); border-radius: 24px; overflow: hidden; }
+.gseason__h { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 26px; background: var(--blue); color: #fff; }
+.gseason__h h3 { margin: 0; font-size: clamp(18px, 2vw, 24px); font-weight: 700; letter-spacing: .02em; text-transform: uppercase; }
+.gseason__h b { font-size: clamp(22px, 2.6vw, 32px); font-weight: 700; letter-spacing: -0.03em; font-feature-settings: 'tnum'; }
+.gs-date { display: block; margin-top: 2px; font-size: 13px; opacity: .8; }
+.gseason table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.gseason thead th { text-align: left; padding: 12px 26px; background: var(--blue-50); color: var(--ink-2); font-weight: 500; font-size: 14px; }
+.gseason tbody th, .gseason tbody td { text-align: left; padding: 16px 26px; border-top: 1px solid var(--line); vertical-align: top; }
+.gseason tbody th { font-weight: 600; white-space: nowrap; }
+.gs-sum { font-weight: 600; color: var(--blue); font-feature-settings: 'tnum'; white-space: nowrap; }
+.gs-inv { display: inline-flex; align-items: baseline; gap: 6px; margin: 0 6px 6px 0; padding: 5px 12px; border-radius: 999px; background: var(--blue-50); font-size: 14px; font-weight: 500; }
+.gs-inv b { font-weight: 600; color: var(--blue); font-feature-settings: 'tnum'; }
+.gdd-note { margin: 18px 0 0; padding: 18px 22px; border-radius: 18px; background: #FFF6E8; border: 1px solid #F3DDB5; color: var(--ink-2); }
+.gdd-note b { color: var(--ink); }
+@media (max-width: 760px) {
+  .gseason thead { display: none; }
+  .gseason tbody tr { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 16px 20px; border-top: 1px solid var(--line); }
+  .gseason tbody th, .gseason tbody td { display: block; border: 0; padding: 0; white-space: normal; }
+  .gseason tbody td:last-child { grid-column: 1 / -1; margin-top: 8px; }
+  .gseason__h { padding: 16px 20px; }
+}
+.gseason table { table-layout: fixed; }
+.gseason thead th:nth-child(1) { width: 22%; } .gseason thead th:nth-child(2) { width: 20%; }
+@media (max-width: 760px) { .gseason table { table-layout: auto; } }
