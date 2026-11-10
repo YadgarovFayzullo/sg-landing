@@ -349,3 +349,10 @@
 .br > :nth-last-child(2):not(.br__map) { margin-bottom: 4px; }
 @media (max-width: 960px) { .brhero > .brhero__in { grid-template-columns: 1fr; } }
 @media (max-width: 640px) { .brgrid { grid-template-columns: 1fr; } .br { padding: 20px; border-radius: 20px; } .brhero__map { border-radius: 20px; } }
+
+.gfunds { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.gfunds li { display: grid; place-items: center; height: clamp(84px, 9vw, 112px); padding: 0 clamp(18px, 2.4vw, 32px); background: var(--bg); border-radius: 22px; transition: transform .3s var(--ease); }
+.gfunds li:hover { transform: translateY(-3px); }
+.gfunds img { max-width: 100%; max-height: 44px; width: auto; height: auto; object-fit: contain; }
+@media (max-width: 960px) { .gfunds { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .gfunds { gap: 10px; } .gfunds li { border-radius: 16px; } }
