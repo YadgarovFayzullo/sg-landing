@@ -31,3 +31,12 @@
 @media (max-height: 520px) and (orientation: landscape) {
   .nav__inner { height: 56px; }
 }
+
+/* til tugmasi */
+.lang { display: inline-flex; padding: 3px; border-radius: 999px; background: var(--blue-50); }
+.lang button { padding: 6px 11px; border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--muted); line-height: 1; transition: background .2s, color .2s; }
+.lang button[aria-pressed="true"] { background: var(--blue); color: #fff; }
+.lang button:not([aria-pressed="true"]):hover { color: var(--blue); }
+.lang--m { align-self: flex-start; margin: 10px 0 6px; }
+@media (min-width: 961px) { .lang--m { display: none; } }
+@media (max-width: 960px) { .nav__inner > .lang { display: none; } }

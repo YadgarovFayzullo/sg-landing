@@ -1,5 +1,7 @@
 /* Ichki sahifalar: mobil menyu, reveal, atama izohlari (glossary), yil */
-import { GLOSSARY } from './glossary-data.js';
+import { GLOSSARY as GLOSSARY_UZ } from './glossary-data.js';
+import { LANG, GLOSS_EN } from './i18n.js';
+const GLOSSARY = LANG === 'en' ? GLOSSARY_UZ.map((e) => GLOSS_EN[e.label] ?? e) : GLOSSARY_UZ;
 
 const nav = document.getElementById('nav');
 const burger = document.getElementById('burger');

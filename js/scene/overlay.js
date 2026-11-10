@@ -5,6 +5,7 @@ import { clamp, smooth, pointAt } from './math.js';
 import { S, cam, P, imgs, UP } from './state.js';
 import { front, milestones, uni, stageContent } from './entities.js';
 import { stages } from '../data.js';
+import { t } from '../i18n.js';
 import { card, heroCopy, summitCopy, scrollHint, caption, shade } from './dom.js';
 import { outro } from './camera.js';
 
@@ -87,7 +88,7 @@ export function updateLabels() {
 let stageIdx = -1, swapTimer = 0;
 export function setCard(i) {
   const s = stageContent[i];
-  card.step.textContent = `Bosqich 0${i + 1} / 0${stages.length}`;
+  card.step.textContent = `${t('Bosqich')} 0${i + 1} / 0${stages.length}`;
   card.title.textContent = s.title;
   card.desc.textContent = s.desc;
   card.list.innerHTML = s.helpHtml;

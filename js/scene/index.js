@@ -5,6 +5,7 @@
    (DPR ≤ 2, ≤ 4096px) chiziladi → 4K/60fps.
    Kadr tartibi: input → physics → camera → render → overlay.
    ========================================================= */
+import '../i18n.js';
 import { T_START, T_END } from './config.js';
 import { clamp, lerp, easeJourney } from './math.js';
 import { S, REDUCED } from './state.js';

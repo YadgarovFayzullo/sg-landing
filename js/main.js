@@ -1,5 +1,7 @@
 /* Startup Garage — sahifa interaktivligi (sahnadan tashqari): menyu, reveal, yil */
 
+import './i18n.js';
+
 /* nav: sahnadan keyin oq fon */
 const nav = document.getElementById('nav');
 const journey = document.getElementById('journey');
