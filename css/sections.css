@@ -18,7 +18,7 @@
 .stats { margin-top: clamp(56px, 7vw, 96px); display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
 .stat { padding: 28px 24px 0 0; display: flex; flex-direction: column; gap: 10px; }
 .stat + .stat { padding-left: 24px; border-left: 1px solid var(--line); }
-.stat__num { font-size: clamp(36px, 4vw, 56px); font-weight: 600; letter-spacing: -0.045em; line-height: 1; font-feature-settings: 'tnum'; }
+.stat__num { font-size: clamp(30px, 3.4vw, 48px); font-weight: 600; letter-spacing: -0.045em; line-height: 1; font-feature-settings: 'tnum'; }
 .stat__txt { font-size: 15px; color: var(--muted); max-width: 220px; }
 
 /* route */
@@ -52,7 +52,7 @@
 .win-stat { border-radius: 28px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; background: #fff; border: 1px solid var(--line); }
 .win-stat--big { grid-column: span 2; grid-row: span 2; background: linear-gradient(135deg, #5458FF 0%, #7C80FF 100%); border-color: transparent; color: #fff; padding: 36px; }
 .win-stat__label { font-size: 14px; font-weight: 500; opacity: .85; }
-.win-stat__num { font-size: clamp(56px, 7vw, 116px); font-weight: 600; letter-spacing: -0.05em; line-height: .95; font-feature-settings: 'tnum'; }
+.win-stat__num { font-size: clamp(40px, 5.2vw, 84px); font-weight: 600; letter-spacing: -0.05em; line-height: .95; font-feature-settings: 'tnum'; }
 .win-stat__txt { display: block; font-size: 15px; opacity: .9; max-width: 340px; margin-top: 10px; }
 .wins__last { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
 .wins__last .win__who--wide { flex-wrap: wrap; gap: 10px; justify-content: flex-start; }
@@ -101,9 +101,6 @@
 
 
 /* partners */
-.partners li { display: grid; place-items: center; width: calc((100% - 84px) / 7); aspect-ratio: 1; padding: clamp(14px, 1.6vw, 22px); box-sizing: border-box; background: var(--bg); border-radius: 22px; }
-.partners img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
-.partners { margin: 28px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
 
 /* faq */
 .faq { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 64px; align-items: start; }
@@ -148,8 +145,7 @@
   .route { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 960px) {
-  .partners li { width: calc(25% - 11px); }
-  .stats { grid-template-columns: 1fr 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
   .stat:nth-child(3) { border-left: 0; padding-left: 0; }
   .stat:nth-child(n+3) { margin-top: 28px; border-top: 1px solid var(--line); }
   .help { grid-template-columns: 1fr 1fr; }
@@ -168,7 +164,7 @@
   .lead { font-size: 16px; }
   .statement { font-size: 24px; }
   .stats { margin-top: 44px; }
-  .stat__num { font-size: 34px; }
+  .stat__num { font-size: 30px; }
   .stat__txt { font-size: 14px; }
 
   /* Yo'l xaritasi — suriladigan karusel */
@@ -193,7 +189,7 @@
   .wins { grid-template-columns: 1fr; }
   .wins__last { grid-template-columns: 1fr 1fr; }
   .win-stat--big { grid-column: auto; grid-row: auto; padding: 26px; }
-  .win-stat__num { font-size: 64px; }
+  .win-stat__num { font-size: clamp(34px, 11vw, 52px); }
   .win { padding: 20px; border-radius: 22px; }
     .win__who .peer__logo { width: 44px; height: 44px; border-radius: 14px; font-size: 17px; }
   .win__who--wide .peer__logo { width: 124px; height: 40px; border-radius: 0; }
@@ -203,9 +199,7 @@
 
   .program { padding: 24px 22px; }
   .program h3 { font-size: 26px; }
-  .partners { gap: 10px; }
-  .partners li { width: calc(33.333% - 7px); padding: 12px; border-radius: 16px; }
-  .cta__lead { font-size: 16px; }
+      .cta__lead { font-size: 16px; }
   .head--row { flex-direction: column; align-items: flex-start; }
   .faq__item summary { font-size: 16.5px; }
   .faq__item p { padding-right: 0; }
@@ -239,3 +233,11 @@
 .gdd-home__meta { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
 .gdd-home__meta li { padding: 8px 14px; border-radius: 999px; background: var(--blue-50); color: var(--blue); font-size: 14px; font-weight: 600; }
 .gdd-home__btns { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* Yagona fondlar/hamkorlar komponenti (data/partners.json) */
+.funds { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+.funds li { display: grid; place-items: center; height: clamp(84px, 8.4vw, 116px); padding: 0 clamp(14px, 1.8vw, 26px); background: var(--bg, #fff); border: 1px solid var(--line); border-radius: 22px; transition: transform .3s var(--ease), box-shadow .3s; }
+.funds li:hover { transform: translateY(-3px); box-shadow: 0 16px 32px -20px rgba(84, 88, 255, .45); }
+.funds img { max-width: 100%; max-height: 40px; width: auto; height: auto; object-fit: contain; }
+@media (max-width: 960px) { .funds { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 640px) { .funds { grid-template-columns: repeat(3, 1fr); gap: 10px; } .funds li { border-radius: 16px; padding: 0 10px; height: 72px; } .funds img { max-height: 30px; } }

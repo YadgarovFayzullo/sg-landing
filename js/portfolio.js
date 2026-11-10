@@ -12,7 +12,7 @@ document.querySelectorAll('.mq__row').forEach((row) => {
 });
 
 /* hisoblagichlar */
-const fmt = (el, v) => { el.textContent = `${el.dataset.pre || ''}${v.toFixed(+el.dataset.dec || 0)}${el.dataset.suf || ''}`; };
+const fmt = (el, v) => { el.textContent = `${el.dataset.pre || ''}${v.toLocaleString('en-US', { minimumFractionDigits: +el.dataset.dec || 0, maximumFractionDigits: +el.dataset.dec || 0 })}${el.dataset.suf || ''}`; };
 const co = new IntersectionObserver((ents) => ents.forEach((e) => {
   if (!e.isIntersecting) return;
   co.unobserve(e.target);
