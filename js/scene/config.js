@@ -59,12 +59,12 @@ export const THEME_FADE = 3;
 export const SIGN_GLOW = { night: 1, dawn: 0.7, sunrise: 0.2, evening: 0.3 };
 
 export const ASSETS = {
-  bg: 'assets/scene-1536.webp',
-  bg4k: 'assets/scene-4k.webp',
-  body: 'assets/cabin-body.png',
-  grip: 'assets/cabin-grip.png',
-  glow: 'assets/cabin-glow.png',
-  sky: 'assets/sky-top.webp',
-  uni: 'assets/unicorn-cloud.webp',
-  sign: 'assets/sign-neon.png'
+  bg: '/assets/scene-1536.webp',
+  bg4k: '/assets/scene-4k.webp',
+  body: '/assets/cabin-body.png',
+  grip: '/assets/cabin-grip.png',
+  glow: '/assets/cabin-glow.png',
+  sky: '/assets/sky-top.webp',
+  uni: '/assets/unicorn-cloud.webp',
+  sign: '/assets/sign-neon.png'
 };

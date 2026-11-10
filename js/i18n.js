@@ -1,12 +1,24 @@
 /* Til: uz (default) / en. Matn HTML'da o'zbekcha — inglizcha tarjima js/i18n-en.js da (kalit = o'zbekcha satr).
    Til almashganda sahifa qayta yuklanadi: sahna matnlarni DOM'dan o'qiydi, shuning uchun tarjima ulardan oldin bajariladi. */
 const KEY = 'sg-lang';
-let lang = 'uz';
+/* Til manzildan olinadi: /uz/... yoki /en/...  Prefikssiz manzil — saqlangan tanlov (default uz) bilan prefiksli manzilga yo'naltiriladi. */
+const m = location.pathname.match(/^\/(uz|en)(?=\/|$)/);
+let lang = m ? m[1] : null;
+const q = new URLSearchParams(location.search).get('lang');
+let pref = 'uz';
 try {
-  const q = new URLSearchParams(location.search).get('lang');
   if (q === 'uz' || q === 'en') localStorage.setItem(KEY, q);
-  lang = localStorage.getItem(KEY) === 'en' ? 'en' : 'uz';
+  pref = localStorage.getItem(KEY) === 'en' ? 'en' : 'uz';
+  if (lang) localStorage.setItem(KEY, lang);
 } catch { /* storage yopiq — default uz */ }
+if (!lang) {
+  const u = new URL(location.href);
+  u.searchParams.delete('lang');
+  let path = u.pathname.replace(/index\.html$/, '');
+  if (!path.endsWith('/')) path += '/';
+  location.replace(`/${q === 'uz' || q === 'en' ? q : pref}${path}${u.search}${u.hash}`);
+  await new Promise(() => {}); // yo'naltirish tugaguncha boshqa modullar ishga tushmasin
+}
 
 const mod = lang === 'en' ? await import('./i18n-en.js') : null;
 const EN = mod?.EN ?? null;
@@ -52,7 +64,7 @@ function mount() {
       const b = e.target.closest('button[data-lang]');
       if (!b || b.dataset.lang === lang) return;
       try { localStorage.setItem(KEY, b.dataset.lang); } catch { /* ignore */ }
-      const u = new URL(location.href); u.searchParams.delete('lang'); location.href = u.toString();
+      location.href = location.pathname.replace(/^\/(uz|en)(?=\/|$)/, `/${b.dataset.lang}`) + location.search + location.hash;
     });
     return w;
   };
