@@ -1,0 +1,19 @@
+[
+  {
+    "slug": "grand-demo-day",
+    "url": "/grand-demo-day",
+    "image": "/assets/gdd/gdd-01.webp",
+    "uz": {
+      "tag": "Tadbir",
+      "date": "19-noyabr, 2026",
+      "title": "Grand Demo Day — Yandex Uzbekistan × Startup Garage",
+      "excerpt": "Startapingizni venchur fondlar, angel investorlar va biznes vakillariga tanishtiring. Sakkiz hafta davom etadigan saralashning final bosqichi."
+    },
+    "en": {
+      "tag": "Event",
+      "date": "November 19, 2026",
+      "title": "Grand Demo Day — Yandex Uzbekistan × Startup Garage",
+      "excerpt": "Introduce your startup to venture funds, angel investors and business representatives. The final stage of an eight-week selection."
+    }
+  }
+]
