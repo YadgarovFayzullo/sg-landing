@@ -60,6 +60,11 @@
 .win { display: flex; flex-direction: column; justify-content: space-between; gap: 22px; background: #fff; border: 1px solid var(--line); border-radius: 28px; padding: 26px; }
 .win__who { display: flex; align-items: center; gap: 14px; min-width: 0; }
 .win__who .peer__logo { width: 52px; height: 52px; border-radius: 16px; font-size: 20px; }
+.win__who--wide { justify-content: space-between; }
+.win__who--wide .peer__logo { width: 150px; height: 48px; border-radius: 0; background: none; font-size: 0; color: transparent; }
+.win__who--wide .peer__logo img { object-fit: contain; object-position: left center; background: none; }
+.win__who--wide .win__name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.win__who--wide .win__tag { margin: 0; padding: 4px 10px; border-radius: 999px; background: var(--blue-50); color: var(--blue); font-weight: 600; font-size: 12px; white-space: nowrap; }
 .win__name { display: block; font-size: 19px; font-weight: 600; letter-spacing: -0.02em; color: var(--ink); }
 .win__tag { display: block; font-size: 13px; color: var(--muted); margin-top: 2px; }
 .win__money { min-width: 0; }
@@ -182,6 +187,7 @@
   .win-stat__num { font-size: 64px; }
   .win { padding: 20px; border-radius: 22px; }
   .win__who .peer__logo { width: 44px; height: 44px; border-radius: 14px; font-size: 17px; }
+  .win__who--wide .peer__logo { width: 124px; height: 40px; border-radius: 0; }
 
   .peer:hover { transform: none; }
   .peers { margin-top: 28px; }
