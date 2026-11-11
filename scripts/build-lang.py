@@ -4,7 +4,7 @@ HTML ikkala tilda bir xil, farqi: <html lang>, ichki havolalar prefiksi va hrefl
 Ishga tushirish:  python3 scripts/build-lang.py   (yoki: npm run build)"""
 import re, os, shutil, sys, json, html as H
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SLUGS = ['services', 'for-partners', 'portfolio', 'books', 'media', 'grand-demo-day', 'branches', 'sg-women', 'events', 'blog']
+SLUGS = ['services', 'for-partners', 'portfolio', 'books', 'media', 'grand-demo-day', 'branches', 'sg-women', 'events', 'blog', 'team']
 LANGS = ['uz', 'en']
 SITE = 'https://startupgarage.uz'
 READ = {'uz': 'O‘qish', 'en': 'Read'}

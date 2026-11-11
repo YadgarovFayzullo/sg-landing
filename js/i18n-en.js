@@ -532,7 +532,28 @@ export const EN = {
  "AI · O‘sish": "AI · Growth",
  "MedTech · G‘oya": "MedTech · Idea",
  "Navbatdagi rezident": "Next resident",
- "Ariza qabul qilinmoqda": "Applications open"
+ "Ariza qabul qilinmoqda": "Applications open",
+ "Jamoa — Startup Garage": "Team — Startup Garage",
+ "Startup Garage jamoasi, hamkorlar va investorlar — asoschilar uchun venchur infratuzilmasini quruvchi odamlar.": "The Startup Garage team, partners and investors — the people building venture infrastructure for founders.",
+ "Startup Garage jamoasi": "Startup Garage team",
+ "jamoasi": "team",
+ "Asoschilar uchun ta’lim, akseleratsiya va kapitalni bir joyga yig‘adigan odamlar. Biz startaplar bilan yelkama-yelka ishlaymiz.": "The people who bring education, acceleration and capital together for founders. We work shoulder to shoulder with startups.",
+ "startap portfelda": "startups in portfolio",
+ "mamlakat": "countries",
+ "jalb qilingan": "raised",
+ "Startup Garage asoschisi": "Founder at Startup Garage",
+ "Rivojlanayotgan bozorlar asoschilari uchun venchur infratuzilmasini quradi: ta’lim va akseleratsiyadan kapital, investitsiyaga tayyorlik va ekotizim o‘sishigacha.": "Focused on building venture infrastructure for emerging-market founders from education and acceleration to capital, investment readiness, and ecosystem growth.",
+ "Operatsiyalar rahbari": "Head of Operations",
+ "Startap dasturlari, hamkorliklar va asoschilarni qo‘llab-quvvatlash tashabbuslarini muvofiqlashtiradi.": "Helps coordinate startup programs, partnerships, and founder support initiatives.",
+ "Yetakchi loyiha menejeri": "Lead Project Manager",
+ "Asoschilar bilan yaqin ishlab, mahsulot rivoji, startap strategiyasi va venchur o‘sishini qo‘llab-quvvatlaydi.": "Works closely with founders to support product development, startup strategy, and venture growth.",
+ "Hamkorlar va investorlar": "Partners & Investors",
+ "Tadbirkor va investor": "Entrepreneur & Investor",
+ "Jamoat bozorlari, ko‘chmas mulk va erta bosqichdagi startaplarga sarmoya kiritadigan serial tadbirkor. Imkon Ventures LP’i, O‘zbekiston va AQShda biznesi bor.": "Serial entrepreneur investing across public markets, real estate and early-stage startups. LP at Imkon Ventures with businesses in Uzbekistan and the US.",
+ "Imkon Ventures general partneri": "General Partner at Imkon Ventures",
+ "Doha’dagi DTX’ning sobiq VC’si. 35+ kompaniyaga $55M+ sarmoya kiritgan. 50+ kompaniyadan iborat $2B+ AUM portfelini boshqargan.": "Ex-VC at DTX, Doha. Invested $55M+ across 35+ companies. Managed a $2B+ AUM portfolio of 50+ companies.",
+ "Jamoamizga qo‘shiling yoki hamkor bo‘ling": "Join our team or partner with us",
+ "Startap, investor yoki hamkor sifatida yozing — jamoamiz javob beradi.": "Write to us as a startup, investor or partner — our team will reply."
 };
 
 // Glossary (by Uzbek label) — English match words, label and explanation.
