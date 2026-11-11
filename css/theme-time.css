@@ -85,3 +85,8 @@ html:is([data-time="night"], [data-time="dawn"]) .nav:not(.is-solid):not(.is-ope
   background: rgba(11, 12, 22, .78); color: #fff; font: 600 12px/1 "Bricolage Grotesque", system-ui, sans-serif; letter-spacing: .02em;
   pointer-events: none; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
 }
+
+/* tunda ochiluvchi menyu: karta oq — matn to'q bo'lib qolsin */
+html:is([data-time="night"], [data-time="dawn"]) .nav:not(.is-solid):not(.is-open) .nav__menu a { color: var(--ink-2); }
+html:is([data-time="night"], [data-time="dawn"]) .nav:not(.is-solid):not(.is-open) .nav__menu a:hover,
+html:is([data-time="night"], [data-time="dawn"]) .nav:not(.is-solid):not(.is-open) .nav__menu a[aria-current="page"] { color: var(--blue); }
