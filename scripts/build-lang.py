@@ -110,6 +110,40 @@ def sitemap():
             rows += f'  <url>\n    <loc>{u(lang)}</loc>\n{alt}    <lastmod>{LASTMOD}</lastmod>\n    <changefreq>{freq}</changefreq>\n    <priority>{"1.0" if slug == "" else "0.7"}</priority>\n  </url>\n'
     open(os.path.join(ROOT, 'sitemap.xml'), 'w', encoding='utf-8').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + rows + '</urlset>\n')
 
+_EN = None
+def en_dict():
+    """js/i18n-en.js dagi EN lug'ati (node orqali) — build vaqtida /en/ HTML'ni tarjima qilish uchun."""
+    global _EN
+    if _EN is None:
+        import subprocess
+        out = subprocess.run(['node', '-e', "import('./js/i18n-en.js').then(m=>process.stdout.write(JSON.stringify(m.EN)))"], cwd=ROOT, capture_output=True, text=True, check=True).stdout
+        _EN = json.loads(out)
+    return _EN
+
+def translate_body(html):
+    """i18n.js bilan bir xil mantiq: matn tugunlari va alt/aria-label/title/placeholder/data-peers-label atributlari."""
+    EN = en_dict()
+    norm = lambda x: re.sub(r'\s+', ' ', x).strip()
+    i = html.find('<body')
+    head, body = html[:i], html[i:]
+    parts = re.split(r'(<script\b.*?</script>|<style\b.*?</style>|<noscript\b.*?</noscript>|<!--.*?-->)', body, flags=re.S)
+    def txt(m):
+        raw = m.group(1)
+        v = EN.get(norm(H.unescape(raw)))
+        if not v: return m.group(0)
+        lead = re.match(r'\s*', raw).group(0); trail = re.search(r'\s*$', raw).group(0)
+        return '>' + lead + H.escape(v, quote=False) + trail + '<'
+    def attr(m):
+        v = EN.get(norm(H.unescape(m.group(2))))
+        return f'{m.group(1)}="{H.escape(v, quote=True)}"' if v else m.group(0)
+    out = []
+    for k, part in enumerate(parts):
+        if k % 2 == 1: out.append(part); continue
+        part = re.sub(r'>([^<>]+)<', txt, part)
+        part = re.sub(r'\b(alt|aria-label|title|data-peers-label|placeholder)="([^"]*)"', attr, part)
+        out.append(part)
+    return head + ''.join(out)
+
 def rewrite(html, lang, slug):
     html = re.sub(r'<html lang="[a-z]+"', f'<html lang="{lang}"', html, count=1)
     alt = ''.join(f'<link rel="alternate" hreflang="{l}" href="{SITE}/{l}/{slug + "/" if slug else ""}">\n  ' for l in LANGS)
@@ -122,6 +156,8 @@ def rewrite(html, lang, slug):
     html = re.sub(rf'href="/({slugs})"', rf'href="/{lang}/\1/"', html)
     html = re.sub(r'href="/(blog/[^"]+)"', rf'href="/{lang}/\1"', html)
     html = re.sub(r'href="/(#[^"]*)?"', lambda m: f'href="/{lang}/{m.group(1) or ""}"', html)
+    if lang == 'en':
+        html = translate_body(html)
     return html
 
 def main():
