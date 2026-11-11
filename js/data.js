@@ -20,14 +20,14 @@ export const stages = [
 export const cabins = {
   hero: { name: t('Sizning startapingiz'), tag: t('Startup Garage bilan') },
   ahead: [
-    { name: t('Echo'), tag: t('EdTech · G‘oya') },
-    { name: t('Zingo'), tag: t('EdTech · MVP') },
-    { name: t('Kolingo'), tag: t('EdTech · O‘sish') },
-    { name: t('Magicbot'), tag: t('E-commerce · O‘sish') },
-    { name: t('Mohirdev'), tag: t('$750K investitsiya') }
+    { name: t('KiGo'), tag: t('Startup Garage rezidenti') },
+    { name: t('Joymee'), tag: t('$150K investitsiya') },
+    { name: t('Romchi'), tag: t('$50K investitsiya') },
+    { name: t('Bito'), tag: t('$630K investitsiya') },
+    { name: t('Darstop'), tag: t('EdTech · O‘sish') }
   ],
   behind: [
-    { name: t('Darstop'), tag: t('EdTech · O‘sish') },
+    { name: t('Mohirdev'), tag: t('$750K investitsiya') },
     { name: t('Braille Recognition'), tag: t('AI · O‘sish') },
     { name: t('Karmon AI'), tag: t('AI · MVP') },
     { name: t('MedFinder'), tag: t('MedTech · G‘oya') },
