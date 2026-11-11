@@ -7,6 +7,13 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SLUGS = ['services', 'for-partners', 'portfolio', 'books', 'media', 'grand-demo-day', 'branches', 'sg-women', 'events', 'blog', 'team']
 LANGS = ['uz', 'en']
 SITE = 'https://startupgarage.uz'
+OG_IMAGE = SITE + '/assets/og-default.jpg'
+OG_LOCALE = {'uz': 'uz_UZ', 'en': 'en_US'}
+LABEL = {'uz': {'': 'Bosh sahifa', 'services': 'Xizmatlar', 'for-partners': 'Hamkorlarga', 'portfolio': 'Portfolio', 'books': 'Kitoblar', 'media': 'Media', 'grand-demo-day': 'Grand Demo Day', 'branches': 'Filiallar', 'sg-women': 'SG Women', 'events': 'Tadbirlar', 'blog': 'Blog', 'team': 'Jamoa'},
+         'en': {'': 'Home', 'services': 'Services', 'for-partners': 'For partners', 'portfolio': 'Portfolio', 'books': 'Books', 'media': 'Media', 'grand-demo-day': 'Grand Demo Day', 'branches': 'Branches', 'sg-women': 'SG Women', 'events': 'Events', 'blog': 'Blog', 'team': 'Team'}}
+SAMEAS = ['https://t.me/startupgarage_uz', 'https://www.instagram.com/startupgarage_uz', 'https://www.linkedin.com/company/startupgarageuz', 'https://www.youtube.com/@startupgarage_uz']
+LASTMOD = '2026-11-12'
+PRIORITY_WEEKLY = {'', 'portfolio', 'events', 'blog'}
 READ = {'uz': 'O‘qish', 'en': 'Read'}
 EMPTY = {'uz': 'Yangi maqolalar tez orada chiqadi. Yangiliklarni Telegram kanalimizda kuzating.', 'en': 'New articles are coming soon. Follow the news on our Telegram channel.'}
 
@@ -52,11 +59,65 @@ def fill_mq(html):
 def src(slug):
     return os.path.join(ROOT, 'index.html' if slug == '' else f'{slug}/index.html')
 
+def seo(slug):
+    return json.load(open(os.path.join(ROOT, 'data', 'seo.json'), encoding='utf-8'))[slug]
+
+def ld(obj):
+    return '<script type="application/ld+json">' + json.dumps(obj, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/') + '</script>\n  '
+
+def jsonld(lang, slug, url, t):
+    out = []
+    if slug == '':
+        out.append({'@context': 'https://schema.org', '@type': 'Organization', '@id': SITE + '/#org', 'name': 'Startup Garage', 'url': SITE + '/',
+                    'logo': SITE + '/assets/icon-192.png', 'description': t['description'], 'sameAs': SAMEAS})
+        out.append({'@context': 'https://schema.org', '@type': 'WebSite', '@id': SITE + '/#website', 'name': 'Startup Garage', 'url': SITE + '/' + lang + '/',
+                    'inLanguage': lang, 'publisher': {'@id': SITE + '/#org'}})
+    else:
+        out.append({'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
+            {'@type': 'ListItem', 'position': 1, 'name': LABEL[lang][''], 'item': f'{SITE}/{lang}/'},
+            {'@type': 'ListItem', 'position': 2, 'name': LABEL[lang][slug], 'item': url}]})
+    if slug == 'grand-demo-day':
+        out.append({'@context': 'https://schema.org', '@type': 'Event', 'name': 'Grand Demo Day 2026', 'description': t['description'],
+                    'startDate': '2026-11-19T14:00:00+05:00', 'endDate': '2026-11-19T18:00:00+05:00',
+                    'eventStatus': 'https://schema.org/EventScheduled', 'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode',
+                    'location': {'@type': 'Place', 'name': 'Yandex Uzbekistan office', 'address': {'@type': 'PostalAddress', 'addressLocality': 'Tashkent', 'addressCountry': 'UZ'}},
+                    'image': [OG_IMAGE], 'url': url, 'inLanguage': lang,
+                    'organizer': {'@type': 'Organization', 'name': 'Startup Garage', 'url': SITE + '/'}})
+    return ''.join(ld(o) for o in out)
+
+def head_seo(lang, slug):
+    t = seo(slug)[lang]
+    url = f'{SITE}/{lang}/{slug + "/" if slug else ""}'
+    e = lambda x: H.escape(x, quote=True)
+    other = [l for l in LANGS if l != lang]
+    m = [f'<link rel="canonical" href="{url}">',
+         '<meta property="og:type" content="website">', '<meta property="og:site_name" content="Startup Garage">',
+         f'<meta property="og:title" content="{e(t["title"])}">', f'<meta property="og:description" content="{e(t["description"])}">',
+         f'<meta property="og:url" content="{url}">', f'<meta property="og:locale" content="{OG_LOCALE[lang]}">']
+    m += [f'<meta property="og:locale:alternate" content="{OG_LOCALE[l]}">' for l in other]
+    m += [f'<meta property="og:image" content="{OG_IMAGE}">', '<meta property="og:image:width" content="1200">', '<meta property="og:image:height" content="630">',
+          '<meta name="twitter:card" content="summary_large_image">', f'<meta name="twitter:title" content="{e(t["title"])}">',
+          f'<meta name="twitter:description" content="{e(t["description"])}">', f'<meta name="twitter:image" content="{OG_IMAGE}">']
+    return '\n  '.join(m) + '\n  ' + jsonld(lang, slug, url, t), t
+
+def sitemap():
+    rows = ''
+    for slug in [''] + SLUGS:
+        for lang in LANGS:
+            u = lambda l: f'{SITE}/{l}/{slug + "/" if slug else ""}'
+            alt = ''.join(f'    <xhtml:link rel="alternate" hreflang="{l}" href="{u(l)}"/>\n' for l in LANGS) + f'    <xhtml:link rel="alternate" hreflang="x-default" href="{u("uz")}"/>\n'
+            freq = 'weekly' if slug in PRIORITY_WEEKLY else 'monthly'
+            rows += f'  <url>\n    <loc>{u(lang)}</loc>\n{alt}    <lastmod>{LASTMOD}</lastmod>\n    <changefreq>{freq}</changefreq>\n    <priority>{"1.0" if slug == "" else "0.7"}</priority>\n  </url>\n'
+    open(os.path.join(ROOT, 'sitemap.xml'), 'w', encoding='utf-8').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + rows + '</urlset>\n')
+
 def rewrite(html, lang, slug):
     html = re.sub(r'<html lang="[a-z]+"', f'<html lang="{lang}"', html, count=1)
     alt = ''.join(f'<link rel="alternate" hreflang="{l}" href="{SITE}/{l}/{slug + "/" if slug else ""}">\n  ' for l in LANGS)
     alt += f'<link rel="alternate" hreflang="x-default" href="{SITE}/uz/{slug + "/" if slug else ""}">\n  '
-    html = html.replace('</head>', alt + '</head>', 1)
+    block, t = head_seo(lang, slug)
+    html = re.sub(r'<title>.*?</title>', lambda m: f'<title>{H.escape(t["title"], quote=False)}</title>', html, count=1, flags=re.S)
+    html = re.sub(r'<meta name="description" content="[^"]*">', lambda m: f'<meta name="description" content="{H.escape(t["description"], quote=True)}">', html, count=1)
+    html = html.replace('</head>', alt + block + '</head>', 1)
     slugs = '|'.join(SLUGS)
     html = re.sub(rf'href="/({slugs})"', rf'href="/{lang}/\1/"', html)
     html = re.sub(r'href="/(blog/[^"]+)"', rf'href="/{lang}/\1"', html)
@@ -83,6 +144,7 @@ def main():
             page = fill_funds(fill_posts(html, lang) if slug == 'blog' else html)
             if slug == 'portfolio': page = fill_mq(page)
             open(out, 'w', encoding='utf-8').write(rewrite(page, lang, slug)); n += 1
+    sitemap()
     print(f'{n} ta sahifa yaratildi: {", ".join(LANGS)}')
 
 if __name__ == '__main__':

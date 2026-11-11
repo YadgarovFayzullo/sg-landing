@@ -1,0 +1,122 @@
+{
+ "": {
+  "uz": {
+   "title": "Startup Garage — startaplar uchun venchur studio, Toshkent",
+   "description": "Startup Garage — startaplar uchun to‘liq xizmat ko‘rsatuvchi venchur studio. G‘oyadan MVP’gacha, market fitdan investitsiyagacha — 18 oy davomida birga."
+  },
+  "en": {
+   "title": "Startup Garage — venture studio for startups in Uzbekistan",
+   "description": "Startup Garage is a full-service venture studio for startups in Uzbekistan: from idea to MVP, from market fit to investment — together for 18 months."
+  }
+ },
+ "services": {
+  "uz": {
+   "title": "Xizmatlar: diagnostika, fundraising, bozorga kirish",
+   "description": "Startup Garage xizmatlari: Startup Diagnostic, Fundraising Readiness, Startup CFO, Talent Scouting, Corporate Venture Building va Uzbekistan Soft Landing."
+  },
+  "en": {
+   "title": "Services: startup diagnostics, fundraising, market entry",
+   "description": "Startup Garage services: Startup Diagnostic, Fundraising Readiness, Startup CFO, Talent Scouting, Corporate Venture Building and Uzbekistan Soft Landing."
+  }
+ },
+ "for-partners": {
+  "uz": {
+   "title": "Hamkorlarga: maktab va universitetlar uchun startap dasturi",
+   "description": "Xususiy maktab va universitetlar uchun Startup Garage dasturlari: 1 yillik Founders School va 2 oylik “Startup foundation” offline intensive kursi."
+  },
+  "en": {
+   "title": "For partners: startup programs for schools and universities",
+   "description": "Startup Garage programs for private schools and universities: the one-year Founders School and the two-month offline “Startup foundation” intensive."
+  }
+ },
+ "portfolio": {
+  "uz": {
+   "title": "Portfolio: Startup Garage rezident startaplari portfeli",
+   "description": "Startup Garage rezidentlari portfeli: g‘oyadan bozorgacha birga yo‘l bosib o‘tayotgan va investitsiya jalb qilgan O‘zbekiston startaplari bilan tanishing."
+  },
+  "en": {
+   "title": "Portfolio: startups backed by Startup Garage residents",
+   "description": "Meet the Startup Garage resident portfolio: Uzbekistan startups that we guide from idea to market and that have gone on to raise investment."
+  }
+ },
+ "books": {
+  "uz": {
+   "title": "Kitoblar: startupchilar uchun 5 ta eng foydali kitob",
+   "description": "Startupchilar uchun 5 ta eng kerakli kitob bitta to‘plamda: marketing, sotuv, biznes model, investorlar bilan ishlash va startap yo‘lining asoslari."
+  },
+  "en": {
+   "title": "Books: 5 essential reads for startup founders today",
+   "description": "Five essential books for founders in one collection: marketing, sales, business models, working with investors and the fundamentals of the startup journey."
+  }
+ },
+ "media": {
+  "uz": {
+   "title": "Media: OAV Startup Garage haqida — maqolalar, intervyular",
+   "description": "Startup Garage haqida mahalliy va xorijiy nashrlarda chop etilgan maqolalar, intervyular va yangiliklar — OAV nigohida bizning faoliyatimiz."
+  },
+  "en": {
+   "title": "Media: Startup Garage in the press and news coverage",
+   "description": "Articles, interviews and news about Startup Garage published by local and international media: how the press covers our work with founders."
+  }
+ },
+ "grand-demo-day": {
+  "uz": {
+   "title": "Grand Demo Day 2026 — 19-noyabr, Yandex Uzbekistan",
+   "description": "Grand Demo Day — Startup Garage rezidentlari mahsulotini investorlar va ekspertlar oldida taqdim etadigan yakuniy tadbir. 19-noyabr, Toshkent, Yandex ofisi."
+  },
+  "en": {
+   "title": "Grand Demo Day 2026 — November 19, Yandex Uzbekistan",
+   "description": "Grand Demo Day is the final event where Startup Garage residents pitch to investors and experts. November 19, Tashkent, Yandex Uzbekistan office."
+  }
+ },
+ "branches": {
+  "uz": {
+   "title": "Filiallar: O‘zbekiston, Qatar va Marokashdagi ofislar",
+   "description": "Startup Garage filiallari: O‘zbekiston viloyatlari, Qatar va Marokash. Manzillar, filial menejerlari va aloqa uchun telefon raqamlari bir joyda."
+  },
+  "en": {
+   "title": "Branches: offices across Uzbekistan, Qatar and Morocco",
+   "description": "Startup Garage branches across the regions of Uzbekistan, Qatar and Morocco: addresses, branch managers and phone numbers in one place."
+  }
+ },
+ "sg-women": {
+  "uz": {
+   "title": "SG Women — ayol asoschilar uchun startap hamjamiyati",
+   "description": "SG Women — Startup Garage tomonidan ayol asoschilarni startap yo‘lining har bir bosqichida ilhomlantirish, bilim berish va qo‘llab-quvvatlash tashabbusi."
+  },
+  "en": {
+   "title": "SG Women — a startup community for women founders",
+   "description": "SG Women is a Startup Garage initiative that inspires, educates and supports women founders at every stage of the startup journey. Join the community."
+  }
+ },
+ "events": {
+  "uz": {
+   "title": "Tadbirlar: Demo Day, masterklasslar va netvorking",
+   "description": "Startup Garage tadbirlari: Grand Demo Day mavsumlari, masterklasslar va netvorking uchrashuvlari. O‘tgan tadbirlar natijalari va kelgusi sanalar."
+  },
+  "en": {
+   "title": "Events: Demo Day, masterclasses and networking meetups",
+   "description": "Startup Garage events: Grand Demo Day seasons, masterclasses and networking meetups. See results of past events and the dates of upcoming ones."
+  }
+ },
+ "blog": {
+  "uz": {
+   "title": "Blog: startaplar haqida foydali maqolalar va yangiliklar",
+   "description": "Startup Garage blogi: startap asoschilari uchun foydali maqolalar, tajriba va investitsiya ko‘targan portfelimiz startaplari haqida yangiliklar."
+  },
+  "en": {
+   "title": "Blog: useful articles and news for startup founders",
+   "description": "The Startup Garage blog: helpful articles for founders, practical lessons and news about portfolio startups that have raised investment."
+  }
+ },
+ "team": {
+  "uz": {
+   "title": "Jamoa: Startup Garage asoschilari, hamkorlar, investorlar",
+   "description": "Startup Garage jamoasi, hamkorlar va investorlar — asoschilar uchun venchur infratuzilmasini quruvchi odamlar bilan tanishing."
+  },
+  "en": {
+   "title": "Team: Startup Garage people, partners and investors",
+   "description": "Meet the Startup Garage team, partners and investors — the people building venture infrastructure for founders in Uzbekistan and beyond."
+  }
+ }
+}

@@ -39,7 +39,6 @@
   .nav.is-open .nav__burger span { background: #fff !important; }
   .nav.is-open .nav__mobile { opacity: 1; transform: none; visibility: visible; pointer-events: auto; transition-delay: 0s; }
 }
-}
 @media (max-height: 520px) and (orientation: landscape) {
   .nav__inner { height: 56px; }
 }
