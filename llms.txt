@@ -1,0 +1,25 @@
+# Startup Garage
+
+> Startup Garage is Uzbekistan's startup accelerator and community (10 years, 550+ portfolio residents). It supports founders from idea to market entry with mentorship, education, networking and help raising investment.
+
+Languages: Uzbek (default, /uz/) and English (/en/).
+
+## Main pages
+- [Home](https://startupgarage.uz/en/): programs, results, how Startup Garage helps
+- [Services](https://startupgarage.uz/en/services/): programs and support for startups
+- [Portfolio](https://startupgarage.uz/en/portfolio/): resident startups and investment wins
+- [Grand Demo Day](https://startupgarage.uz/en/grand-demo-day/): annual demo day for resident startups
+- [Events](https://startupgarage.uz/en/events/): upcoming and past events
+- [Team](https://startupgarage.uz/en/team/): founders and core team
+- [Branches](https://startupgarage.uz/en/branches/): regional branches
+- [SG Women](https://startupgarage.uz/en/sg-women/): program for women founders
+- [For partners](https://startupgarage.uz/en/for-partners/): partnership options
+- [Books](https://startupgarage.uz/en/books/): recommended and published books
+- [Media](https://startupgarage.uz/en/media/): press and media coverage
+- [Blog](https://startupgarage.uz/en/blog/): articles for founders
+
+## Apply
+- [Resident application](https://resident.startupgarage.uz): submit a startup application
+
+## Optional
+- [Sitemap](https://startupgarage.uz/sitemap.xml)
