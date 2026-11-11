@@ -533,6 +533,7 @@ export const EN = {
  "MedTech · G‘oya": "MedTech · Idea",
  "Navbatdagi rezident": "Next resident",
  "Ariza qabul qilinmoqda": "Applications open",
+ "Investitsiya $150K": "Investment $150K",
  "$150K investitsiya": "$150K investment",
  "$50K investitsiya": "$50K investment",
  "$630K investitsiya": "$630K investment",
