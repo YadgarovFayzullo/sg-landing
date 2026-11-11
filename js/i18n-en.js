@@ -535,7 +535,7 @@ export const EN = {
  "Ariza qabul qilinmoqda": "Applications open",
  ". 10 yillik tajribaga ega ekspertlar g‘oyangizni MVP darajasiga olib chiqish, investitsiya jalb qilish va loyihani kengaytirishda yoningizda bo‘ladi.": ". Experts with 10 years of experience will be by your side as you take your idea to the MVP stage, raise investment and scale the project.",
  "10 yil": "10 years",
- "dasturlarimizdan o‘tgan rezidentlar": "residents who completed our programs",
+ "portfelimizdagi rezidentlar": "residents in our portfolio",
  "Jamoa — Startup Garage": "Team — Startup Garage",
  "Startup Garage jamoasi, hamkorlar va investorlar — asoschilar uchun venchur infratuzilmasini quruvchi odamlar.": "The Startup Garage team, partners and investors — the people building venture infrastructure for founders.",
  "Startup Garage jamoasi": "Startup Garage team",
