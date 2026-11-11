@@ -28,7 +28,7 @@ export const cabins = {
   ],
   behind: [
     { name: t('AliPos'), tag: t('$280K investitsiya') },
-    { name: t('Karmon AI'), tag: t('AI · MVP') },
+    { name: t('Karmon AI'), tag: t('$170K investitsiya') },
     { name: t('Inter AI'), tag: t('$58K investitsiya') },
     { name: t('MedFinder'), tag: t('MedTech · G‘oya') },
     { name: t('Navbatdagi rezident'), tag: t('Ariza qabul qilinmoqda') }
