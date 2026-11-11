@@ -494,3 +494,9 @@
 .tp img { width: clamp(96px, 11vw, 150px); height: auto; aspect-ratio: 1; flex: none; border-radius: 24px; object-fit: cover; }
 @media (max-width: 900px) { .tms { grid-template-columns: 1fr 1fr; } .tps { grid-template-columns: 1fr; } }
 @media (max-width: 600px) { .tms { grid-template-columns: 1fr; } .tp { flex-direction: column; align-items: flex-start; } .tp img { width: 100%; max-width: 220px; height: auto; } }
+
+/* O'tgan Demo Day mavsumlari kartalari */
+.evc--past .evc__body { padding: 26px 26px 28px; }
+.evc__amt { font-size: 34px; font-weight: 600; letter-spacing: -0.04em; color: var(--blue); line-height: 1.1; }
+.evc--past > a { background: linear-gradient(180deg, #fff, var(--blue-50)); }
+.gseason { scroll-margin-top: 96px; }
