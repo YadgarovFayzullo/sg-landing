@@ -178,8 +178,10 @@
   .route__item:hover { transform: none; }
   .route__item h3 { margin-top: 22px; font-size: 22px; }
 
-  /* Yordam — ixcham */
-  .help { grid-template-columns: 1fr; }
+  /* Yordam — ixcham (iOS'da vertikal skrollni to'smasligi uchun: overflow:hidden o'rniga clip, touch-action) */
+  .help { grid-template-columns: 1fr; overflow: clip; touch-action: pan-y; }
+  .help__item { touch-action: pan-y; }
+  .route { touch-action: pan-x pan-y; }
   .help__item { padding: 24px 22px 26px; gap: 8px; }
   .help__num { margin-bottom: 8px; }
   .help__item h3 { font-size: 18.5px; }
