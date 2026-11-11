@@ -168,7 +168,7 @@
   /* Yo'l xaritasi — suriladigan karusel */
   .route {
     grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 84%; gap: 12px;
-    overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none;
+    overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none;
     margin: 0 calc(-1 * var(--gutter)); padding: 4px var(--gutter) 10px; scroll-padding: 0 var(--gutter);
   }
   .route::-webkit-scrollbar { display: none; }
@@ -179,7 +179,6 @@
   /* Yordam — ixcham (iOS'da vertikal skrollni to'smasligi uchun: overflow:hidden o'rniga clip, touch-action) */
   .help { grid-template-columns: 1fr; overflow: clip; touch-action: pan-y; }
   .help__item { touch-action: pan-y; }
-  .route { touch-action: pan-x pan-y; }
   .help__item { padding: 24px 22px 26px; gap: 8px; }
   .help__num { margin-bottom: 8px; }
   .help__item h3 { font-size: 18.5px; }
