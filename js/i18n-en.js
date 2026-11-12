@@ -533,6 +533,7 @@ export const EN = {
  "MedTech · G‘oya": "MedTech · Idea",
  "Navbatdagi rezident": "Next resident",
  "Ariza qabul qilinmoqda": "Applications open",
+ "Sayt test rejimida ishlamoqda — ba’zi ma’lumotlar o‘zgarishi mumkin": "The site is running in test mode — some information may change",
  "$170K investitsiya": "$170K investment",
  "Samarqand viloyati, Samarqand shahar, Bo'stonsaroy ko'chasi, 36": "Samarkand region, Samarkand city, Bostonsaroy street, 36",
  "Farg'ona viloyati, Marg'ilon shahar, Raqamli texnologiyalar markazi": "Fergana region, Margilan city, Digital Technologies Center",

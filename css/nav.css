@@ -66,3 +66,11 @@
 .nav__menu a:hover, .nav__menu a[aria-current="page"] { background: var(--blue-50); color: var(--blue); }
 .nav__links a[aria-current="page"] { color: var(--blue); }
 .nav__group { margin: 14px 0 2px; font-size: 13px; font-weight: 600; color: var(--muted); }
+
+/* Test rejimi plashkasi — navbar ostida */
+.testbar { position: absolute; top: 100%; left: 0; right: 0; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 6px var(--gutter); background: #FFF4CC; color: #6B4E00; border-bottom: 1px solid #F0DC8E; font-size: 13px; font-weight: 600; line-height: 1.3; text-align: center; pointer-events: none; }
+.testbar__dot { flex: none; width: 7px; height: 7px; border-radius: 50%; background: #E5A400; animation: tbpulse 1.6s ease-in-out infinite; }
+@keyframes tbpulse { 50% { opacity: .35; } }
+.nav.is-open .testbar { display: none; }
+@media (prefers-reduced-motion: reduce) { .testbar__dot { animation: none; } }
+@media (max-width: 640px) { .testbar { font-size: 12px; padding: 5px 12px; } }
