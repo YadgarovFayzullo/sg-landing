@@ -500,3 +500,13 @@
 .evc__amt { font-size: 34px; font-weight: 600; letter-spacing: -0.04em; color: var(--blue); line-height: 1.1; }
 .evc--past > a { background: linear-gradient(180deg, #fff, var(--blue-50)); }
 .gseason { scroll-margin-top: 96px; }
+/* site.json: tadbir kartasi havolasiz, galereya mavsum tugmalari, blog maqolasi */
+.evc > .evc__box { display: flex; flex-direction: column; height: 100%; background: #fff; border: 1px solid var(--line); border-radius: 26px; overflow: hidden; }
+.evc--past > .evc__box { background: linear-gradient(180deg, #fff, var(--blue-50)); }
+.gal-tabs { margin-top: 20px; }
+.post { max-width: 760px; }
+.post__meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+.post__img { margin: 0 0 32px; border-radius: 24px; overflow: hidden; }
+.post__img img { display: block; width: 100%; height: auto; }
+.post__body p { margin: 0 0 1.1em; font-size: clamp(16px, 1.3vw, 18px); line-height: 1.65; color: var(--ink-2); }
+.post__back { margin-top: 32px; }

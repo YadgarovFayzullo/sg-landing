@@ -1,7 +1,7 @@
-/* Grand Demo Day sahifasi: galereya lightbox (klaviatura va swipe) */
+/* Grand Demo Day sahifasi: galereya lightbox (klaviatura va swipe) va mavsum tugmalari (bir nechta galereya bo'lsa) */
 import './page.js';
 
-const btns = [...document.querySelectorAll('.gal__b')];
+let btns = [];
 const lb = document.createElement('div');
 lb.className = 'lb'; lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true'); lb.setAttribute('aria-label', 'Foto');
 lb.innerHTML = '<img alt=""><button class="lb__x" aria-label="Close">✕</button><button class="lb__p" aria-label="Prev">←</button><button class="lb__n" aria-label="Next">→</button>';
@@ -11,7 +11,15 @@ let cur = 0;
 const show = (i) => { cur = (i + btns.length) % btns.length; const s = btns[cur].querySelector('img'); img.src = s.currentSrc || s.src; img.alt = s.alt; };
 const open = (i) => { show(i); lb.classList.add('is-open'); document.body.style.overflow = 'hidden'; };
 const close = () => { lb.classList.remove('is-open'); document.body.style.overflow = ''; };
-btns.forEach((b, i) => b.addEventListener('click', () => open(i)));
+document.querySelectorAll('.gal__b').forEach((b) => b.addEventListener('click', () => {
+  btns = [...b.closest('.gal').querySelectorAll('.gal__b')];
+  open(btns.indexOf(b));
+}));
+const tabs = [...document.querySelectorAll('.gal-tabs [data-gal]')];
+tabs.forEach((t) => t.addEventListener('click', () => {
+  tabs.forEach((x) => { const on = x === t; x.classList.toggle('is-on', on); x.setAttribute('aria-selected', String(on)); });
+  document.querySelectorAll('.gal-set').forEach((s) => { s.hidden = s.dataset.gal !== t.dataset.gal; });
+}));
 lb.querySelector('.lb__x').addEventListener('click', close);
 lb.querySelector('.lb__p').addEventListener('click', () => show(cur - 1));
 lb.querySelector('.lb__n').addEventListener('click', () => show(cur + 1));

@@ -3,3 +3,4 @@ node_modules/
 *.log
 contrast.py
 day-*.png
+__pycache__/

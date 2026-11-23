@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """Til papkalarini yaratadi: /uz/... va /en/... (manba sahifalar — ildizdagi index.html va <slug>/index.html).
 HTML ikkala tilda bir xil, farqi: <html lang>, ichki havolalar prefiksi va hreflang. Matn tarjimasi js/i18n.js da (manzil bo'yicha).
+GDD mavsumlari, tadbirlar va blog — data/site.json (yoki SG_API_URL bo'lsa API'dan; scripts/site_content.py).
 Ishga tushirish:  python3 scripts/build-lang.py   (yoki: npm run build)"""
 import re, os, shutil, sys, json, html as H
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import site_content
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SLUGS = ['services', 'for-partners', 'portfolio', 'books', 'media', 'grand-demo-day', 'branches', 'sg-women', 'events', 'blog', 'team']
 LANGS = ['uz', 'en']
@@ -17,18 +20,14 @@ PRIORITY_WEEKLY = {'', 'portfolio', 'events', 'blog'}
 READ = {'uz': 'O‘qish', 'en': 'Read'}
 EMPTY = {'uz': 'Yangi maqolalar tez orada chiqadi. Yangiliklarni Telegram kanalimizda kuzating.', 'en': 'New articles are coming soon. Follow the news on our Telegram channel.'}
 
+SITEDATA = None  # site_content.Site — main() da yuklanadi
+
+def T(lang, s):
+    """Dinamik bloklardagi statik yorliqlar: en uchun js/i18n-en.js lug'ati."""
+    return en_dict().get(s, s) if lang == 'en' else s
+
 def posts_html(lang):
-    posts = json.load(open(os.path.join(ROOT, 'data', 'blog.json'), encoding='utf-8'))
-    if not posts:
-        return f'<p class="blsoon">{EMPTY[lang]}</p>'
-    cards = ''
-    for p in posts:
-        t = p[lang]
-        img = f'<span class="bp__img"><img src="{p["image"]}" alt="" loading="lazy"></span>' if p.get('image') else ''
-        cards += (f'<li class="bp reveal"><a href="{p["url"]}">{img}<span class="bp__body"><span class="bp__meta"><span class="bp__tag">{H.escape(t["tag"])}</span>'
-                  f'<span class="bp__date">{H.escape(t["date"])}</span></span><b>{H.escape(t["title"])}</b><span class="bp__ex">{H.escape(t["excerpt"])}</span>'
-                  f'<span class="bp__go">{READ[lang]} <span aria-hidden="true">→</span></span></span></a></li>\n')
-    return f'<ul class="bposts">{cards}</ul>'
+    return SITEDATA.posts_html(lang, READ[lang], EMPTY[lang])
 
 def fill_posts(html, lang):
     return re.sub(r'<!-- posts:start -->.*?<!-- posts:end -->', lambda m: '<!-- posts:start -->' + posts_html(lang) + '<!-- posts:end -->', html, flags=re.S)
@@ -65,49 +64,58 @@ def seo(slug):
 def ld(obj):
     return '<script type="application/ld+json">' + json.dumps(obj, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/') + '</script>\n  '
 
-def jsonld(lang, slug, url, t):
+def jsonld(lang, slug, url, t, extra=None):
     out = []
     if slug == '':
         out.append({'@context': 'https://schema.org', '@type': 'Organization', '@id': SITE + '/#org', 'name': 'Startup Garage', 'url': SITE + '/',
                     'logo': SITE + '/assets/icon-192.png', 'description': t['description'], 'sameAs': SAMEAS})
         out.append({'@context': 'https://schema.org', '@type': 'WebSite', '@id': SITE + '/#website', 'name': 'Startup Garage', 'url': SITE + '/' + lang + '/',
                     'inLanguage': lang, 'publisher': {'@id': SITE + '/#org'}})
+    elif slug.startswith('blog/'):
+        out.append({'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
+            {'@type': 'ListItem', 'position': 1, 'name': LABEL[lang][''], 'item': f'{SITE}/{lang}/'},
+            {'@type': 'ListItem', 'position': 2, 'name': LABEL[lang]['blog'], 'item': f'{SITE}/{lang}/blog/'},
+            {'@type': 'ListItem', 'position': 3, 'name': t['title'], 'item': url}]})
     else:
         out.append({'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
             {'@type': 'ListItem', 'position': 1, 'name': LABEL[lang][''], 'item': f'{SITE}/{lang}/'},
             {'@type': 'ListItem', 'position': 2, 'name': LABEL[lang][slug], 'item': url}]})
     if slug == 'grand-demo-day':
-        out.append({'@context': 'https://schema.org', '@type': 'Event', 'name': 'Grand Demo Day 2026', 'description': t['description'],
-                    'startDate': '2026-11-19T14:00:00+05:00', 'endDate': '2026-11-19T18:00:00+05:00',
-                    'eventStatus': 'https://schema.org/EventScheduled', 'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode',
-                    'location': {'@type': 'Place', 'name': 'Yandex Uzbekistan office', 'address': {'@type': 'PostalAddress', 'addressLocality': 'Tashkent', 'addressCountry': 'UZ'}},
-                    'image': [OG_IMAGE], 'url': url, 'inLanguage': lang,
-                    'organizer': {'@type': 'Organization', 'name': 'Startup Garage', 'url': SITE + '/'}})
+        ev = SITEDATA.event_ld(lang, url, t['description'])
+        if ev:
+            ev.update({'image': [OG_IMAGE], 'url': url, 'inLanguage': lang,
+                       'organizer': {'@type': 'Organization', 'name': 'Startup Garage', 'url': SITE + '/'}})
+            out.append(ev)
+    if extra:
+        out.append(extra)
     return ''.join(ld(o) for o in out)
 
-def head_seo(lang, slug):
-    t = seo(slug)[lang]
+def head_seo(lang, slug, page=None):
+    """page — seo.json'da yo'q sahifa (blog maqolasi): {'title', 'description', 'image', 'type', 'ld'}."""
+    t = page or seo(slug)[lang]
     url = f'{SITE}/{lang}/{slug + "/" if slug else ""}'
     e = lambda x: H.escape(x, quote=True)
     other = [l for l in LANGS if l != lang]
+    img = (page or {}).get('image') or OG_IMAGE
     m = [f'<link rel="canonical" href="{url}">',
-         '<meta property="og:type" content="website">', '<meta property="og:site_name" content="Startup Garage">',
+         f'<meta property="og:type" content="{(page or {}).get("type", "website")}">', '<meta property="og:site_name" content="Startup Garage">',
          f'<meta property="og:title" content="{e(t["title"])}">', f'<meta property="og:description" content="{e(t["description"])}">',
          f'<meta property="og:url" content="{url}">', f'<meta property="og:locale" content="{OG_LOCALE[lang]}">']
     m += [f'<meta property="og:locale:alternate" content="{OG_LOCALE[l]}">' for l in other]
-    m += [f'<meta property="og:image" content="{OG_IMAGE}">', '<meta property="og:image:width" content="1200">', '<meta property="og:image:height" content="630">',
+    m += [f'<meta property="og:image" content="{img}">'] + (['<meta property="og:image:width" content="1200">', '<meta property="og:image:height" content="630">'] if img == OG_IMAGE else []) + [
           '<meta name="twitter:card" content="summary_large_image">', f'<meta name="twitter:title" content="{e(t["title"])}">',
-          f'<meta name="twitter:description" content="{e(t["description"])}">', f'<meta name="twitter:image" content="{OG_IMAGE}">']
-    return '\n  '.join(m) + '\n  ' + jsonld(lang, slug, url, t), t
+          f'<meta name="twitter:description" content="{e(t["description"])}">', f'<meta name="twitter:image" content="{img}">']
+    return '\n  '.join(m) + '\n  ' + jsonld(lang, slug, url, t, (page or {}).get('ld')), t
 
-def sitemap():
+def sitemap(posts=()):
+    """posts — [(slug, lastmod)] blog maqolalari (blog/<slug>)."""
     rows = ''
-    for slug in [''] + SLUGS:
+    for slug, lastmod in [(s, LASTMOD) for s in [''] + SLUGS] + [(f'blog/{s}', d) for s, d in posts]:
         for lang in LANGS:
             u = lambda l: f'{SITE}/{l}/{slug + "/" if slug else ""}'
             alt = ''.join(f'    <xhtml:link rel="alternate" hreflang="{l}" href="{u(l)}"/>\n' for l in LANGS) + f'    <xhtml:link rel="alternate" hreflang="x-default" href="{u("uz")}"/>\n'
             freq = 'weekly' if slug in PRIORITY_WEEKLY else 'monthly'
-            rows += f'  <url>\n    <loc>{u(lang)}</loc>\n{alt}    <lastmod>{LASTMOD}</lastmod>\n    <changefreq>{freq}</changefreq>\n    <priority>{"1.0" if slug == "" else "0.7"}</priority>\n  </url>\n'
+            rows += f'  <url>\n    <loc>{u(lang)}</loc>\n{alt}    <lastmod>{lastmod}</lastmod>\n    <changefreq>{freq}</changefreq>\n    <priority>{"1.0" if slug == "" else "0.7"}</priority>\n  </url>\n'
     open(os.path.join(ROOT, 'sitemap.xml'), 'w', encoding='utf-8').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + rows + '</urlset>\n')
 
 _EN = None
@@ -126,7 +134,9 @@ def translate_body(html):
     norm = lambda x: re.sub(r'\s+', ' ', x).strip()
     i = html.find('<body')
     head, body = html[:i], html[i:]
-    parts = re.split(r'(<script\b.*?</script>|<style\b.*?</style>|<noscript\b.*?</noscript>|<!--.*?-->)', body, flags=re.S)
+    # <!-- site:X:start -->…<!-- site:X:end --> — build vaqtida tilga mos chizilgan blok (site.json), lug'at tegmaydi
+    parts = re.split(r'(<!-- site:([a-z-]+):start -->.*?<!-- site:\2:end -->|<script\b.*?</script>|<style\b.*?</style>|<noscript\b.*?</noscript>|<!--.*?-->)', body, flags=re.S)
+    parts = [x for k, x in enumerate(parts) if k % 3 != 2]  # ichki guruh (blok nomi) qismlarini tashlash
     def txt(m):
         raw = m.group(1)
         v = EN.get(norm(H.unescape(raw)))
@@ -144,23 +154,48 @@ def translate_body(html):
         out.append(part)
     return head + ''.join(out)
 
-def rewrite(html, lang, slug):
+def rewrite(html, lang, slug, page=None):
     html = re.sub(r'<html lang="[a-z]+"', f'<html lang="{lang}"', html, count=1)
     alt = ''.join(f'<link rel="alternate" hreflang="{l}" href="{SITE}/{l}/{slug + "/" if slug else ""}">\n  ' for l in LANGS)
     alt += f'<link rel="alternate" hreflang="x-default" href="{SITE}/uz/{slug + "/" if slug else ""}">\n  '
-    block, t = head_seo(lang, slug)
+    block, t = head_seo(lang, slug, page)
     html = re.sub(r'<title>.*?</title>', lambda m: f'<title>{H.escape(t["title"], quote=False)}</title>', html, count=1, flags=re.S)
     html = re.sub(r'<meta name="description" content="[^"]*">', lambda m: f'<meta name="description" content="{H.escape(t["description"], quote=True)}">', html, count=1)
     html = html.replace('</head>', alt + block + '</head>', 1)
     slugs = '|'.join(SLUGS)
-    html = re.sub(rf'href="/({slugs})"', rf'href="/{lang}/\1/"', html)
+    html = re.sub(rf'href="/({slugs})(#[^"]*)?"', lambda m: f'href="/{lang}/{m.group(1)}/{m.group(2) or ""}"', html)
     html = re.sub(r'href="/(blog/[^"]+)"', rf'href="/{lang}/\1"', html)
     html = re.sub(r'href="/(#[^"]*)?"', lambda m: f'href="/{lang}/{m.group(1) or ""}"', html)
     if lang == 'en':
         html = translate_body(html)
     return html
 
+GEN = '<!-- generated by scripts/build-lang.py from data/site.json -->'
+
+def fill_site(slug, html, lang):
+    """data/site.json bloklari: bosh sahifa (GDD bloki), /grand-demo-day, /events, /blog."""
+    if slug == '': return SITEDATA.fill_home(html, lang)
+    if slug == 'grand-demo-day': return SITEDATA.fill_gdd(html, lang)
+    if slug == 'events': return SITEDATA.fill_events(html, lang)
+    if slug == 'blog': return fill_posts(html, lang)
+    return html
+
+def post_page(tpl, p, lang):
+    """blog/<slug>/ — blog sahifasi shabloni, <main> o'rniga maqola."""
+    t = site_content.tx
+    html = re.sub(r'<main id="main">.*?</main>', lambda m: SITEDATA.post_main(p, lang), tpl, count=1, flags=re.S)
+    title, desc = t(p.get('title'), lang) + ' — Startup Garage', t(p.get('excerpt'), lang) or t(p.get('title'), lang)
+    src = SITEDATA.src(p.get('coverPhotoId')) if p.get('coverPhotoId') in SITEDATA.photos else None
+    img = (SITE + src if src and src.startswith('/') else src) or None
+    ld = {'@context': 'https://schema.org', '@type': 'BlogPosting', 'headline': t(p.get('title'), lang), 'description': desc,
+          'datePublished': p['date'], 'inLanguage': lang, 'url': f'{SITE}/{lang}/blog/{p["slug"]}/',
+          'publisher': {'@type': 'Organization', 'name': 'Startup Garage', 'url': SITE + '/'}}
+    if img: ld['image'] = [img]
+    return html, {'title': title, 'description': desc, 'image': img, 'type': 'article', 'ld': ld}
+
 def main():
+    global SITEDATA
+    SITEDATA = site_content.Site(site_content.load(), T)
     for lang in LANGS:
         shutil.rmtree(os.path.join(ROOT, lang), ignore_errors=True)
     sp0 = src('portfolio')
@@ -168,19 +203,37 @@ def main():
     open(sp0, 'w', encoding='utf-8').write(mq_html)
     for sl in ('', 'grand-demo-day'):
         sp = src(sl); h0 = fill_funds(open(sp, encoding='utf-8').read()); open(sp, 'w', encoding='utf-8').write(h0)
-    bsrc = src('blog')
-    bhtml = fill_posts(open(bsrc, encoding='utf-8').read(), 'uz')
-    open(bsrc, 'w', encoding='utf-8').write(bhtml)
+    for sl in ('', 'grand-demo-day', 'events', 'blog'):  # manba sahifalar ham yangilanadi (uz)
+        sp = src(sl); h0 = fill_site(sl, open(sp, encoding='utf-8').read(), 'uz'); open(sp, 'w', encoding='utf-8').write(h0)
     n = 0
     for slug in [''] + SLUGS:
         html = open(src(slug), encoding='utf-8').read()
         for lang in LANGS:
             out = os.path.join(ROOT, lang, slug, 'index.html')
             os.makedirs(os.path.dirname(out), exist_ok=True)
-            page = fill_funds(fill_posts(html, lang) if slug == 'blog' else html)
+            page = fill_funds(fill_site(slug, html, lang))
             if slug == 'portfolio': page = fill_mq(page)
             open(out, 'w', encoding='utf-8').write(rewrite(page, lang, slug)); n += 1
-    sitemap()
+    # blog maqolalari: /blog/<slug>/ (manba, uz — prefikssiz manzil uchun) va /uz|en/blog/<slug>/
+    bdir = os.path.join(ROOT, 'blog')
+    for d in os.listdir(bdir):
+        f = os.path.join(bdir, d, 'index.html')
+        if os.path.isfile(f) and GEN in open(f, encoding='utf-8').read():
+            shutil.rmtree(os.path.join(bdir, d))
+    tpl = open(src('blog'), encoding='utf-8').read()
+    posts = SITEDATA.pages()
+    for p in posts:
+        page, meta = post_page(tpl, p, 'uz')
+        page = re.sub(r'<title>.*?</title>', lambda m: f'<title>{H.escape(meta["title"], quote=False)}</title>', page, count=1, flags=re.S)
+        page = re.sub(r'<meta name="description" content="[^"]*">', lambda m: f'<meta name="description" content="{H.escape(meta["description"], quote=True)}">', page, count=1)
+        os.makedirs(os.path.join(bdir, p['slug']), exist_ok=True)
+        open(os.path.join(bdir, p['slug'], 'index.html'), 'w', encoding='utf-8').write(page.replace('<head>', '<head>\n  ' + GEN, 1))
+        for lang in LANGS:
+            page, meta = post_page(tpl, p, lang)
+            out = os.path.join(ROOT, lang, 'blog', p['slug'], 'index.html')
+            os.makedirs(os.path.dirname(out), exist_ok=True)
+            open(out, 'w', encoding='utf-8').write(rewrite(page, lang, f'blog/{p["slug"]}', meta)); n += 1
+    sitemap([(p['slug'], p['date']) for p in posts])
     print(f'{n} ta sahifa yaratildi: {", ".join(LANGS)}')
 
 if __name__ == '__main__':

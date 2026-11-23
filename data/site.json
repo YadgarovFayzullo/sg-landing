@@ -1,0 +1,648 @@
+{
+  "generatedAt": "2026-11-23T00:00:00.000Z",
+  "today": "2026-11-23",
+  "gddSeasons": [
+    {
+      "id": "818cabf6-b110-5327-8508-23ef8169eb87",
+      "number": 4,
+      "title": {
+        "uz": "",
+        "en": ""
+      },
+      "date": "2026-11-19",
+      "time": "14:00 — 18:00",
+      "place": {
+        "uz": "Yandex Uzbekistan ofisi",
+        "en": "Yandex Uzbekistan office"
+      },
+      "lead": {
+        "uz": "Startapingizni venchur fondlar, angel investorlar va biznes vakillariga tanishtiring",
+        "en": "Introduce your startup to venture funds, angel investors and business representatives"
+      },
+      "registerUrl": "https://luma.com/9jepiv4d",
+      "applyUrl": "https://t.me/SGdemodaybot",
+      "coverPhotoId": "5ee9e4c8-0b7c-59ad-add4-12c79547d5fe",
+      "results": [],
+      "note": {
+        "uz": "",
+        "en": ""
+      },
+      "galleryPhotoIds": [],
+      "published": true,
+      "createdAt": "2026-11-12T00:00:00.000Z",
+      "updatedAt": "2026-11-12T00:00:00.000Z"
+    },
+    {
+      "id": "591f8f14-1418-5b6e-aceb-7d1e12a6abcc",
+      "number": 3,
+      "title": {
+        "uz": "",
+        "en": ""
+      },
+      "date": "2026-10-08",
+      "time": null,
+      "place": {
+        "uz": "",
+        "en": ""
+      },
+      "lead": {
+        "uz": "",
+        "en": ""
+      },
+      "registerUrl": null,
+      "applyUrl": null,
+      "coverPhotoId": null,
+      "results": [
+        {
+          "startup": "Bitimchi AI",
+          "amount": 105000,
+          "investors": [
+            {
+              "name": "SQB Ventures",
+              "amount": 50000
+            },
+            {
+              "name": "Imkon Ventures",
+              "amount": 20000
+            },
+            {
+              "name": "UC Ventures",
+              "amount": 30000
+            },
+            {
+              "name": "CS Angels",
+              "amount": 5000
+            }
+          ]
+        },
+        {
+          "startup": "FinSight",
+          "amount": 60000,
+          "investors": [
+            {
+              "name": "Imkon Ventures",
+              "amount": 20000
+            },
+            {
+              "name": "AloqaVentures",
+              "amount": 20000
+            },
+            {
+              "name": "UC Ventures",
+              "amount": 20000
+            }
+          ]
+        },
+        {
+          "startup": "Swipies AI",
+          "amount": 50000,
+          "investors": [
+            {
+              "name": "SQB Ventures",
+              "amount": null
+            }
+          ]
+        },
+        {
+          "startup": "HRHub",
+          "amount": 20000,
+          "investors": [
+            {
+              "name": "Imkon Ventures",
+              "amount": null
+            }
+          ]
+        }
+      ],
+      "note": {
+        "uz": "3-mavsumda Kaja Games investorlar bilan advisory va strategik hamkorlik bo‘yicha kelishuvlarga erishdi. DentaGo esa CS Angels bilan strategik hamkorlikni boshladi.",
+        "en": "In Season 3, Kaja Games reached agreements with investors on advisory and strategic partnership. DentaGo started a strategic partnership with CS Angels."
+      },
+      "galleryPhotoIds": [
+        "5ee9e4c8-0b7c-59ad-add4-12c79547d5fe",
+        "f8040ef3-4a7c-533e-9790-9740e5cea252",
+        "1fe9512c-922f-5fe6-9409-4a70e22e625c",
+        "0e0df450-0404-51d9-9bfb-e36b5dc40f4b",
+        "42a82179-77b8-59e0-a874-fbac49f494c7",
+        "1d385b45-aded-5623-afee-87981f03cdfc",
+        "a812adf1-d698-5aae-a93e-af9873e74c50",
+        "b119ebbd-b6e0-5ae1-83cd-ecb61daafb8d",
+        "f8b58c6a-096b-5443-8004-14b26139d246",
+        "d904eeff-32ce-5c0c-b8c3-1b14bf2e3b9d",
+        "4d7c39b7-da8c-537c-aeaa-4d34944e67da",
+        "b346364f-9d8b-5eef-979c-01168840f0cc",
+        "77808845-3a2d-594b-b1c9-d07e46f0357e",
+        "2344bc22-cdc7-5fd8-a427-a65d315a168a",
+        "154ca53a-6aee-5e90-b18c-034d1989da8a",
+        "8699b419-32ff-520c-8710-ba9828cbbe54",
+        "56472e24-9f90-5d80-b122-b70763bdfd66",
+        "b1a570c8-3c10-5c84-9021-0e41dc4e41f3",
+        "602f837a-b034-5564-b4c1-ab5cac05e73b",
+        "39e2f420-caa6-568c-abe2-1639c2012a76",
+        "0102ef94-cd40-57cb-8914-0b1d82f1e156",
+        "562c604a-d92e-56b2-9063-273021ac388d"
+      ],
+      "published": true,
+      "createdAt": "2026-11-12T00:00:00.000Z",
+      "updatedAt": "2026-11-12T00:00:00.000Z"
+    },
+    {
+      "id": "e14c2b0f-5dc9-572f-9ce4-cb544eef793a",
+      "number": 2,
+      "title": {
+        "uz": "",
+        "en": ""
+      },
+      "date": null,
+      "time": null,
+      "place": {
+        "uz": "",
+        "en": ""
+      },
+      "lead": {
+        "uz": "",
+        "en": ""
+      },
+      "registerUrl": null,
+      "applyUrl": null,
+      "coverPhotoId": null,
+      "results": [
+        {
+          "startup": "Gnezdo",
+          "amount": 50000,
+          "investors": [
+            {
+              "name": "IT Park Ventures",
+              "amount": null
+            },
+            {
+              "name": "United Ventures",
+              "amount": null
+            },
+            {
+              "name": "Yoshlar Ventures",
+              "amount": null
+            },
+            {
+              "name": "AloqaVentures",
+              "amount": null
+            },
+            {
+              "name": "CS Angels Club",
+              "amount": null
+            },
+            {
+              "name": "UC Ventures",
+              "amount": null
+            }
+          ]
+        },
+        {
+          "startup": "BAI Soft",
+          "amount": 50000,
+          "investors": [
+            {
+              "name": "UC Ventures",
+              "amount": 40000
+            },
+            {
+              "name": "Hayot Ventures",
+              "amount": 10000
+            }
+          ]
+        },
+        {
+          "startup": "Uagro",
+          "amount": 20000,
+          "investors": [
+            {
+              "name": "AloqaVentures",
+              "amount": null
+            }
+          ]
+        }
+      ],
+      "note": {
+        "uz": "",
+        "en": ""
+      },
+      "galleryPhotoIds": [],
+      "published": true,
+      "createdAt": "2026-11-12T00:00:00.000Z",
+      "updatedAt": "2026-11-12T00:00:00.000Z"
+    },
+    {
+      "id": "c97a17d1-3b6e-5e13-b047-5b94941ba01e",
+      "number": 1,
+      "title": {
+        "uz": "",
+        "en": ""
+      },
+      "date": null,
+      "time": null,
+      "place": {
+        "uz": "",
+        "en": ""
+      },
+      "lead": {
+        "uz": "",
+        "en": ""
+      },
+      "registerUrl": null,
+      "applyUrl": null,
+      "coverPhotoId": null,
+      "results": [
+        {
+          "startup": "Safora",
+          "amount": 50000,
+          "investors": [
+            {
+              "name": "Yoshlar Ventures",
+              "amount": 30000
+            },
+            {
+              "name": "AloqaVentures",
+              "amount": 20000
+            }
+          ]
+        },
+        {
+          "startup": "Savat",
+          "amount": 25000,
+          "investors": [
+            {
+              "name": "Imkon Ventures",
+              "amount": null
+            }
+          ]
+        },
+        {
+          "startup": "Rentzor",
+          "amount": 20000,
+          "investors": [
+            {
+              "name": "AloqaVentures",
+              "amount": null
+            }
+          ]
+        }
+      ],
+      "note": {
+        "uz": "",
+        "en": ""
+      },
+      "galleryPhotoIds": [],
+      "published": true,
+      "createdAt": "2026-11-12T00:00:00.000Z",
+      "updatedAt": "2026-11-12T00:00:00.000Z"
+    }
+  ],
+  "events": [
+    {
+      "id": "f3590442-8c9f-504f-a16f-f5165f40bf92",
+      "title": {
+        "uz": "Techstars Startup Week",
+        "en": "Techstars Startup Week"
+      },
+      "dateFrom": "2026-11-24",
+      "dateTo": "2026-11-26",
+      "time": null,
+      "place": {
+        "uz": "Humo Arena, Toshkent",
+        "en": "Humo Arena, Tashkent"
+      },
+      "summary": {
+        "uz": "Markaziy Osiyoda ilk bor o‘tkaziladigan texnologiyalar festivali: 3 kun, 3 ta sahna, 5 000 ishtirokchi.",
+        "en": "The first technology festival of its kind in Central Asia: 3 days, 3 stages, 5,000 participants."
+      },
+      "url": "https://techstarsuzbekistan.uz",
+      "coverPhotoId": null,
+      "gddSeasonId": null,
+      "published": true,
+      "createdAt": "2026-11-12T00:00:00.000Z",
+      "updatedAt": "2026-11-12T00:00:00.000Z"
+    },
+    {
+      "id": "f7d21520-72fb-538a-87c8-ab93b3318e74",
+      "title": {
+        "uz": "Grand Demo Day",
+        "en": "Grand Demo Day"
+      },
+      "dateFrom": "2026-11-19",
+      "dateTo": null,
+      "time": "14:00 — 18:00",
+      "place": {
+        "uz": "Yandex Uzbekistan ofisi",
+        "en": "Yandex Uzbekistan office"
+      },
+      "summary": {
+        "uz": "Startapingizni venchur fondlar, angel investorlar va biznes vakillariga tanishtiring.",
+        "en": "Introduce your startup to venture funds, angel investors and business representatives."
+      },
+      "url": "/grand-demo-day",
+      "coverPhotoId": "5ee9e4c8-0b7c-59ad-add4-12c79547d5fe",
+      "gddSeasonId": "818cabf6-b110-5327-8508-23ef8169eb87",
+      "published": true,
+      "createdAt": "2026-11-12T00:00:00.000Z",
+      "updatedAt": "2026-11-12T00:00:00.000Z"
+    },
+    {
+      "id": "1ee5252c-f830-53ea-89d2-1366b0e0cad4",
+      "title": {
+        "uz": "Navoiyda Yoshlar Biznes Inkubatori ochilishi",
+        "en": "Opening of the Youth Business Incubator in Navoi"
+      },
+      "dateFrom": "2026-11-09",
+      "dateTo": null,
+      "time": null,
+      "place": {
+        "uz": "Navoiy shahri",
+        "en": "Navoi city"
+      },
+      "summary": {
+        "uz": "AloqaBank, AloqaVentures va Startup Garage hamkorligidagi yangi markaz: mentorlik, bepul ta’lim va kovorking.",
+        "en": "A new hub by AloqaBank, AloqaVentures and Startup Garage: mentoring, free education and coworking."
+      },
+      "url": "https://t.me/startupgarage_uz/1840",
+      "coverPhotoId": null,
+      "gddSeasonId": null,
+      "published": true,
+      "createdAt": "2026-11-12T00:00:00.000Z",
+      "updatedAt": "2026-11-12T00:00:00.000Z"
+    },
+    {
+      "id": "11104017-5b26-5c5e-b981-95037dc3eca3",
+      "title": {
+        "uz": "Grand Demo Day 4-mavsum — saralash",
+        "en": "Grand Demo Day Season 4 — selection round"
+      },
+      "dateFrom": "2026-10-16",
+      "dateTo": "2026-11-11",
+      "time": "17:00",
+      "place": {
+        "uz": "onlayn efir",
+        "en": "live online"
+      },
+      "summary": {
+        "uz": "Startaplar saralash bosqichida loyihalarini taqdim etdi. Finalga chiqqanlar 19-noyabrda Yandex ofisida sahnaga chiqadi.",
+        "en": "Startups presented their projects in the selection round. Those who made it to the final take the stage at the Yandex office on 19 November."
+      },
+      "url": "/grand-demo-day#g-steps",
+      "coverPhotoId": null,
+      "gddSeasonId": null,
+      "published": true,
+      "createdAt": "2026-11-12T00:00:00.000Z",
+      "updatedAt": "2026-11-12T00:00:00.000Z"
+    }
+  ],
+  "news": [
+    {
+      "id": "1fba3bc4-1815-5449-8c6b-0726c05356f2",
+      "slug": "grand-demo-day",
+      "tag": {
+        "uz": "Tadbir",
+        "en": "Event"
+      },
+      "date": "2026-11-19",
+      "title": {
+        "uz": "Grand Demo Day — Yandex Uzbekistan × Startup Garage",
+        "en": "Grand Demo Day — Yandex Uzbekistan × Startup Garage"
+      },
+      "excerpt": {
+        "uz": "Startapingizni venchur fondlar, angel investorlar va biznes vakillariga tanishtiring. Sakkiz hafta davom etadigan saralashning final bosqichi.",
+        "en": "Introduce your startup to venture funds, angel investors and business representatives. The final stage of an eight-week selection."
+      },
+      "body": {
+        "uz": "",
+        "en": ""
+      },
+      "url": "/grand-demo-day",
+      "coverPhotoId": "5ee9e4c8-0b7c-59ad-add4-12c79547d5fe",
+      "published": true,
+      "createdAt": "2026-11-12T00:00:00.000Z",
+      "updatedAt": "2026-11-12T00:00:00.000Z"
+    }
+  ],
+  "photos": [
+    {
+      "id": "5ee9e4c8-0b7c-59ad-add4-12c79547d5fe",
+      "width": 1400,
+      "height": 1050,
+      "alt": {
+        "uz": "Grand Demo Day ishtirokchilari",
+        "en": "Grand Demo Day participants"
+      },
+      "url": "/assets/gdd/gdd-01.webp"
+    },
+    {
+      "id": "f8040ef3-4a7c-533e-9790-9740e5cea252",
+      "width": 1400,
+      "height": 1050,
+      "alt": {
+        "uz": "Grand Demo Day, foto 2",
+        "en": "Grand Demo Day, photo 2"
+      },
+      "url": "/assets/gdd/gdd-02.webp"
+    },
+    {
+      "id": "1fe9512c-922f-5fe6-9409-4a70e22e625c",
+      "width": 1050,
+      "height": 1400,
+      "alt": {
+        "uz": "Grand Demo Day, foto 3",
+        "en": "Grand Demo Day, photo 3"
+      },
+      "url": "/assets/gdd/gdd-03.webp"
+    },
+    {
+      "id": "0e0df450-0404-51d9-9bfb-e36b5dc40f4b",
+      "width": 1050,
+      "height": 1400,
+      "alt": {
+        "uz": "Grand Demo Day, foto 4",
+        "en": "Grand Demo Day, photo 4"
+      },
+      "url": "/assets/gdd/gdd-04.webp"
+    },
+    {
+      "id": "42a82179-77b8-59e0-a874-fbac49f494c7",
+      "width": 1050,
+      "height": 1400,
+      "alt": {
+        "uz": "Grand Demo Day, foto 5",
+        "en": "Grand Demo Day, photo 5"
+      },
+      "url": "/assets/gdd/gdd-05.webp"
+    },
+    {
+      "id": "1d385b45-aded-5623-afee-87981f03cdfc",
+      "width": 1050,
+      "height": 1400,
+      "alt": {
+        "uz": "Grand Demo Day, foto 6",
+        "en": "Grand Demo Day, photo 6"
+      },
+      "url": "/assets/gdd/gdd-06.webp"
+    },
+    {
+      "id": "a812adf1-d698-5aae-a93e-af9873e74c50",
+      "width": 1050,
+      "height": 1400,
+      "alt": {
+        "uz": "Grand Demo Day, foto 7",
+        "en": "Grand Demo Day, photo 7"
+      },
+      "url": "/assets/gdd/gdd-07.webp"
+    },
+    {
+      "id": "b119ebbd-b6e0-5ae1-83cd-ecb61daafb8d",
+      "width": 1050,
+      "height": 1400,
+      "alt": {
+        "uz": "Grand Demo Day, foto 8",
+        "en": "Grand Demo Day, photo 8"
+      },
+      "url": "/assets/gdd/gdd-08.webp"
+    },
+    {
+      "id": "f8b58c6a-096b-5443-8004-14b26139d246",
+      "width": 1050,
+      "height": 1400,
+      "alt": {
+        "uz": "Grand Demo Day, foto 9",
+        "en": "Grand Demo Day, photo 9"
+      },
+      "url": "/assets/gdd/gdd-09.webp"
+    },
+    {
+      "id": "d904eeff-32ce-5c0c-b8c3-1b14bf2e3b9d",
+      "width": 1050,
+      "height": 1400,
+      "alt": {
+        "uz": "Grand Demo Day, foto 10",
+        "en": "Grand Demo Day, photo 10"
+      },
+      "url": "/assets/gdd/gdd-10.webp"
+    },
+    {
+      "id": "4d7c39b7-da8c-537c-aeaa-4d34944e67da",
+      "width": 1050,
+      "height": 1400,
+      "alt": {
+        "uz": "Grand Demo Day, foto 11",
+        "en": "Grand Demo Day, photo 11"
+      },
+      "url": "/assets/gdd/gdd-11.webp"
+    },
+    {
+      "id": "b346364f-9d8b-5eef-979c-01168840f0cc",
+      "width": 1050,
+      "height": 1400,
+      "alt": {
+        "uz": "Grand Demo Day, foto 12",
+        "en": "Grand Demo Day, photo 12"
+      },
+      "url": "/assets/gdd/gdd-12.webp"
+    },
+    {
+      "id": "77808845-3a2d-594b-b1c9-d07e46f0357e",
+      "width": 1050,
+      "height": 1400,
+      "alt": {
+        "uz": "Grand Demo Day, foto 13",
+        "en": "Grand Demo Day, photo 13"
+      },
+      "url": "/assets/gdd/gdd-13.webp"
+    },
+    {
+      "id": "2344bc22-cdc7-5fd8-a427-a65d315a168a",
+      "width": 1050,
+      "height": 1400,
+      "alt": {
+        "uz": "Grand Demo Day, foto 14",
+        "en": "Grand Demo Day, photo 14"
+      },
+      "url": "/assets/gdd/gdd-14.webp"
+    },
+    {
+      "id": "154ca53a-6aee-5e90-b18c-034d1989da8a",
+      "width": 1050,
+      "height": 1400,
+      "alt": {
+        "uz": "Grand Demo Day, foto 15",
+        "en": "Grand Demo Day, photo 15"
+      },
+      "url": "/assets/gdd/gdd-15.webp"
+    },
+    {
+      "id": "8699b419-32ff-520c-8710-ba9828cbbe54",
+      "width": 1050,
+      "height": 1400,
+      "alt": {
+        "uz": "Grand Demo Day, foto 16",
+        "en": "Grand Demo Day, photo 16"
+      },
+      "url": "/assets/gdd/gdd-16.webp"
+    },
+    {
+      "id": "56472e24-9f90-5d80-b122-b70763bdfd66",
+      "width": 1050,
+      "height": 1400,
+      "alt": {
+        "uz": "Grand Demo Day, foto 17",
+        "en": "Grand Demo Day, photo 17"
+      },
+      "url": "/assets/gdd/gdd-17.webp"
+    },
+    {
+      "id": "b1a570c8-3c10-5c84-9021-0e41dc4e41f3",
+      "width": 1050,
+      "height": 1400,
+      "alt": {
+        "uz": "Grand Demo Day, foto 18",
+        "en": "Grand Demo Day, photo 18"
+      },
+      "url": "/assets/gdd/gdd-18.webp"
+    },
+    {
+      "id": "602f837a-b034-5564-b4c1-ab5cac05e73b",
+      "width": 1050,
+      "height": 1400,
+      "alt": {
+        "uz": "Grand Demo Day, foto 19",
+        "en": "Grand Demo Day, photo 19"
+      },
+      "url": "/assets/gdd/gdd-19.webp"
+    },
+    {
+      "id": "39e2f420-caa6-568c-abe2-1639c2012a76",
+      "width": 1050,
+      "height": 1400,
+      "alt": {
+        "uz": "Grand Demo Day, foto 20",
+        "en": "Grand Demo Day, photo 20"
+      },
+      "url": "/assets/gdd/gdd-20.webp"
+    },
+    {
+      "id": "0102ef94-cd40-57cb-8914-0b1d82f1e156",
+      "width": 1050,
+      "height": 1400,
+      "alt": {
+        "uz": "Grand Demo Day, foto 21",
+        "en": "Grand Demo Day, photo 21"
+      },
+      "url": "/assets/gdd/gdd-21.webp"
+    },
+    {
+      "id": "562c604a-d92e-56b2-9063-273021ac388d",
+      "width": 1050,
+      "height": 1400,
+      "alt": {
+        "uz": "Grand Demo Day, foto 22",
+        "en": "Grand Demo Day, photo 22"
+      },
+      "url": "/assets/gdd/gdd-22.webp"
+    }
+  ]
+}
