@@ -168,8 +168,13 @@ def season_title(s, lang):
     return tx(s.get('title'), lang) or (f'Grand Demo Day · {s["number"]}-mavsum' if lang == 'uz' else f'Grand Demo Day · Season {s["number"]}')
 
 
+def season_slug(n):
+    """A season's address segment: /grand-demo-day/1-mavsum/ (the same in both languages)."""
+    return f'{n}-mavsum'
+
+
 def season_href(n):
-    return f'/grand-demo-day/{n}/'
+    return f'/grand-demo-day/{season_slug(n)}/'
 
 
 # labels of the season cards and pages, in both languages

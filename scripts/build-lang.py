@@ -116,7 +116,7 @@ def sitemap(posts=(), seasons=()):
     """posts — [(slug, lastmod)] blog maqolalari (blog/<slug>); seasons — [(raqam, lastmod)] (grand-demo-day/<n>)."""
     rows = ''
     for slug, lastmod in ([(s, LASTMOD) for s in [''] + SLUGS] + [(f'blog/{s}', d) for s, d in posts]
-                          + [(f'grand-demo-day/{n}', d) for n, d in seasons]):
+                          + [(f'grand-demo-day/{site_content.season_slug(n)}', d) for n, d in seasons]):
         for lang in LANGS:
             u = lambda l: f'{SITE}/{l}/{slug + "/" if slug else ""}'
             alt = ''.join(f'    <xhtml:link rel="alternate" hreflang="{l}" href="{u(l)}"/>\n' for l in LANGS) + f'    <xhtml:link rel="alternate" hreflang="x-default" href="{u("uz")}"/>\n'
@@ -171,7 +171,7 @@ def rewrite(html, lang, slug, page=None):
     slugs = '|'.join(SLUGS)
     html = re.sub(rf'href="/({slugs})(#[^"]*)?"', lambda m: f'href="/{lang}/{m.group(1)}/{m.group(2) or ""}"', html)
     html = re.sub(r'href="/(blog/[^"]+)"', rf'href="/{lang}/\1"', html)
-    html = re.sub(r'href="/(grand-demo-day/\d+/)"', rf'href="/{lang}/\1"', html)
+    html = re.sub(r'href="/(grand-demo-day/\d+-mavsum/)"', rf'href="/{lang}/\1"', html)
     html = re.sub(r'href="/(#[^"]*)?"', lambda m: f'href="/{lang}/{m.group(1) or ""}"', html)
     if lang == 'en':
         html = translate_body(html)
@@ -223,6 +223,16 @@ def write_generated(path, page, meta):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     open(path, 'w', encoding='utf-8').write(page.replace('<head>', '<head>\n  ' + GEN, 1))
 
+def write_moved(path, to):
+    """A page that moved: sends the visitor (and search engines, via canonical) to its new address."""
+    url = H.escape(to, quote=True)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    open(path, 'w', encoding='utf-8').write(
+        f'<!doctype html>\n<html><head>\n  {GEN}\n  <meta charset="utf-8">\n  <title>Startup Garage</title>\n'
+        f'  <link rel="canonical" href="{SITE}{url}">\n  <meta name="robots" content="noindex">\n'
+        f'  <meta http-equiv="refresh" content="0; url={url}">\n  <script>location.replace({json.dumps(to)} + location.hash)</script>\n'
+        f'</head><body><a href="{url}">{url}</a></body></html>\n')
+
 def main():
     global SITEDATA
     SITEDATA = site_content.Site(site_content.load(), T)
@@ -272,12 +282,17 @@ def main():
     gtpl = open(src('grand-demo-day'), encoding='utf-8').read()
     for s in SITEDATA.seasons:
         page, meta = season_page(gtpl, s, 'uz')
-        write_generated(os.path.join(gdir, str(s['number']), 'index.html'), page, meta)
+        slug = site_content.season_slug(s['number'])
+        write_generated(os.path.join(gdir, slug, 'index.html'), page, meta)
         for lang in LANGS:
             page, meta = season_page(gtpl, s, lang)
-            out = os.path.join(ROOT, lang, 'grand-demo-day', str(s['number']), 'index.html')
+            out = os.path.join(ROOT, lang, 'grand-demo-day', slug, 'index.html')
             os.makedirs(os.path.dirname(out), exist_ok=True)
-            open(out, 'w', encoding='utf-8').write(rewrite(page, lang, f'grand-demo-day/{s["number"]}', meta)); n += 1
+            open(out, 'w', encoding='utf-8').write(rewrite(page, lang, f'grand-demo-day/{slug}', meta)); n += 1
+        # the first addresses (/grand-demo-day/1/, shared on 23 Nov 2026) move to /grand-demo-day/1-mavsum/
+        for base in ['', '/uz', '/en']:
+            old = os.path.join(ROOT, base.lstrip('/'), 'grand-demo-day', str(s['number']), 'index.html')
+            write_moved(old, f'{base}/grand-demo-day/{slug}/')
     sitemap([(p['slug'], p['date']) for p in posts],
             [(s['number'], (s.get('updatedAt') or LASTMOD)[:10]) for s in SITEDATA.seasons])
     print(f'{n} ta sahifa yaratildi: {", ".join(LANGS)}')
