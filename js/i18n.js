@@ -35,13 +35,14 @@ if (EN) {
   const nodes = [];
   while (walker.nextNode()) nodes.push(walker.currentNode);
   for (const n of nodes) {
-    if (skip.has(n.parentNode?.nodeName)) continue;
+    if (skip.has(n.parentNode?.nodeName) || n.parentElement?.closest('[data-noi18n]')) continue; // data-noi18n: build vaqtida tilga mos chizilgan blok (data/site.json)
     const v = EN[norm(n.nodeValue)];
     if (!v) continue;
     const lead = n.nodeValue.match(/^\s*/)[0], trail = n.nodeValue.match(/\s*$/)[0];
     n.nodeValue = lead + v + trail;
   }
   for (const el of document.querySelectorAll('[alt],[aria-label],[title],[data-peers-label],[placeholder]')) {
+    if (el.closest('[data-noi18n]')) continue;
     for (const a of ['alt', 'aria-label', 'title', 'data-peers-label', 'placeholder']) {
       const v = el.getAttribute(a);
       if (v && EN[norm(v)]) el.setAttribute(a, EN[norm(v)]);
