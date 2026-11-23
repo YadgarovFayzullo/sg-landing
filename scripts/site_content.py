@@ -168,6 +168,21 @@ def season_title(s, lang):
     return tx(s.get('title'), lang) or (f'Grand Demo Day · {s["number"]}-mavsum' if lang == 'uz' else f'Grand Demo Day · Season {s["number"]}')
 
 
+def season_href(n):
+    return f'/grand-demo-day/{n}/'
+
+
+# labels of the season cards and pages, in both languages
+SL = {
+    'uz': {'all': 'Barcha mavsumlar', 'more': 'Batafsil', 'nodate': 'Sana belgilanmagan', 'done': 'Yakunlangan mavsum',
+           'soon': 'Yaqinlashayotgan mavsum', 'results': 'Natijalar', 'back': '← Barcha mavsumlar', 'prev': '← {n}-mavsum',
+           'next': '{n}-mavsum →', 'empty': 'Natijalar va lavhalar tadbirdan keyin shu yerda chiqadi.'},
+    'en': {'all': 'All seasons', 'more': 'Learn more', 'nodate': 'Date to be announced', 'done': 'Season completed',
+           'soon': 'Upcoming season', 'results': 'Results', 'back': '← All seasons', 'prev': '← Season {n}',
+           'next': 'Season {n} →', 'empty': 'Results and photos appear here after the event.'},
+}
+
+
 def ext_link(url):
     return ' target="_blank" rel="noopener"' if re.match(r'https?://', url or '') else ''
 
@@ -278,23 +293,71 @@ class Site:
         return f'<li class="reveal" data-noi18n><b>{money_short(total)}</b><span>{e(sp)}</span></li>'
 
     def results_html(self, lang):
+        """Natijalar: jami ko'rsatkichlar va har mavsum uchun karta (jadval — mavsum sahifasida)."""
         T = self.T
-        if not self.with_results:
-            return ''
-        nums = [s['number'] for s in self.with_results]
-        if lang == 'uz':
-            lead = (', '.join(f'{x}-' for x in nums[:-1]) + f' va {nums[-1]}-mavsum' if len(nums) > 1 else f'{nums[0]}-mavsum') + ' soft commitment natijalari'
-        else:
-            lead = 'Soft commitment results for ' + (('seasons ' + ', '.join(str(x) for x in nums[:-1]) + f' and {nums[-1]}') if len(nums) > 1 else f'season {nums[0]}')
-        total, n, k = self.totals()
-        out = (f'<p class="gdd-rhead__lead" data-noi18n>{e(lead)}</p>\n'
-               f'        <ul class="gdd-facts gdd-facts--row gdd-facts--res" data-noi18n>\n'
-               f'          <li class="reveal"><b>{money(total)}</b><span>{e(T(lang, "Jami soft commitment"))}</span></li>\n'
-               f'          <li class="reveal"><b>{n}{" ta" if lang == "uz" else ""}</b><span>{e(T(lang, "Soft commitment olgan startup"))}</span></li>\n'
-               f'          <li class="reveal"><b>{k} {"mavsum" if lang == "uz" else ("season" if k == 1 else "seasons")}</b><span>{e(T(lang, "Jamlangan natijalar"))}</span></li>\n'
-               f'        </ul>')
-        head = f'<thead><tr><th scope="col">{e(T(lang, "Startup"))}</th><th scope="col">{e(T(lang, "Soft commitment"))}</th><th scope="col">{e(T(lang, "Investor(lar)"))}</th></tr></thead>'
-        for s in self.with_results:
+        out = ''
+        if self.with_results:
+            nums = [s['number'] for s in self.with_results]
+            if lang == 'uz':
+                lead = (', '.join(f'{x}-' for x in nums[:-1]) + f' va {nums[-1]}-mavsum' if len(nums) > 1 else f'{nums[0]}-mavsum') + ' soft commitment natijalari'
+            else:
+                lead = 'Soft commitment results for ' + (('seasons ' + ', '.join(str(x) for x in nums[:-1]) + f' and {nums[-1]}') if len(nums) > 1 else f'season {nums[0]}')
+            total, n, k = self.totals()
+            out += (f'<p class="gdd-rhead__lead" data-noi18n>{e(lead)}</p>\n'
+                    f'        <ul class="gdd-facts gdd-facts--row gdd-facts--res" data-noi18n>\n'
+                    f'          <li class="reveal"><b>{money(total)}</b><span>{e(T(lang, "Jami soft commitment"))}</span></li>\n'
+                    f'          <li class="reveal"><b>{n}{" ta" if lang == "uz" else ""}</b><span>{e(T(lang, "Soft commitment olgan startup"))}</span></li>\n'
+                    f'          <li class="reveal"><b>{k} {"mavsum" if lang == "uz" else ("season" if k == 1 else "seasons")}</b><span>{e(T(lang, "Jamlangan natijalar"))}</span></li>\n'
+                    f'        </ul>\n')
+        if self.seasons:
+            cards = ''.join(self.season_tile(s, lang) for s in sorted(self.seasons, key=lambda s: -s['number']))
+            out += (f'        <h3 class="gdd-sub" id="mavsumlar" data-noi18n>{e(SL[lang]["all"])}</h3>\n'
+                    f'        <ul class="evl gdd-seasons" data-noi18n>{cards}\n        </ul>')
+        return out
+
+    def season_tile(self, s, lang):
+        """Mavsum kartasi (GDD sahifasida): muqova, sana, nom, summa → /grand-demo-day/N/."""
+        up = bool(s.get('date')) and s['date'] >= self.today
+        src = self.src(s['coverPhotoId']) if s.get('coverPhotoId') in self.photos else None
+        img = f'<span class="evc__img"><img src="{ea(src)}" alt="" loading="lazy"></span>' if src else ''
+        date = d_long(s['date'], lang) if s.get('date') else SL[lang]['nodate']
+        where = ' · '.join([date] + ([tx(s.get('place'), lang)] if tx(s.get('place'), lang) else []))
+        sm = sum(float(r.get('amount') or 0) for r in s.get('results') or [])
+        amt = f'<span class="evc__amt">{money(sm)}</span>' if sm > 0 else ''
+        tag = f'<span class="evc__tag">{e(SL[lang]["soon"])}</span>' if up else ''
+        return (f'\n          <li class="evc{"" if up else " evc--past"} reveal"><a href="{season_href(s["number"])}">{img}<span class="evc__body">'
+                f'{tag}<span class="evc__date">{e(where)}</span><b>{e(season_title(s, lang))}</b>{amt}'
+                f'<span class="evc__go">{e(SL[lang]["more"])} <span aria-hidden="true">→</span></span></span></a></li>')
+
+    def season_main(self, s, lang):
+        """/grand-demo-day/N/ sahifasining <main> qismi: hero, natijalar jadvali, galereya, mavsumlar orasida o'tish."""
+        T, L = self.T, SL[lang]
+        up = bool(s.get('date')) and s['date'] >= self.today
+        kicker = tx(s.get('kicker'), lang)
+        hero = f'<p class="gdd-hero__kicker">{e(kicker)}</p>' if kicker else ''
+        hero += f'<h1 class="gdd-hero__title">{e(tx(s.get("title"), lang) or season_title(s, lang))}</h1>'
+        if tx(s.get('lead'), lang):
+            hero += f'\n        <p class="gdd-hero__lead">{e(tx(s["lead"], lang))}</p>'
+        items = self.meta_items(s, lang)
+        if items:
+            hero += '\n        <ul class="gdd-hero__meta">' + ''.join(f'<li>{e(x)}</li>' for x in items) + '</ul>'
+        if up:
+            btns = ''
+            if s.get('registerUrl'):
+                btns += f'<a class="btn btn--light" href="{ea(s["registerUrl"])}"{ext_link(s["registerUrl"])}>{e(T(lang, "Ro‘yxatdan o‘tish"))}</a>'
+            if s.get('applyUrl'):
+                btns += f'<a class="btn btn--ghost-light" href="{ea(s["applyUrl"])}"{ext_link(s["applyUrl"])}>{e(T(lang, "Ariza topshirish"))}</a>'
+            if btns:
+                hero += f'\n        <div class="phero__actions">{btns}</div>'
+        cover = ''
+        if s.get('coverPhotoId') in self.photos:
+            p = self.photos[s['coverPhotoId']]
+            cover = (f'\n      <div class="container"><figure class="gdd-hero__img"><img src="{ea(self.src(p["id"]))}" alt="{ea(tx(p.get("alt"), lang))}" '
+                     f'width="{p["width"]}" height="{p["height"]}"></figure></div>')
+        out = (f'<main id="main">\n    <!-- site:season:start --><div data-noi18n>\n'
+               f'    <section class="gdd-hero">\n      <div class="container gdd-hero__in">\n        {hero}\n      </div>{cover}\n    </section>\n')
+        if s.get('results'):
+            head = f'<thead><tr><th scope="col">{e(T(lang, "Startup"))}</th><th scope="col">{e(T(lang, "Soft commitment"))}</th><th scope="col">{e(T(lang, "Investor(lar)"))}</th></tr></thead>'
             date = f'<span class="gs-date">{e(d_long(s["date"], lang))}</span>' if s.get('date') else ''
             sm = sum(float(r.get('amount') or 0) for r in s['results'])
             rows = ''
@@ -302,10 +365,29 @@ class Site:
                 invs = ''.join(f'<span class="gs-inv">{e(i["name"])}' + (f'<b>{money(i["amount"])}</b>' if i.get('amount') is not None else '') + '</span>'
                                for i in r.get('investors') or [])
                 rows += f'<tr><th scope="row">{e(r["startup"])}</th><td class="gs-sum">{money(r.get("amount"))}</td><td>{invs}</td></tr>'
-            out += (f'\n        <div class="gseason reveal" id="mavsum-{s["number"]}" data-noi18n><div class="gseason__h"><div><h3>{e(season_label(s["number"], lang))}</h3>{date}</div><b>{money(sm)}</b></div>\n'
-                    f'          <table>{head}<tbody>{rows}</tbody></table></div>')
-            if tx(s.get('note'), lang):
-                out += f'\n        <p class="gdd-note reveal" data-noi18n><b>{e(T(lang, "Qo‘shimcha natijalar:"))}</b> {e(tx(s["note"], lang))}</p>'
+            note = (f'\n        <p class="gdd-note"><b>{e(T(lang, "Qo‘shimcha natijalar:"))}</b> {e(tx(s["note"], lang))}</p>'
+                    if tx(s.get('note'), lang) else '')
+            out += (f'    <section class="psec psec--soft" aria-labelledby="s-res"><div class="container">\n'
+                    f'        <h2 class="psec__title" id="s-res">{e(L["results"])}</h2>\n'
+                    f'        <div class="gseason"><div class="gseason__h"><div><h3>{e(season_label(s["number"], lang))}</h3>{date}</div><b>{money(sm)}</b></div>\n'
+                    f'          <table>{head}<tbody>{rows}</tbody></table></div>{note}\n    </div></section>\n')
+        photos = self.gallery(s)
+        if photos:
+            lis = ''.join(f'\n          <li class="gal__i"><button type="button" class="gal__b" data-i="{i}" aria-label="{ea(T(lang, "Foto") + " " + str(i + 1))}">'
+                          f'<img src="{ea(self.src(p["id"]))}" alt="{ea(tx(p.get("alt"), lang))}" width="{p["width"]}" height="{p["height"]}" loading="lazy"></button></li>'
+                          for i, p in enumerate(photos))
+            out += (f'    <section class="psec" id="lavhalar" aria-labelledby="s-gal"><div class="container">\n'
+                    f'        <h2 class="psec__title" id="s-gal">{e(T(lang, "Tadbirdan lavhalar"))}</h2>\n'
+                    f'        <ul class="gal" id="gdGal">{lis}\n        </ul>\n    </div></section>\n')
+        if not s.get('results') and not photos:
+            out += f'    <section class="psec psec--soft"><div class="container"><p class="gdd-sub2">{e(L["empty"])}</p></div></section>\n'
+        nums = [x['number'] for x in self.seasons]
+        i = nums.index(s['number'])
+        prev = f'<a class="btn btn--ghost" href="{season_href(nums[i - 1])}">{e(L["prev"].format(n=nums[i - 1]))}</a>' if i > 0 else ''
+        nxt = f'<a class="btn btn--ghost" href="{season_href(nums[i + 1])}">{e(L["next"].format(n=nums[i + 1]))}</a>' if i + 1 < len(nums) else ''
+        out += (f'    <section class="psec"><div class="container"><nav class="gdd-snav" aria-label="{e(L["all"])}">'
+                f'<a class="btn btn--primary" href="/grand-demo-day">{e(L["back"])}</a><span class="gdd-snav__pn">{prev}{nxt}</span></nav></div></section>\n'
+                f'    </div><!-- site:season:end -->\n  </main>')
         return out
 
     def gallery_html(self, lang):
@@ -395,7 +477,7 @@ class Site:
         T = self.T
         date = d_long(s['date'], lang) if s.get('date') else T(lang, 'Yakunlangan mavsum')
         sm = sum(float(r.get('amount') or 0) for r in s['results'])
-        return (f'<li class="evc evc--past reveal" data-noi18n><a href="/grand-demo-day#mavsum-{s["number"]}"><span class="evc__body"><span class="evc__date">{e(date)}</span>'
+        return (f'<li class="evc evc--past reveal" data-noi18n><a href="{season_href(s["number"])}"><span class="evc__body"><span class="evc__date">{e(date)}</span>'
                 f'<b>{e(season_title(s, lang))}</b><span class="evc__amt">{money(sm)}</span><span>{e(T(lang, "Soft commitment natijalari, finalchilar va investorlar."))}</span>'
                 f'<span class="evc__go">{e(T(lang, "Batafsil"))} <span aria-hidden="true">→</span></span></span></a></li>')
 

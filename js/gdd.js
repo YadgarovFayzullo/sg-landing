@@ -31,3 +31,7 @@ document.addEventListener('keydown', (e) => {
 let x0 = null;
 lb.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
 lb.addEventListener('touchend', (e) => { if (x0 === null) return; const d = e.changedTouches[0].clientX - x0; if (Math.abs(d) > 50) show(cur + (d < 0 ? 1 : -1)); x0 = null; });
+
+// old links to a season's table (/grand-demo-day#mavsum-3) → the season's own page (/grand-demo-day/3/)
+const old = /^#mavsum-(\d+)$/.exec(location.hash);
+if (old) location.replace(location.pathname.replace(/\/?$/, '/') + old[1] + '/');

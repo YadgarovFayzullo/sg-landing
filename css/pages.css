@@ -510,3 +510,9 @@
 .post__img img { display: block; width: 100%; height: auto; }
 .post__body p { margin: 0 0 1.1em; font-size: clamp(16px, 1.3vw, 18px); line-height: 1.65; color: var(--ink-2); }
 .post__back { margin-top: 32px; }
+
+/* Grand Demo Day: season cards and the season page's navigation */
+.gdd-seasons { margin-top: 18px; }
+.evc__tag { align-self: flex-start; padding: 4px 10px; border-radius: 999px; background: var(--blue-50); color: var(--blue); font-size: 13px; font-weight: 600; }
+.gdd-snav { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.gdd-snav__pn { display: flex; flex-wrap: wrap; gap: 10px; }
