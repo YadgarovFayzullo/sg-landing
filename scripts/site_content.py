@@ -237,7 +237,9 @@ class Site:
         T, s = self.T, self.hero
         if not s:
             return '<h1 class="gdd-hero__title">Grand Demo Day</h1>'
-        out = f'<h1 class="gdd-hero__title" data-noi18n>{e(tx(s.get("title"), lang) or "Grand Demo Day")}</h1>'
+        kicker = tx(s.get('kicker'), lang)  # the line above the title (the season's partner); empty → none
+        out = f'<p class="gdd-hero__kicker" data-noi18n>{e(kicker)}</p>' if kicker else ''
+        out += f'<h1 class="gdd-hero__title" data-noi18n>{e(tx(s.get("title"), lang) or "Grand Demo Day")}</h1>'
         if tx(s.get('lead'), lang):
             out += f'\n        <p class="gdd-hero__lead" data-noi18n>{e(tx(s["lead"], lang))}</p>'
         items = self.meta_items(s, lang)

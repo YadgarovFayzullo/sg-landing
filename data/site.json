@@ -30,7 +30,11 @@
       "galleryPhotoIds": [],
       "published": true,
       "createdAt": "2026-11-12T00:00:00.000Z",
-      "updatedAt": "2026-11-12T00:00:00.000Z"
+      "updatedAt": "2026-11-12T00:00:00.000Z",
+      "kicker": {
+        "uz": "Yandex Uzbekistan × Startup Garage",
+        "en": "Yandex Uzbekistan × Startup Garage"
+      }
     },
     {
       "id": "591f8f14-1418-5b6e-aceb-7d1e12a6abcc",
@@ -144,7 +148,11 @@
       ],
       "published": true,
       "createdAt": "2026-11-12T00:00:00.000Z",
-      "updatedAt": "2026-11-12T00:00:00.000Z"
+      "updatedAt": "2026-11-12T00:00:00.000Z",
+      "kicker": {
+        "uz": "",
+        "en": ""
+      }
     },
     {
       "id": "e14c2b0f-5dc9-572f-9ce4-cb544eef793a",
@@ -229,7 +237,11 @@
       "galleryPhotoIds": [],
       "published": true,
       "createdAt": "2026-11-12T00:00:00.000Z",
-      "updatedAt": "2026-11-12T00:00:00.000Z"
+      "updatedAt": "2026-11-12T00:00:00.000Z",
+      "kicker": {
+        "uz": "",
+        "en": ""
+      }
     },
     {
       "id": "c97a17d1-3b6e-5e13-b047-5b94941ba01e",
@@ -294,7 +306,11 @@
       "galleryPhotoIds": [],
       "published": true,
       "createdAt": "2026-11-12T00:00:00.000Z",
-      "updatedAt": "2026-11-12T00:00:00.000Z"
+      "updatedAt": "2026-11-12T00:00:00.000Z",
+      "kicker": {
+        "uz": "",
+        "en": ""
+      }
     }
   ],
   "events": [
