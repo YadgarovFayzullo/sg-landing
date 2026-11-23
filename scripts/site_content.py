@@ -362,8 +362,8 @@ class Site:
             sm = sum(float(r.get('amount') or 0) for r in s['results'])
             rows = ''
             for r in s['results']:
-                invs = ''.join(f'<span class="gs-inv">{e(i["name"])}' + (f'<b>{money(i["amount"])}</b>' if i.get('amount') is not None else '') + '</span>'
-                               for i in r.get('investors') or [])
+                # investors by name only: the site shows no per-investor sums
+                invs = ''.join(f'<span class="gs-inv">{e(i["name"])}</span>' for i in r.get('investors') or [])
                 rows += f'<tr><th scope="row">{e(r["startup"])}</th><td class="gs-sum">{money(r.get("amount"))}</td><td>{invs}</td></tr>'
             note = (f'\n        <p class="gdd-note"><b>{e(T(lang, "Qo‘shimcha natijalar:"))}</b> {e(tx(s["note"], lang))}</p>'
                     if tx(s.get('note'), lang) else '')
