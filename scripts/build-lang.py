@@ -71,6 +71,11 @@ def jsonld(lang, slug, url, t, extra=None):
                     'logo': SITE + '/assets/icon-192.png', 'description': t['description'], 'sameAs': SAMEAS})
         out.append({'@context': 'https://schema.org', '@type': 'WebSite', '@id': SITE + '/#website', 'name': 'Startup Garage', 'url': SITE + '/' + lang + '/',
                     'inLanguage': lang, 'publisher': {'@id': SITE + '/#org'}})
+    elif slug.startswith('grand-demo-day/'):
+        out.append({'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
+            {'@type': 'ListItem', 'position': 1, 'name': LABEL[lang][''], 'item': f'{SITE}/{lang}/'},
+            {'@type': 'ListItem', 'position': 2, 'name': LABEL[lang]['grand-demo-day'], 'item': f'{SITE}/{lang}/grand-demo-day/'},
+            {'@type': 'ListItem', 'position': 3, 'name': t['title'], 'item': url}]})
     elif slug.startswith('blog/'):
         out.append({'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
             {'@type': 'ListItem', 'position': 1, 'name': LABEL[lang][''], 'item': f'{SITE}/{lang}/'},
@@ -107,10 +112,11 @@ def head_seo(lang, slug, page=None):
           f'<meta name="twitter:description" content="{e(t["description"])}">', f'<meta name="twitter:image" content="{img}">']
     return '\n  '.join(m) + '\n  ' + jsonld(lang, slug, url, t, (page or {}).get('ld')), t
 
-def sitemap(posts=()):
-    """posts — [(slug, lastmod)] blog maqolalari (blog/<slug>)."""
+def sitemap(posts=(), seasons=()):
+    """posts — [(slug, lastmod)] blog maqolalari (blog/<slug>); seasons — [(raqam, lastmod)] (grand-demo-day/<n>)."""
     rows = ''
-    for slug, lastmod in [(s, LASTMOD) for s in [''] + SLUGS] + [(f'blog/{s}', d) for s, d in posts]:
+    for slug, lastmod in ([(s, LASTMOD) for s in [''] + SLUGS] + [(f'blog/{s}', d) for s, d in posts]
+                          + [(f'grand-demo-day/{n}', d) for n, d in seasons]):
         for lang in LANGS:
             u = lambda l: f'{SITE}/{l}/{slug + "/" if slug else ""}'
             alt = ''.join(f'    <xhtml:link rel="alternate" hreflang="{l}" href="{u(l)}"/>\n' for l in LANGS) + f'    <xhtml:link rel="alternate" hreflang="x-default" href="{u("uz")}"/>\n'
@@ -165,6 +171,7 @@ def rewrite(html, lang, slug, page=None):
     slugs = '|'.join(SLUGS)
     html = re.sub(rf'href="/({slugs})(#[^"]*)?"', lambda m: f'href="/{lang}/{m.group(1)}/{m.group(2) or ""}"', html)
     html = re.sub(r'href="/(blog/[^"]+)"', rf'href="/{lang}/\1"', html)
+    html = re.sub(r'href="/(grand-demo-day/\d+/)"', rf'href="/{lang}/\1"', html)
     html = re.sub(r'href="/(#[^"]*)?"', lambda m: f'href="/{lang}/{m.group(1) or ""}"', html)
     if lang == 'en':
         html = translate_body(html)
@@ -192,6 +199,29 @@ def post_page(tpl, p, lang):
           'publisher': {'@type': 'Organization', 'name': 'Startup Garage', 'url': SITE + '/'}}
     if img: ld['image'] = [img]
     return html, {'title': title, 'description': desc, 'image': img, 'type': 'article', 'ld': ld}
+
+def season_page(tpl, s, lang):
+    """grand-demo-day/<n>/ — GDD sahifasi shabloni, <main> o'rniga mavsum."""
+    t = site_content.tx
+    html = re.sub(r'<main id="main">.*?</main>', lambda m: SITEDATA.season_main(s, lang), tpl, count=1, flags=re.S)
+    name = t(s.get('title'), lang) or site_content.season_title(s, lang)
+    sm = sum(float(r.get('amount') or 0) for r in s.get('results') or [])
+    if t(s.get('lead'), lang):
+        desc = t(s.get('lead'), lang)
+    elif lang == 'uz':
+        desc = f'{s["number"]}-mavsum' + (f': {site_content.money(sm)} soft commitment' if sm else '') + ', finalchilar va tadbirdan lavhalar.'
+    else:
+        desc = f'Season {s["number"]}' + (f': {site_content.money(sm)} in soft commitments' if sm else '') + ', finalists and photos from the event.'
+    src = SITEDATA.src(s.get('coverPhotoId')) if s.get('coverPhotoId') in SITEDATA.photos else None
+    img = (SITE + src if src and src.startswith('/') else src) or None
+    return html, {'title': f'{name} — Startup Garage', 'description': desc, 'image': img, 'type': 'website'}
+
+def write_generated(path, page, meta):
+    """Prefikssiz (uz) manba sahifasi: generated belgisi bilan — keyingi build uni o'chirib qayta yozadi."""
+    page = re.sub(r'<title>.*?</title>', lambda m: f'<title>{H.escape(meta["title"], quote=False)}</title>', page, count=1, flags=re.S)
+    page = re.sub(r'<meta name="description" content="[^"]*">', lambda m: f'<meta name="description" content="{H.escape(meta["description"], quote=True)}">', page, count=1)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    open(path, 'w', encoding='utf-8').write(page.replace('<head>', '<head>\n  ' + GEN, 1))
 
 def main():
     global SITEDATA
@@ -233,7 +263,23 @@ def main():
             out = os.path.join(ROOT, lang, 'blog', p['slug'], 'index.html')
             os.makedirs(os.path.dirname(out), exist_ok=True)
             open(out, 'w', encoding='utf-8').write(rewrite(page, lang, f'blog/{p["slug"]}', meta)); n += 1
-    sitemap([(p['slug'], p['date']) for p in posts])
+    # Grand Demo Day mavsumlari: /grand-demo-day/<n>/ (manba, uz) va /uz|en/grand-demo-day/<n>/
+    gdir = os.path.join(ROOT, 'grand-demo-day')
+    for d in os.listdir(gdir):
+        f = os.path.join(gdir, d, 'index.html')
+        if os.path.isfile(f) and GEN in open(f, encoding='utf-8').read():
+            shutil.rmtree(os.path.join(gdir, d))
+    gtpl = open(src('grand-demo-day'), encoding='utf-8').read()
+    for s in SITEDATA.seasons:
+        page, meta = season_page(gtpl, s, 'uz')
+        write_generated(os.path.join(gdir, str(s['number']), 'index.html'), page, meta)
+        for lang in LANGS:
+            page, meta = season_page(gtpl, s, lang)
+            out = os.path.join(ROOT, lang, 'grand-demo-day', str(s['number']), 'index.html')
+            os.makedirs(os.path.dirname(out), exist_ok=True)
+            open(out, 'w', encoding='utf-8').write(rewrite(page, lang, f'grand-demo-day/{s["number"]}', meta)); n += 1
+    sitemap([(p['slug'], p['date']) for p in posts],
+            [(s['number'], (s.get('updatedAt') or LASTMOD)[:10]) for s in SITEDATA.seasons])
     print(f'{n} ta sahifa yaratildi: {", ".join(LANGS)}')
 
 if __name__ == '__main__':
