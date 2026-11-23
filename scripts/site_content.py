@@ -168,18 +168,25 @@ def season_title(s, lang):
     return tx(s.get('title'), lang) or (f'Grand Demo Day · {s["number"]}-mavsum' if lang == 'uz' else f'Grand Demo Day · Season {s["number"]}')
 
 
+def season_slug(n):
+    """A season's address segment: /grand-demo-day/1-mavsum/ (the same in both languages)."""
+    return f'{n}-mavsum'
+
+
 def season_href(n):
-    return f'/grand-demo-day/{n}/'
+    return f'/grand-demo-day/{season_slug(n)}/'
 
 
 # labels of the season cards and pages, in both languages
 SL = {
     'uz': {'all': 'Barcha mavsumlar', 'more': 'Batafsil', 'nodate': 'Sana belgilanmagan', 'done': 'Yakunlangan mavsum',
            'soon': 'Yaqinlashayotgan mavsum', 'results': 'Natijalar', 'back': '← Barcha mavsumlar', 'prev': '← {n}-mavsum',
-           'next': '{n}-mavsum →', 'empty': 'Natijalar va lavhalar tadbirdan keyin shu yerda chiqadi.'},
+           'next': '{n}-mavsum →', 'empty': 'Natijalar va lavhalar tadbirdan keyin shu yerda chiqadi.',
+           'sc': 'soft commitment', 'startups': 'ta startup', 'photos': 'ta foto'},
     'en': {'all': 'All seasons', 'more': 'Learn more', 'nodate': 'Date to be announced', 'done': 'Season completed',
            'soon': 'Upcoming season', 'results': 'Results', 'back': '← All seasons', 'prev': '← Season {n}',
-           'next': 'Season {n} →', 'empty': 'Results and photos appear here after the event.'},
+           'next': 'Season {n} →', 'empty': 'Results and photos appear here after the event.',
+           'sc': 'soft commitment', 'startups': 'startups', 'photos': 'photos'},
 }
 
 
@@ -333,14 +340,29 @@ class Site:
         """/grand-demo-day/N/ sahifasining <main> qismi: hero, natijalar jadvali, galereya, mavsumlar orasida o'tish."""
         T, L = self.T, SL[lang]
         up = bool(s.get('date')) and s['date'] >= self.today
+        # the header: back link, partner line, "Grand Demo Day" small over the season large, facts, cover on the right
+        own = tx(s.get('title'), lang)
+        default = season_title(s, lang)
+        name = (f'<span class="gss__eyebrow">Grand Demo Day</span><span class="gss__name">{e(season_label(s["number"], lang))}</span>'
+                if not own or own == default else f'<span class="gss__name gss__name--own">{e(own)}</span>')
+        top = f'<a class="gss__back" href="/grand-demo-day">{e(L["back"])}</a>'
         kicker = tx(s.get('kicker'), lang)
-        hero = f'<p class="gdd-hero__kicker">{e(kicker)}</p>' if kicker else ''
-        hero += f'<h1 class="gdd-hero__title">{e(tx(s.get("title"), lang) or season_title(s, lang))}</h1>'
+        if kicker:
+            top += f'<span class="gss__kicker">{e(kicker)}</span>'
+        txt = f'<div class="gss__top">{top}</div>\n          <h1 class="gss__title">{name}</h1>'
         if tx(s.get('lead'), lang):
-            hero += f'\n        <p class="gdd-hero__lead">{e(tx(s["lead"], lang))}</p>'
+            txt += f'\n          <p class="gss__lead">{e(tx(s["lead"], lang))}</p>'
         items = self.meta_items(s, lang)
         if items:
-            hero += '\n        <ul class="gdd-hero__meta">' + ''.join(f'<li>{e(x)}</li>' for x in items) + '</ul>'
+            txt += '\n          <ul class="gdd-hero__meta gss__meta">' + ''.join(f'<li>{e(x)}</li>' for x in items) + '</ul>'
+        sm = sum(float(r.get('amount') or 0) for r in s.get('results') or [])
+        nst = sum(1 for r in s.get('results') or [] if float(r.get('amount') or 0) > 0)
+        nph = len(self.gallery(s))
+        pairs = [(money(sm), L['sc']) if sm > 0 else None, (str(nst), L['startups']) if nst else None,
+                 (str(nph), L['photos']) if nph else None]
+        facts = ''.join(f'<li><b>{b}</b><span>{e(l)}</span></li>' for b, l in (x for x in pairs if x))
+        if facts:
+            txt += f'\n          <ul class="gss__facts">{facts}</ul>'
         if up:
             btns = ''
             if s.get('registerUrl'):
@@ -348,14 +370,17 @@ class Site:
             if s.get('applyUrl'):
                 btns += f'<a class="btn btn--ghost-light" href="{ea(s["applyUrl"])}"{ext_link(s["applyUrl"])}>{e(T(lang, "Ariza topshirish"))}</a>'
             if btns:
-                hero += f'\n        <div class="phero__actions">{btns}</div>'
+                txt += f'\n          <div class="phero__actions gss__actions">{btns}</div>'
         cover = ''
-        if s.get('coverPhotoId') in self.photos:
-            p = self.photos[s['coverPhotoId']]
-            cover = (f'\n      <div class="container"><figure class="gdd-hero__img"><img src="{ea(self.src(p["id"]))}" alt="{ea(tx(p.get("alt"), lang))}" '
-                     f'width="{p["width"]}" height="{p["height"]}"></figure></div>')
+        # the cover, or else the gallery's first photo
+        pid = s.get('coverPhotoId') if s.get('coverPhotoId') in self.photos else next((x['id'] for x in self.gallery(s)), None)
+        if pid:
+            p = self.photos[pid]
+            cover = (f'\n        <figure class="gss__img"><img src="{ea(self.src(p["id"]))}" alt="{ea(tx(p.get("alt"), lang))}" '
+                     f'width="{p["width"]}" height="{p["height"]}"></figure>')
         out = (f'<main id="main">\n    <!-- site:season:start --><div data-noi18n>\n'
-               f'    <section class="gdd-hero">\n      <div class="container gdd-hero__in">\n        {hero}\n      </div>{cover}\n    </section>\n')
+               f'    <section class="gss{" gss--img" if cover else ""}">\n      <div class="container gss__in">\n'
+               f'        <div class="gss__txt">\n          {txt}\n        </div>{cover}\n      </div>\n    </section>\n')
         if s.get('results'):
             head = f'<thead><tr><th scope="col">{e(T(lang, "Startup"))}</th><th scope="col">{e(T(lang, "Soft commitment"))}</th><th scope="col">{e(T(lang, "Investor(lar)"))}</th></tr></thead>'
             date = f'<span class="gs-date">{e(d_long(s["date"], lang))}</span>' if s.get('date') else ''
