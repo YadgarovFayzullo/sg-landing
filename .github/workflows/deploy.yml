@@ -1,0 +1,61 @@
+name: Deploy landing
+
+# startupgarage.uz is served by nginx from /var/www/landing on 2.28.137.147.
+# Runs on a push to main, when the site content changes in the admin panel (the API sends a
+# repository_dispatch "site-content"), and by hand.
+on:
+  push:
+    branches: [main]
+  repository_dispatch:
+    types: [site-content]
+  workflow_dispatch:
+
+# one deploy at a time; a newer one waits instead of cutting an upload in half
+concurrency:
+  group: landing-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # SG_API_URL (repository variable) on → pages from the API; off → from data/site.json.
+      # An unreachable API fails the build, so the live site stays as it was.
+      - name: Build
+        env:
+          SG_API_URL: ${{ vars.SG_API_URL }}
+        run: python3 scripts/build-lang.py
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.LANDING_SSH_KEY_B64 }}" | base64 -d > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          ssh-keygen -l -f ~/.ssh/id_deploy
+          printf '%s\n' "2.28.137.147 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINFI6lREjf7zRN/satr/EDUdtU+lzBXwuBoqITjl7+RS" > ~/.ssh/known_hosts
+
+      # only what the site serves; nothing on the server outside these files is removed.
+      # The key may only run rrsync, confined to /var/www/landing (so "/" is that folder).
+      - name: Upload
+        run: |
+          rsync -az --checksum \
+            -e "ssh -i ~/.ssh/id_deploy -o IdentitiesOnly=yes" \
+            --exclude '.git' --exclude '.github' --exclude 'scripts' --exclude 'node_modules' \
+            --exclude 'README.md' --exclude 'package.json' --exclude 'vercel.json' \
+            --exclude '.gitignore' --exclude '.prettierrc' --exclude '.editorconfig' \
+            --exclude 'contrast.py' --exclude 'day-*.png' \
+            ./ magic@2.28.137.147:/
+
+      - name: Check the live site
+        run: |
+          for p in / /uz/ /en/ /uz/grand-demo-day/ /uz/events/ /uz/blog/; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' -L "https://startupgarage.uz$p")
+            echo "$p $code"; [ "$code" = 200 ] || exit 1
+          done
