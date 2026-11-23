@@ -516,3 +516,27 @@
 .evc__tag { align-self: flex-start; padding: 4px 10px; border-radius: 999px; background: var(--blue-50); color: var(--blue); font-size: 13px; font-weight: 600; }
 .gdd-snav { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
 .gdd-snav__pn { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* Grand Demo Day season page: a compact header (the GDD page's 128px title is too big for "Grand Demo Day · 1-mavsum") */
+.gss { padding: clamp(132px, 11vw, 160px) 0 clamp(44px, 5vw, 72px); background: radial-gradient(120% 90% at 50% 0%, #2a35e6 0%, #1a1fb0 45%, #0e1170 100%); color: #fff; overflow: hidden; }
+.gss__in { display: grid; gap: clamp(28px, 4vw, 56px); align-items: center; }
+.gss--img .gss__in { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); }
+.gss__txt { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+.gss__top { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; font-size: 14px; font-weight: 600; }
+.gss__back { color: #fff; opacity: .8; text-decoration: none; padding: 7px 14px; border-radius: 999px; background: rgba(255,255,255,.12); transition: opacity .2s, background .2s; }
+.gss__back:hover { opacity: 1; background: rgba(255,255,255,.2); }
+.gss__kicker { letter-spacing: .08em; text-transform: uppercase; opacity: .7; font-size: 13px; }
+.gss__title { display: flex; flex-direction: column; gap: 6px; margin: 0; }
+.gss__eyebrow { font-size: clamp(18px, 1.8vw, 24px); font-weight: 500; letter-spacing: -0.01em; opacity: .75; }
+.gss__name { font-size: clamp(52px, 8vw, 104px); font-weight: 600; line-height: .95; letter-spacing: -0.05em; }
+.gss__name--own { font-size: clamp(40px, 5.5vw, 72px); line-height: 1; letter-spacing: -0.04em; }
+.gss__lead { max-width: 52ch; margin: 0; font-size: clamp(16px, 1.3vw, 18px); opacity: .85; }
+.gss__meta { justify-content: flex-start; margin: 0; }
+.gss__facts { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; margin: 4px 0 0; padding: 0; }
+.gss__facts li { display: flex; flex-direction: column; gap: 2px; min-width: 120px; padding: 14px 18px; border-radius: 18px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.14); }
+.gss__facts b { font-size: clamp(22px, 2.2vw, 30px); font-weight: 600; letter-spacing: -0.03em; font-feature-settings: 'tnum'; }
+.gss__facts span { font-size: 13px; opacity: .75; }
+.gss__actions { margin-top: 4px; }
+.gss__img { margin: 0; border-radius: 24px; overflow: hidden; box-shadow: 0 40px 80px -30px rgba(0,0,0,.6); aspect-ratio: 4 / 3; }
+.gss__img img { display: block; width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 900px) { .gss--img .gss__in { grid-template-columns: 1fr; } .gss__img { border-radius: 18px; } }
