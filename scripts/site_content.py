@@ -6,7 +6,7 @@ Shartnoma: sg-new-api/docs/site-content.md. Faqat stdlib.
   SITE_ALLOW_SNAPSHOT=1 API ishlamasa ham data/site.json bilan davom etish
   SITE_TODAY=YYYY-MM-DD "bugun"ni qotirish (test uchun); default — Toshkent sanasi
 """
-import datetime, html as H, json, os, re, sys, urllib.parse, urllib.request
+import datetime, html as H, http.client, json, os, re, sys, time, urllib.error, urllib.parse, urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SNAPSHOT = os.path.join(ROOT, 'data', 'site.json')
@@ -25,10 +25,25 @@ ea = lambda s: H.escape(s or '', quote=True)
 
 # ---------------- ma'lumotni olish ----------------
 
+TRIES = 3
+RETRY_PAUSE = 3  # soniya; har urinishda ikki baravar
+
+
 def _get(url):
-    req = urllib.request.Request(url, headers=UA)
-    with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
-        return r.read(), (r.headers.get('Content-Type') or '').split(';')[0].strip().lower()
+    """Uzilgan ulanish, IncompleteRead va 5xx — yana urinadi (3 marta); 4xx — darhol xato."""
+    for attempt in range(1, TRIES + 1):
+        try:
+            req = urllib.request.Request(url, headers=UA)
+            with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
+                return r.read(), (r.headers.get('Content-Type') or '').split(';')[0].strip().lower()
+        except urllib.error.HTTPError as err:
+            if err.code < 500 or attempt == TRIES:
+                raise
+        except (urllib.error.URLError, http.client.HTTPException, ConnectionError, TimeoutError):
+            if attempt == TRIES:
+                raise
+        print(f'{url}: {attempt}-urinish muvaffaqiyatsiz, yana urinamiz', file=sys.stderr)
+        time.sleep(RETRY_PAUSE * 2 ** (attempt - 1))
 
 
 def _version(url):
