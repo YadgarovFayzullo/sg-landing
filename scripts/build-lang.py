@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Til papkalarini yaratadi: /uz/... va /en/... (manba sahifalar — ildizdagi index.html va <slug>/index.html).
 HTML ikkala tilda bir xil, farqi: <html lang>, ichki havolalar prefiksi va hreflang. Matn tarjimasi js/i18n.js da (manzil bo'yicha).
-GDD mavsumlari, tadbirlar va blog — data/site.json (yoki SG_API_URL bo'lsa API'dan; scripts/site_content.py).
+GDD mavsumlari, tadbirlar, blog va rezidentlar sahifalari (/startups) — data/site.json (yoki SG_API_URL bo'lsa API'dan; scripts/site_content.py).
 Ishga tushirish:  python3 scripts/build-lang.py   (yoki: npm run build)"""
 import re, os, shutil, sys, json, html as H
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -14,9 +14,10 @@ OG_IMAGE = SITE + '/assets/og-default.jpg'
 OG_LOCALE = {'uz': 'uz_UZ', 'en': 'en_US'}
 LABEL = {'uz': {'': 'Bosh sahifa', 'services': 'Xizmatlar', 'for-partners': 'Hamkorlarga', 'portfolio': 'Portfolio', 'books': 'Kitoblar', 'media': 'Media', 'grand-demo-day': 'Grand Demo Day', 'branches': 'Filiallar', 'sg-women': 'SG Women', 'events': 'Tadbirlar', 'blog': 'Blog', 'team': 'Jamoa'},
          'en': {'': 'Home', 'services': 'Services', 'for-partners': 'For partners', 'portfolio': 'Portfolio', 'books': 'Books', 'media': 'Media', 'grand-demo-day': 'Grand Demo Day', 'branches': 'Branches', 'sg-women': 'SG Women', 'events': 'Events', 'blog': 'Blog', 'team': 'Team'}}
+LABEL['uz']['startups'], LABEL['en']['startups'] = site_content.STL['uz']['list'], site_content.STL['en']['list']
 SAMEAS = ['https://t.me/startupgarage_uz', 'https://www.instagram.com/startupgarage_uz', 'https://www.linkedin.com/company/startupgarageuz', 'https://www.youtube.com/@startupgarage_uz']
 LASTMOD = '2026-11-12'
-PRIORITY_WEEKLY = {'', 'portfolio', 'events', 'blog'}
+PRIORITY_WEEKLY = {'', 'portfolio', 'events', 'blog', 'startups'}
 READ = {'uz': 'O‘qish', 'en': 'Read'}
 EMPTY = {'uz': 'Yangi maqolalar tez orada chiqadi. Yangiliklarni Telegram kanalimizda kuzating.', 'en': 'New articles are coming soon. Follow the news on our Telegram channel.'}
 
@@ -76,6 +77,11 @@ def jsonld(lang, slug, url, t, extra=None):
             {'@type': 'ListItem', 'position': 1, 'name': LABEL[lang][''], 'item': f'{SITE}/{lang}/'},
             {'@type': 'ListItem', 'position': 2, 'name': LABEL[lang]['grand-demo-day'], 'item': f'{SITE}/{lang}/grand-demo-day/'},
             {'@type': 'ListItem', 'position': 3, 'name': t['title'], 'item': url}]})
+    elif slug.startswith('startups/'):
+        out.append({'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
+            {'@type': 'ListItem', 'position': 1, 'name': LABEL[lang][''], 'item': f'{SITE}/{lang}/'},
+            {'@type': 'ListItem', 'position': 2, 'name': LABEL[lang]['startups'], 'item': f'{SITE}/{lang}/startups/'},
+            {'@type': 'ListItem', 'position': 3, 'name': t.get('name') or t['title'], 'item': url}]})
     elif slug.startswith('blog/'):
         out.append({'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
             {'@type': 'ListItem', 'position': 1, 'name': LABEL[lang][''], 'item': f'{SITE}/{lang}/'},
@@ -112,11 +118,14 @@ def head_seo(lang, slug, page=None):
           f'<meta name="twitter:description" content="{e(t["description"])}">', f'<meta name="twitter:image" content="{img}">']
     return '\n  '.join(m) + '\n  ' + jsonld(lang, slug, url, t, (page or {}).get('ld')), t
 
-def sitemap(posts=(), seasons=()):
-    """posts — [(slug, lastmod)] blog maqolalari (blog/<slug>); seasons — [(raqam, lastmod)] (grand-demo-day/<n>)."""
+def sitemap(posts=(), seasons=(), startups=()):
+    """posts — [(slug, lastmod)] blog maqolalari (blog/<slug>); seasons — [(raqam, lastmod)] (grand-demo-day/<n>);
+    startups — [(slug, lastmod)] rezidentlar sahifalari (startups/<slug>; bo'sh bo'lmasa /startups/ ham)."""
     rows = ''
     for slug, lastmod in ([(s, LASTMOD) for s in [''] + SLUGS] + [(f'blog/{s}', d) for s, d in posts]
-                          + [(f'grand-demo-day/{site_content.season_slug(n)}', d) for n, d in seasons]):
+                          + [(f'grand-demo-day/{site_content.season_slug(n)}', d) for n, d in seasons]
+                          + ([('startups', max(d for _, d in startups))] if startups else [])
+                          + [(f'startups/{s}', d) for s, d in startups]):
         for lang in LANGS:
             u = lambda l: f'{SITE}/{l}/{slug + "/" if slug else ""}'
             alt = ''.join(f'    <xhtml:link rel="alternate" hreflang="{l}" href="{u(l)}"/>\n' for l in LANGS) + f'    <xhtml:link rel="alternate" hreflang="x-default" href="{u("uz")}"/>\n'
@@ -172,6 +181,7 @@ def rewrite(html, lang, slug, page=None):
     html = re.sub(rf'href="/({slugs})(#[^"]*)?"', lambda m: f'href="/{lang}/{m.group(1)}/{m.group(2) or ""}"', html)
     html = re.sub(r'href="/(blog/[^"]+)"', rf'href="/{lang}/\1"', html)
     html = re.sub(r'href="/(grand-demo-day/\d+-mavsum/)"', rf'href="/{lang}/\1"', html)
+    html = re.sub(r'href="/startups(/[a-z0-9-]+/)?/?"', lambda m: f'href="/{lang}/startups{m.group(1) or "/"}"', html)
     html = re.sub(r'href="/(#[^"]*)?"', lambda m: f'href="/{lang}/{m.group(1) or ""}"', html)
     if lang == 'en':
         html = translate_body(html)
@@ -185,6 +195,7 @@ def fill_site(slug, html, lang):
     if slug == 'grand-demo-day': return SITEDATA.fill_gdd(html, lang)
     if slug == 'events': return SITEDATA.fill_events(html, lang)
     if slug == 'blog': return fill_posts(html, lang)
+    if slug == 'portfolio': return SITEDATA.fill_portfolio(html, lang)
     return html
 
 def post_page(tpl, p, lang):
@@ -216,6 +227,45 @@ def season_page(tpl, s, lang):
     img = (SITE + src if src and src.startswith('/') else src) or None
     return html, {'title': f'{name} — Startup Garage', 'description': desc, 'image': img, 'type': 'website'}
 
+def startup_shell(tpl, main):
+    """Portfolio sahifasi shabloni (menyu: Portfolio), <main> o'rniga rezident sahifasi; skript — js/startups.js."""
+    html = re.sub(r'<main id="main">.*?</main>', lambda m: main, tpl, count=1, flags=re.S)
+    return re.sub(r'<script type="module" src="/js/portfolio\.js[^"]*"></script>', '<script type="module" src="/js/startups.js?v=20261124a"></script>', html, count=1)
+
+def abs_url(src):
+    return (SITE + src if src and src.startswith('/') else src) or None
+
+def startup_page(tpl, st, lang):
+    """startups/<slug>/ — rezidentning ochiq sahifasi."""
+    L, name = site_content.STL[lang], st['name'].strip()
+    html = startup_shell(tpl, SITEDATA.startup_main(st, lang))
+    url = f'{SITE}/{lang}/startups/{st["slug"]}/'
+    desc = site_content.startup_desc(st, lang) or f'{name} — {L["resident"]}'
+    img = abs_url(SITEDATA.logo(st))
+    org = {'@context': 'https://schema.org', '@type': 'Organization', '@id': url + '#org', 'name': name, 'url': url,
+           'memberOf': {'@type': 'Organization', 'name': 'Startup Garage', 'url': SITE + '/'}}
+    org['description'] = re.sub(r'\s+', ' ', site_content.tx(st.get('description'), lang)).strip() or desc
+    if img:
+        org['logo'] = img
+    links = [u for _, u in SITEDATA.links_of(st)]
+    if links:
+        org['sameAs'] = links
+    if st.get('founders'):
+        org['founder'] = [{'@type': 'Person', 'name': f.strip()} for f in st['founders'] if (f or '').strip()]
+    return html, {'title': f'{name} — {L["resident"]}', 'name': name, 'description': desc, 'image': img, 'type': 'website', 'ld': org}
+
+def startups_page(tpl, lang):
+    """startups/ — rezidentlar ro'yxati."""
+    L = site_content.STL[lang]
+    html = startup_shell(tpl, SITEDATA.startups_main(lang))
+    n = len(SITEDATA.startups)
+    desc = f'{L["lead"]} {L["count"].format(n=n)}.'
+    ld = {'@context': 'https://schema.org', '@type': 'CollectionPage', 'name': L['title'], 'url': f'{SITE}/{lang}/startups/', 'inLanguage': lang,
+          'mainEntity': {'@type': 'ItemList', 'numberOfItems': n, 'itemListElement': [
+              {'@type': 'ListItem', 'position': i + 1, 'name': st['name'].strip(), 'url': f'{SITE}/{lang}/startups/{st["slug"]}/'}
+              for i, st in enumerate(SITEDATA.startups)]}}
+    return html, {'title': f'{L["title"]} — Startup Garage', 'description': desc, 'image': None, 'type': 'website', 'ld': ld}
+
 def write_generated(path, page, meta):
     """Prefikssiz (uz) manba sahifasi: generated belgisi bilan — keyingi build uni o'chirib qayta yozadi."""
     page = re.sub(r'<title>.*?</title>', lambda m: f'<title>{H.escape(meta["title"], quote=False)}</title>', page, count=1, flags=re.S)
@@ -243,7 +293,7 @@ def main():
     open(sp0, 'w', encoding='utf-8').write(mq_html)
     for sl in ('', 'grand-demo-day'):
         sp = src(sl); h0 = fill_funds(open(sp, encoding='utf-8').read()); open(sp, 'w', encoding='utf-8').write(h0)
-    for sl in ('', 'grand-demo-day', 'events', 'blog'):  # manba sahifalar ham yangilanadi (uz)
+    for sl in ('', 'grand-demo-day', 'events', 'blog', 'portfolio'):  # manba sahifalar ham yangilanadi (uz)
         sp = src(sl); h0 = fill_site(sl, open(sp, encoding='utf-8').read(), 'uz'); open(sp, 'w', encoding='utf-8').write(h0)
     n = 0
     for slug in [''] + SLUGS:
@@ -293,8 +343,38 @@ def main():
         for base in ['', '/uz', '/en']:
             old = os.path.join(ROOT, base.lstrip('/'), 'grand-demo-day', str(s['number']), 'index.html')
             write_moved(old, f'{base}/grand-demo-day/{slug}/')
+    # rezidentlar sahifalari: /startups/ va /startups/<slug>/ (manba, uz) va /uz|en/startups/...
+    sdir = os.path.join(ROOT, 'startups')
+    if os.path.isdir(sdir):
+        for d in os.listdir(sdir):
+            f = os.path.join(sdir, d, 'index.html')
+            if os.path.isfile(f) and GEN in open(f, encoding='utf-8').read():
+                shutil.rmtree(os.path.join(sdir, d))
+        f = os.path.join(sdir, 'index.html')
+        if os.path.isfile(f) and GEN in open(f, encoding='utf-8').read():
+            os.remove(f)
+        if not os.listdir(sdir):
+            os.rmdir(sdir)
+    if SITEDATA.startups:
+        ptpl = open(src('portfolio'), encoding='utf-8').read()
+        page, meta = startups_page(ptpl, 'uz')
+        write_generated(os.path.join(sdir, 'index.html'), page, meta)
+        for lang in LANGS:
+            page, meta = startups_page(ptpl, lang)
+            out = os.path.join(ROOT, lang, 'startups', 'index.html')
+            os.makedirs(os.path.dirname(out), exist_ok=True)
+            open(out, 'w', encoding='utf-8').write(rewrite(page, lang, 'startups', meta)); n += 1
+        for st in SITEDATA.startups:
+            page, meta = startup_page(ptpl, st, 'uz')
+            write_generated(os.path.join(sdir, st['slug'], 'index.html'), page, meta)
+            for lang in LANGS:
+                page, meta = startup_page(ptpl, st, lang)
+                out = os.path.join(ROOT, lang, 'startups', st['slug'], 'index.html')
+                os.makedirs(os.path.dirname(out), exist_ok=True)
+                open(out, 'w', encoding='utf-8').write(rewrite(page, lang, f'startups/{st["slug"]}', meta)); n += 1
     sitemap([(p['slug'], p['date']) for p in posts],
-            [(s['number'], (s.get('updatedAt') or LASTMOD)[:10]) for s in SITEDATA.seasons])
+            [(s['number'], (s.get('updatedAt') or LASTMOD)[:10]) for s in SITEDATA.seasons],
+            [(st['slug'], (st.get('updatedAt') or LASTMOD)[:10]) for st in SITEDATA.startups])
     print(f'{n} ta sahifa yaratildi: {", ".join(LANGS)}')
 
 if __name__ == '__main__':

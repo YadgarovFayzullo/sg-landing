@@ -1,4 +1,4 @@
-"""Sayt kontenti (Grand Demo Day mavsumlari, tadbirlar, yangiliklar) — data/site.json yoki API (GET /v1/public/site).
+"""Sayt kontenti (Grand Demo Day mavsumlari, tadbirlar, yangiliklar, rezidentlar sahifalari) — data/site.json yoki API (GET /v1/public/site).
 Shartnoma: sg-new-api/docs/site-content.md. Faqat stdlib.
 
   SG_API_URL            o'rnatilgan bo'lsa — API'dan olinadi, data/site.json va assets/site/ yangilanadi;
@@ -12,6 +12,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SNAPSHOT = os.path.join(ROOT, 'data', 'site.json')
 ASSETS = os.path.join(ROOT, 'assets', 'site')
 MANIFEST = os.path.join(ASSETS, '.versions.json')
+LOGOS = os.path.join(ASSETS, 'logos')
+LOGO_MANIFEST = os.path.join(LOGOS, '.versions.json')
 TIMEOUT = 20
 EXT = {'image/webp': 'webp', 'image/jpeg': 'jpg', 'image/jpg': 'jpg', 'image/png': 'png', 'image/avif': 'avif', 'image/gif': 'gif'}
 UA = {'User-Agent': 'startupgarage-landing-build', 'Accept': 'application/json'}
@@ -75,11 +77,50 @@ def _download_photos(api, photos):
         new[pid] = {'v': v, 'file': name}
         got += 1
     keep = {m['file'] for m in new.values()} | {'.versions.json'}
-    for f in os.listdir(ASSETS):  # endi ishlatilmaydigan rasmlar
-        if f not in keep:
+    for f in os.listdir(ASSETS):  # endi ishlatilmaydigan rasmlar (logos/ — o'z papkasi)
+        if f not in keep and os.path.isfile(os.path.join(ASSETS, f)):
             os.remove(os.path.join(ASSETS, f))
     open(MANIFEST, 'w', encoding='utf-8').write(json.dumps(new, ensure_ascii=False, indent=2, sort_keys=True) + '\n')
     return got
+
+
+def _download_logos(api, startups):
+    """Rezident logotiplari: assets/site/logos/<slug>.<ext>; o'sha `v` bilan bor bo'lsa — qayta yuklanmaydi."""
+    os.makedirs(LOGOS, exist_ok=True)
+    try:
+        man = json.load(open(LOGO_MANIFEST, encoding='utf-8'))
+    except (OSError, ValueError):
+        man = {}
+    new, got = {}, 0
+    for st in startups:
+        slug, url = st.get('slug'), st.get('logoUrl')
+        if not url or not valid_slug(slug):
+            continue
+        v = _version(url)
+        old = man.get(slug)
+        if old and old.get('v') == v and os.path.isfile(os.path.join(LOGOS, old.get('file', ''))):
+            new[slug] = old
+            continue
+        body, ctype = _get(api + url)
+        ext = EXT.get(ctype)
+        if not ext:
+            raise RuntimeError(f'logo {slug}: unexpected content type {ctype!r}')
+        name = f'{slug}.{ext}'
+        tmp = os.path.join(LOGOS, name + '.tmp')
+        open(tmp, 'wb').write(body)
+        os.replace(tmp, os.path.join(LOGOS, name))
+        new[slug] = {'v': v, 'file': name}
+        got += 1
+    keep = {m['file'] for m in new.values()} | {'.versions.json'}
+    for f in os.listdir(LOGOS):  # endi ishlatilmaydigan logotiplar
+        if f not in keep and os.path.isfile(os.path.join(LOGOS, f)):
+            os.remove(os.path.join(LOGOS, f))
+    open(LOGO_MANIFEST, 'w', encoding='utf-8').write(json.dumps(new, ensure_ascii=False, indent=2, sort_keys=True) + '\n')
+    return got
+
+
+def valid_slug(s):
+    return isinstance(s, str) and re.fullmatch(r'[a-z0-9-]{1,80}', s) is not None
 
 
 def _valid(d):
@@ -96,9 +137,11 @@ def load():
             if not _valid(data):
                 raise ValueError('unexpected response shape')
             got = _download_photos(api, data['photos'])
+            got_logos = _download_logos(api, data.get('startups') or [])
             open(SNAPSHOT, 'w', encoding='utf-8').write(json.dumps(data, ensure_ascii=False, indent=2) + '\n')
             print(f'site: {api} — {len(data["gddSeasons"])} mavsum, {len(data["events"])} tadbir, {len(data["news"])} yangilik, '
-                  f'{len(data["photos"])} rasm ({got} ta yuklandi)')
+                  f'{len(data["photos"])} rasm ({got} ta yuklandi), '
+                  f'{len(data.get("startups") or [])} startup ({got_logos} ta logo yuklandi)')
             return data
         except Exception as ex:  # noqa: BLE001 — har qanday xato: tarmoq, JSON, rasm
             if os.environ.get('SITE_ALLOW_SNAPSHOT') != '1':
@@ -205,6 +248,58 @@ SL = {
 }
 
 
+# residents' public pages (/startups/, /startups/<slug>/), in both languages
+RESIDENT_URL = 'https://resident.startupgarage.uz'  # the site's "Rezident bo‘lish" button
+STAGES = ['idea', 'mvp', 'growth', 'scale']
+STAGE = {'uz': {'idea': 'G‘oya', 'mvp': 'MVP', 'growth': 'O‘sish', 'scale': 'Masshtab'},
+         'en': {'idea': 'Idea', 'mvp': 'MVP', 'growth': 'Growth', 'scale': 'Scale'}}
+STL = {
+    'uz': {'home': 'Bosh sahifa', 'list': 'Rezidentlar', 'title': 'Startup Garage rezidentlari',
+           'lead': 'Startup Garage’da o‘sayotgan startaplar: soha, bosqich va hudud bo‘yicha toping.',
+           'count': '{n} ta rezident', 'resident': 'Startup Garage rezidenti', 'search': 'Nomi yoki soha bo‘yicha qidirish…',
+           'search_l': 'Rezidentni qidirish', 'sphere': 'Barcha sohalar', 'stage': 'Barcha bosqichlar', 'region': 'Barcha hududlar',
+           'sphere_l': 'Soha', 'stage_l': 'Bosqich', 'region_l': 'Hudud', 'found': 'Topildi:',
+           'empty': 'Bu filtrlarga mos rezident topilmadi.', 'reset': 'Filtrlarni tozalash', 'none': 'Rezidentlar sahifalari tez orada shu yerda chiqadi.',
+           'about': 'Startup haqida', 'links': 'Havolalar', 'founders': 'Asoschilar', 'badges': 'Yutuqlar',
+           'gdd': 'Grand Demo Day · {n}-mavsum', 'invested': 'Investitsiya olgan', 'others': 'Boshqa rezidentlar',
+           'more': 'Batafsil', 'all': 'Barcha rezidentlar', 'cta_t': 'Startupingiz bormi?',
+           'cta_p': 'Startup Garage rezidenti bo‘ling: mentorlar, investorlar va hamjamiyat bir joyda.', 'cta': 'Rezident bo‘lish',
+           'pf': 'Barcha rezidentlar', 'pf_p': 'Har bir rezidentning sahifasi: soha, bosqich, havolalar.'},
+    'en': {'home': 'Home', 'list': 'Residents', 'title': 'Startup Garage residents',
+           'lead': 'Startups growing at Startup Garage: find them by sphere, stage and region.',
+           'count': '{n} residents', 'resident': 'Startup Garage resident', 'search': 'Search by name or sphere…',
+           'search_l': 'Search residents', 'sphere': 'All spheres', 'stage': 'All stages', 'region': 'All regions',
+           'sphere_l': 'Sphere', 'stage_l': 'Stage', 'region_l': 'Region', 'found': 'Found:',
+           'empty': 'No residents match these filters.', 'reset': 'Clear filters', 'none': 'Residents’ pages will appear here soon.',
+           'about': 'About the startup', 'links': 'Links', 'founders': 'Founders', 'badges': 'Highlights',
+           'gdd': 'Grand Demo Day · Season {n}', 'invested': 'Raised investment', 'others': 'Other residents',
+           'more': 'Learn more', 'all': 'All residents', 'cta_t': 'Have a startup?',
+           'cta_p': 'Become a Startup Garage resident: mentors, investors and a community in one place.', 'cta': 'Become a resident',
+           'pf': 'All residents', 'pf_p': 'A page for every resident: sphere, stage, links.'},
+}
+
+
+def startup_href(slug):
+    return f'/startups/{slug}/'
+
+
+def startup_desc(st, lang):
+    """meta description: the tagline, or else the first 155 characters of the description."""
+    t = tx(st.get('tagline'), lang)
+    if t:
+        return t
+    d = re.sub(r'\s+', ' ', tx(st.get('description'), lang)).strip()
+    if len(d) <= 155:
+        return d
+    cut = d[:155].rsplit(' ', 1)[0].rstrip(',.;:—- ')
+    return cut + '…'
+
+
+def _hue(name):
+    """A stable hue for the letter avatar."""
+    return sum(ord(c) for c in name) * 37 % 360
+
+
 def ext_link(url):
     return ' target="_blank" rel="noopener"' if re.match(r'https?://', url or '') else ''
 
@@ -237,6 +332,17 @@ class Site:
             self.manifest = json.load(open(MANIFEST, encoding='utf-8'))
         except (OSError, ValueError):
             self.manifest = {}
+        try:
+            self.logo_manifest = json.load(open(LOGO_MANIFEST, encoding='utf-8'))
+        except (OSError, ValueError):
+            self.logo_manifest = {}
+        self._warned = set()
+        # residents' pages: the key may be missing (older API / snapshot) — then there are none
+        seen, sts = set(), []
+        for st in pub(data.get('startups') or []):
+            if valid_slug(st.get('slug')) and (st.get('name') or '').strip() and st['slug'] not in seen:
+                seen.add(st['slug']); sts.append(st)
+        self.startups = sorted(sts, key=lambda st: st['name'].strip().casefold())
 
     # rasm manzili: API'dan yuklangan fayl (assets/site/) yoki sayt yo'li
     def src(self, pid):
@@ -582,3 +688,168 @@ class Site:
                 f'      <div class="post__body">{body}\n      </div>\n'
                 f'      <p class="post__back"><a class="btn btn--ghost" href="/blog">{back}</a></p>\n'
                 f'    </div></article><!-- site:post:end -->\n  </main>')
+
+    # ---------- /startups ----------
+    def logo(self, st):
+        """The logo's site path: downloaded into assets/site/logos/, or a site path in the snapshot; None → letter avatar."""
+        m = self.logo_manifest.get(st['slug'])
+        if m and os.path.isfile(os.path.join(LOGOS, m['file'])):
+            return f'/assets/site/logos/{m["file"]}'
+        url = st.get('logoUrl') or ''
+        if url.startswith('/') and not url.startswith('/v1/'):
+            return url.split('?')[0]
+        if url and st['slug'] not in self._warned:
+            self._warned.add(st['slug'])
+            print(f'site: logo {st["slug"]} lokal emas ({url}) — harf ko‘rsatiladi', file=sys.stderr)
+        return None
+
+    def logo_html(self, st, cls, lazy=True):
+        src = self.logo(st)
+        if src:
+            return f'<span class="{cls}"><img src="{ea(src)}" alt="{ea(st["name"])}"{' loading="lazy"' if lazy else ''}></span>'
+        name = st['name'].strip()
+        return f'<span class="{cls} {cls}--letter" style="--h:{_hue(name)}" aria-hidden="true">{e(name[:1].upper())}</span>'
+
+    def stage_label(self, st, lang):
+        return STAGE[lang].get(st.get('stage') or '', '')
+
+    def region_label(self, st, lang):
+        return tx(st.get('region'), lang)
+
+    def links_of(self, st):
+        """[(label, url)] — the startup's own links (website, Telegram, Instagram)."""
+        out = []
+        w = (st.get('website') or '').strip()
+        if re.match(r'https?://[^\s"<>]+$', w):
+            host = urllib.parse.urlparse(w).netloc
+            out.append((host[4:] if host.startswith('www.') else host or w, w))
+        tg = (st.get('telegram') or '').strip().lstrip('@')
+        if re.fullmatch(r'[A-Za-z0-9_]{4,32}', tg):
+            out.append(('Telegram', f'https://t.me/{tg}'))
+        ig = (st.get('instagram') or '').strip().lstrip('@')
+        if re.fullmatch(r'[A-Za-z0-9_.]{1,30}', ig):
+            out.append(('Instagram', f'https://instagram.com/{ig}'))
+        return out
+
+    def startup_card(self, st, lang):
+        """Card in the list and in "Boshqa rezidentlar": logo, name, tagline, sphere + stage."""
+        L = STL[lang]
+        spheres = [x for x in (st.get('spheres') or []) if x]
+        chips = ''.join(f'<li>{e(x)}</li>' for x in spheres[:3])
+        if self.stage_label(st, lang):
+            chips += f'<li class="stc__stage">{e(self.stage_label(st, lang))}</li>'
+        tag = tx(st.get('tagline'), lang)
+        q = ' '.join([st['name'], tag] + spheres).casefold()
+        attrs = (f' data-q="{ea(q)}" data-sphere="{ea("|".join(spheres))}" data-stage="{ea(st.get("stage") or "")}"'
+                 f' data-region="{ea(tx(st.get("region"), "uz"))}"')
+        return (f'\n          <li class="stc"{attrs}><a href="{startup_href(st["slug"])}">'
+                f'{self.logo_html(st, "stc__logo")}<span class="stc__body"><b class="stc__name">{e(st["name"])}</b>'
+                + (f'<span class="stc__tag">{e(tag)}</span>' if tag else '')
+                + (f'<ul class="stc__chips">{chips}</ul>' if chips else '')
+                + f'<span class="stc__go">{e(L["more"])} <span aria-hidden="true">→</span></span></span></a></li>')
+
+    def cta_html(self, lang):
+        L = STL[lang]
+        return (f'<div class="stcta"><div><h2 class="stcta__t">{e(L["cta_t"])}</h2><p>{e(L["cta_p"])}</p></div>'
+                f'<a class="btn btn--light" href="{RESIDENT_URL}" target="_blank" rel="noopener">{e(L["cta"])} <span class="btn__arrow" aria-hidden="true">→</span></a></div>')
+
+    def others(self, st):
+        """Up to 6 other residents sharing a sphere — most shared spheres first, then by name."""
+        mine = {x.casefold() for x in st.get('spheres') or []}
+        if not mine:
+            return []
+        scored = [(len(mine & {x.casefold() for x in o.get('spheres') or []}), o) for o in self.startups if o['slug'] != st['slug']]
+        return [o for n, o in sorted((x for x in scored if x[0]), key=lambda x: -x[0])][:6]
+
+    def startup_main(self, st, lang):
+        """/startups/<slug>/ — the <main> of a resident's page."""
+        L, name = STL[lang], st['name'].strip()
+        crumbs = (f'<nav class="stcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">{e(L["home"])}</a></li>'
+                  f'<li><a href="/startups">{e(L["list"])}</a></li><li aria-current="page">{e(name)}</li></ol></nav>')
+        chips = [(x, '') for x in (st.get('spheres') or []) if x]
+        if self.stage_label(st, lang):
+            chips.append((self.stage_label(st, lang), ' stchip--stage'))
+        if self.region_label(st, lang):
+            chips.append((self.region_label(st, lang), ''))
+        chips.append((L['resident'] + (f' · {st["year"]}' if st.get('year') else ''), ' stchip--sg'))
+        chips_html = ''.join(f'<li class="stchip{c}">{e(x)}</li>' for x, c in chips)
+        tag = tx(st.get('tagline'), lang)
+        links = ''.join(f'<a class="stlink" href="{ea(u)}" target="_blank" rel="nofollow noopener">{e(lbl)} <span aria-hidden="true">↗</span></a>'
+                        for lbl, u in self.links_of(st))
+        head = (f'<div class="sth">{self.logo_html(st, "sth__logo", lazy=False)}<div class="sth__txt"><h1 class="sth__name">{e(name)}</h1>'
+                + (f'<p class="sth__tag">{e(tag)}</p>' if tag else '') + '</div></div>'
+                f'\n        <ul class="stchips">{chips_html}</ul>'
+                + (f'\n        <div class="stlinks">{links}</div>' if links else ''))
+        paras = [x.strip() for x in re.split(r'\n\s*\n', tx(st.get('description'), lang).replace('\r\n', '\n')) if x.strip()]
+        body = ''.join(f'\n          <p>{e(x).replace(chr(10), "<br>")}</p>' for x in paras)
+        side = ''
+        founders = [f for f in (st.get('founders') or []) if (f or '').strip()]
+        if founders:
+            side += (f'<div class="stbox"><h2 class="stbox__t">{e(L["founders"])}</h2><ul class="stfounders">'
+                     + ''.join(f'<li><span class="stfounders__a" aria-hidden="true">{e(f.strip()[:1].upper())}</span>{e(f.strip())}</li>' for f in founders)
+                     + '</ul></div>')
+        nums = {x['number'] for x in self.seasons}
+        badges = ''
+        for n in sorted({int(x) for x in st.get('gddSeasons') or [] if str(x).isdigit()}):
+            lbl = e(L['gdd'].format(n=n))
+            badges += (f'<li><a class="stbadge stbadge--gdd" href="{season_href(n)}">{lbl} <span aria-hidden="true">→</span></a></li>' if n in nums
+                       else f'<li><span class="stbadge stbadge--gdd">{lbl}</span></li>')
+        if st.get('invested'):
+            badges += f'<li><span class="stbadge stbadge--inv">{e(L["invested"])}</span></li>'
+        if badges:
+            side += f'<div class="stbox"><h2 class="stbox__t">{e(L["badges"])}</h2><ul class="stbadges">{badges}</ul></div>'
+        out = (f'<main id="main">\n    <!-- site:startup:start --><div data-noi18n>\n'
+               f'    <section class="sthero"><div class="container">\n        {crumbs}\n        {head}\n    </div></section>\n'
+               f'    <section class="psec psec--soft"><div class="container stgrid{"" if side else " stgrid--one"}">\n'
+               f'      <article class="stabout"><h2 class="stbox__t">{e(L["about"])}</h2><div class="post__body">{body}\n        </div></article>\n'
+               + (f'      <aside class="stside">{side}</aside>\n' if side else '')
+               + f'    </div></section>\n')
+        oth = self.others(st)
+        if oth:
+            out += (f'    <section class="psec" aria-labelledby="st-oth"><div class="container">\n'
+                    f'      <div class="stbar"><h2 class="psec__title" id="st-oth">{e(L["others"])}</h2><a class="btn btn--ghost" href="/startups">{e(L["all"])} <span aria-hidden="true">→</span></a></div>\n'
+                    f'      <ul class="stl">{"".join(self.startup_card(o, lang) for o in oth)}\n      </ul>\n    </div></section>\n')
+        out += (f'    <section class="psec{" psec--soft" if oth else ""}"><div class="container">{self.cta_html(lang)}</div></section>\n'
+                f'    </div><!-- site:startup:end -->\n  </main>')
+        return out
+
+    def startups_main(self, lang):
+        """/startups/ — the list: hero, search + filters (js/startups.js), cards rendered here so the list is indexable."""
+        L = STL[lang]
+        n = len(self.startups)
+        def opts(values, all_label):
+            return f'<option value="">{e(all_label)}</option>' + ''.join(f'<option value="{ea(v)}">{e(lbl)}</option>' for v, lbl in values)
+        spheres = sorted({x for st in self.startups for x in st.get('spheres') or [] if x}, key=str.casefold)
+        stages = [k for k in STAGES if any(st.get('stage') == k for st in self.startups)]
+        regions = {}
+        for st in self.startups:
+            if tx(st.get('region'), 'uz'):
+                regions[tx(st['region'], 'uz')] = tx(st['region'], lang)
+        sel = lambda i, lab, o: (f'<label class="stsel"><span class="stsel__l">{e(lab)}</span><select id="{i}" aria-label="{ea(lab)}">{o}</select></label>')
+        bar = (f'<div class="stfilters" role="search">'
+               f'<div class="pf-search stfilters__q"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>'
+               f'<input id="stQ" type="search" placeholder="{ea(L["search"])}" aria-label="{ea(L["search_l"])}" autocomplete="off"></div>'
+               + sel('stSphere', L['sphere_l'], opts([(x, x) for x in spheres], L['sphere']))
+               + sel('stStage', L['stage_l'], opts([(k, STAGE[lang][k]) for k in stages], L['stage']))
+               + sel('stRegion', L['region_l'], opts(sorted(regions.items(), key=lambda x: x[1].casefold()), L['region']))
+               + f'</div>\n        <p class="stfound" aria-live="polite">{e(L["found"])} <b class="pf-count" id="stCount">{n}</b></p>')
+        cards = ''.join(self.startup_card(st, lang) for st in self.startups)
+        body = (f'{bar}\n        <ul class="stl" id="stList">{cards}\n        </ul>\n'
+                f'        <div class="stempty" id="stEmpty" hidden><p>{e(L["empty"])}</p><button type="button" class="btn btn--ghost" id="stReset">{e(L["reset"])}</button></div>'
+                if n else f'<p class="pf-empty">{e(L["none"])}</p>')
+        return (f'<main id="main">\n    <!-- site:startups:start --><div data-noi18n>\n'
+                f'    <section class="phero sthero--list"><div class="container">\n'
+                f'      <h1 class="phero__title">{e(L["title"])}</h1>\n'
+                f'      <p class="phero__lead">{e(L["lead"])}</p>\n'
+                f'      <p class="sthero__count">{e(L["count"].format(n=n))}</p>\n'
+                f'    </div></section>\n'
+                f'    <section class="psec psec--soft" aria-label="{ea(L["list"])}"><div class="container">\n        {body}\n    </div></section>\n'
+                f'    <section class="psec"><div class="container">{self.cta_html(lang)}</div></section>\n'
+                f'    </div><!-- site:startups:end -->\n  </main>')
+
+    def fill_portfolio(self, html, lang):
+        """Portfolio: a link to /startups/ under the residents' grid (only when there are pages)."""
+        L = STL[lang]
+        body = (f'<div class="pf-more" data-noi18n><p>{e(L["pf_p"])}</p><a class="btn btn--primary" href="/startups">{e(L["pf"])} <span class="btn__arrow" aria-hidden="true">→</span></a></div>'
+                if self.startups else '')
+        return fill(html, 'pf-startups', body)
