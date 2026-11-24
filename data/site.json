@@ -660,5 +660,99 @@
       },
       "url": "/assets/gdd/gdd-22.webp"
     }
+  ],
+  "startups": [
+    {
+      "slug": "agrosense",
+      "name": "AgroSense",
+      "logoUrl": "/v1/public/logos/0c9b6f2e-3b1a-4f7e-9d61-2a4f5e8c7b10?v=2",
+      "tagline": {
+        "uz": "Fermerlar uchun sun’iy intellektli tuproq va suv monitoringi",
+        "en": "AI soil and water monitoring for farmers"
+      },
+      "description": {
+        "uz": "AgroSense dalaga o‘rnatiladigan arzon sensorlar va mobil ilova orqali tuproq namligi, harorat va o‘g‘it ehtiyojini kuzatadi.\n\nFermer qachon va qancha sug‘orish kerakligini Telegram orqali oladi: tajriba xo‘jaliklarida suv sarfi 30% gacha kamaydi.",
+        "en": "AgroSense tracks soil moisture, temperature and fertiliser needs with low-cost field sensors and a mobile app.\n\nFarmers get irrigation advice in Telegram: pilot farms cut water use by up to 30%."
+      },
+      "spheres": [
+        "AgriTech",
+        "AI"
+      ],
+      "stage": "growth",
+      "region": {
+        "uz": "Samarqand viloyati",
+        "en": "Samarkand Region"
+      },
+      "year": 2025,
+      "website": "https://agrosense.uz",
+      "telegram": "agrosense_uz",
+      "instagram": "agrosense.uz",
+      "founders": [],
+      "invested": true,
+      "gddSeasons": [
+        4
+      ]
+    },
+    {
+      "slug": "darsbor",
+      "name": "Darsbor",
+      "logoUrl": null,
+      "tagline": {
+        "uz": "Maktab o‘quvchilari uchun moslashuvchan onlayn mashg‘ulotlar",
+        "en": ""
+      },
+      "description": {
+        "uz": "Darsbor 5–11-sinf o‘quvchilariga matematika va ingliz tilidan har kuni 15 daqiqalik mashqlar beradi. Platforma o‘quvchining xatolaridan kelib chiqib keyingi topshiriqni tanlaydi.\n\nO‘qituvchi va ota-onalar haftalik hisobotni ko‘radi.",
+        "en": "Darsbor gives grade 5–11 students a daily 15-minute practice in maths and English, picking the next task from the student’s mistakes.\n\nTeachers and parents get a weekly report."
+      },
+      "spheres": [
+        "EdTech",
+        "AI"
+      ],
+      "stage": "mvp",
+      "region": {
+        "uz": "Toshkent shahri",
+        "en": "Tashkent"
+      },
+      "year": 2026,
+      "website": null,
+      "telegram": "darsbor",
+      "instagram": null,
+      "founders": [],
+      "invested": false,
+      "gddSeasons": []
+    },
+    {
+      "slug": "medqueue",
+      "name": "MedQueue",
+      "logoUrl": "/v1/public/logos/5d2e8a41-7c3f-4b2a-8e19-6f0b3c9d4a27?v=1",
+      "tagline": {
+        "uz": "",
+        "en": ""
+      },
+      "description": {
+        "uz": "MedQueue xususiy klinikalar uchun onlayn navbat va qabulni boshqarish tizimi. Bemor shifokorni tanlaydi, vaqtni band qiladi va eslatmani SMS orqali oladi; klinika esa bo‘sh vaqtlar va qabul statistikasini bitta panelda ko‘radi. Hozir Toshkentdagi 12 ta klinika foydalanmoqda.",
+        "en": "MedQueue is an online queue and appointment system for private clinics. Patients choose a doctor, book a time and get an SMS reminder; the clinic sees free slots and visit statistics in one dashboard. 12 clinics in Tashkent use it today."
+      },
+      "spheres": [
+        "HealthTech",
+        "SaaS"
+      ],
+      "stage": "scale",
+      "region": {
+        "uz": "Toshkent shahri",
+        "en": "Tashkent"
+      },
+      "year": 2024,
+      "website": "https://www.medqueue.uz",
+      "telegram": null,
+      "instagram": "medqueue_uz",
+      "founders": [
+        "Dilnoza Rahimova",
+        "Aziz Karimov"
+      ],
+      "invested": false,
+      "gddSeasons": []
+    }
   ]
 }
