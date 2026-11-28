@@ -1,13 +1,17 @@
 {
-  "generatedAt": "2026-11-23T00:00:00.000Z",
-  "today": "2026-11-23",
+  "generatedAt": "2026-11-23T23:13:18.148Z",
+  "today": "2026-11-24",
   "gddSeasons": [
     {
-      "id": "818cabf6-b110-5327-8508-23ef8169eb87",
+      "id": "01a2083b-c154-77b0-b9d1-0927e72953e1",
       "number": 4,
       "title": {
         "uz": "",
         "en": ""
+      },
+      "kicker": {
+        "uz": "Yandex Uzbekistan × Startup Garage",
+        "en": "Yandex Uzbekistan × Startup Garage"
       },
       "date": "2026-11-19",
       "time": "14:00 — 18:00",
@@ -21,7 +25,7 @@
       },
       "registerUrl": "https://luma.com/9jepiv4d",
       "applyUrl": "https://t.me/SGdemodaybot",
-      "coverPhotoId": "5ee9e4c8-0b7c-59ad-add4-12c79547d5fe",
+      "coverPhotoId": "01a2083a-ed97-72f8-8f9e-1874e1659675",
       "results": [],
       "note": {
         "uz": "",
@@ -29,17 +33,17 @@
       },
       "galleryPhotoIds": [],
       "published": true,
-      "createdAt": "2026-11-12T00:00:00.000Z",
-      "updatedAt": "2026-11-12T00:00:00.000Z",
-      "kicker": {
-        "uz": "Yandex Uzbekistan × Startup Garage",
-        "en": "Yandex Uzbekistan × Startup Garage"
-      }
+      "createdAt": "2026-11-23T11:47:43.572Z",
+      "updatedAt": "2026-11-23T11:47:43.572Z"
     },
     {
-      "id": "591f8f14-1418-5b6e-aceb-7d1e12a6abcc",
+      "id": "01a2083b-c0d2-7314-a958-f50aa4f3371d",
       "number": 3,
       "title": {
+        "uz": "",
+        "en": ""
+      },
+      "kicker": {
         "uz": "",
         "en": ""
       },
@@ -123,41 +127,41 @@
         "en": "In Season 3, Kaja Games reached agreements with investors on advisory and strategic partnership. DentaGo started a strategic partnership with CS Angels."
       },
       "galleryPhotoIds": [
-        "5ee9e4c8-0b7c-59ad-add4-12c79547d5fe",
-        "f8040ef3-4a7c-533e-9790-9740e5cea252",
-        "1fe9512c-922f-5fe6-9409-4a70e22e625c",
-        "0e0df450-0404-51d9-9bfb-e36b5dc40f4b",
-        "42a82179-77b8-59e0-a874-fbac49f494c7",
-        "1d385b45-aded-5623-afee-87981f03cdfc",
-        "a812adf1-d698-5aae-a93e-af9873e74c50",
-        "b119ebbd-b6e0-5ae1-83cd-ecb61daafb8d",
-        "f8b58c6a-096b-5443-8004-14b26139d246",
-        "d904eeff-32ce-5c0c-b8c3-1b14bf2e3b9d",
-        "4d7c39b7-da8c-537c-aeaa-4d34944e67da",
-        "b346364f-9d8b-5eef-979c-01168840f0cc",
-        "77808845-3a2d-594b-b1c9-d07e46f0357e",
-        "2344bc22-cdc7-5fd8-a427-a65d315a168a",
-        "154ca53a-6aee-5e90-b18c-034d1989da8a",
-        "8699b419-32ff-520c-8710-ba9828cbbe54",
-        "56472e24-9f90-5d80-b122-b70763bdfd66",
-        "b1a570c8-3c10-5c84-9021-0e41dc4e41f3",
-        "602f837a-b034-5564-b4c1-ab5cac05e73b",
-        "39e2f420-caa6-568c-abe2-1639c2012a76",
-        "0102ef94-cd40-57cb-8914-0b1d82f1e156",
-        "562c604a-d92e-56b2-9063-273021ac388d"
+        "01a2083a-ed97-72f8-8f9e-1874e1659675",
+        "01a2083b-0340-772a-ac76-ebc6ca54e932",
+        "01a2083b-0efe-74b4-bc96-d815a62d1aa8",
+        "01a2083a-f6c9-75bb-8642-ca41c8e4982e",
+        "01a2083b-154b-70a4-b715-2a4a44349c2c",
+        "01a2083b-1a7f-747f-9974-c272859e299e",
+        "01a2083b-2517-7019-b7c6-60ea47b7a27e",
+        "01a2083b-2eba-7676-a5dd-65c09e22fee9",
+        "01a2083b-39e7-713d-a22e-0946c22c735b",
+        "01a2083b-47fe-74eb-8668-8f5df2aa1299",
+        "01a2083b-5737-7199-a29c-8ba959b20b44",
+        "01a2083b-6541-7027-bd88-6537b60fe31c",
+        "01a2083b-6e2c-7764-b1af-6a0c972a7927",
+        "01a2083b-749e-7688-99d8-6c718bbb7960",
+        "01a2083b-7e55-70cd-9530-bb2bda8aca4d",
+        "01a2083b-896d-71ff-9101-e3e3c014a580",
+        "01a2083b-91a0-738f-9c47-b6d8a565b314",
+        "01a2083b-9780-7619-bfa4-c2c9bdc8aba6",
+        "01a2083b-a10c-7565-b8b1-2cce2b355361",
+        "01a2083b-a853-7799-9c78-fe97c2024473",
+        "01a2083b-b2c7-74b9-b0b1-bb0b2686d3ca",
+        "01a2083b-bca4-7659-8e9b-d4829c536307"
       ],
       "published": true,
-      "createdAt": "2026-11-12T00:00:00.000Z",
-      "updatedAt": "2026-11-12T00:00:00.000Z",
-      "kicker": {
-        "uz": "",
-        "en": ""
-      }
+      "createdAt": "2026-11-23T11:47:43.442Z",
+      "updatedAt": "2026-11-23T12:06:41.588Z"
     },
     {
-      "id": "e14c2b0f-5dc9-572f-9ce4-cb544eef793a",
+      "id": "01a2083b-be2a-7313-bde2-5145990b1658",
       "number": 2,
       "title": {
+        "uz": "",
+        "en": ""
+      },
+      "kicker": {
         "uz": "",
         "en": ""
       },
@@ -236,17 +240,17 @@
       },
       "galleryPhotoIds": [],
       "published": true,
-      "createdAt": "2026-11-12T00:00:00.000Z",
-      "updatedAt": "2026-11-12T00:00:00.000Z",
-      "kicker": {
-        "uz": "",
-        "en": ""
-      }
+      "createdAt": "2026-11-23T11:47:42.762Z",
+      "updatedAt": "2026-11-23T11:47:42.762Z"
     },
     {
-      "id": "c97a17d1-3b6e-5e13-b047-5b94941ba01e",
+      "id": "01a2083b-bdad-71f9-94a9-3e7bc0c34606",
       "number": 1,
       "title": {
+        "uz": "",
+        "en": ""
+      },
+      "kicker": {
         "uz": "",
         "en": ""
       },
@@ -305,17 +309,13 @@
       },
       "galleryPhotoIds": [],
       "published": true,
-      "createdAt": "2026-11-12T00:00:00.000Z",
-      "updatedAt": "2026-11-12T00:00:00.000Z",
-      "kicker": {
-        "uz": "",
-        "en": ""
-      }
+      "createdAt": "2026-11-23T11:47:42.637Z",
+      "updatedAt": "2026-11-23T11:47:42.637Z"
     }
   ],
   "events": [
     {
-      "id": "f3590442-8c9f-504f-a16f-f5165f40bf92",
+      "id": "01a2083b-c4fb-7276-8967-7b6842badb99",
       "title": {
         "uz": "Techstars Startup Week",
         "en": "Techstars Startup Week"
@@ -335,11 +335,11 @@
       "coverPhotoId": null,
       "gddSeasonId": null,
       "published": true,
-      "createdAt": "2026-11-12T00:00:00.000Z",
-      "updatedAt": "2026-11-12T00:00:00.000Z"
+      "createdAt": "2026-11-23T11:47:44.507Z",
+      "updatedAt": "2026-11-23T11:47:44.507Z"
     },
     {
-      "id": "f7d21520-72fb-538a-87c8-ab93b3318e74",
+      "id": "01a2083b-c47f-75af-ac8a-a1971e4f5854",
       "title": {
         "uz": "Grand Demo Day",
         "en": "Grand Demo Day"
@@ -356,14 +356,38 @@
         "en": "Introduce your startup to venture funds, angel investors and business representatives."
       },
       "url": "/grand-demo-day",
-      "coverPhotoId": "5ee9e4c8-0b7c-59ad-add4-12c79547d5fe",
-      "gddSeasonId": "818cabf6-b110-5327-8508-23ef8169eb87",
+      "coverPhotoId": "01a2083a-ed97-72f8-8f9e-1874e1659675",
+      "gddSeasonId": "01a2083b-c154-77b0-b9d1-0927e72953e1",
       "published": true,
-      "createdAt": "2026-11-12T00:00:00.000Z",
-      "updatedAt": "2026-11-12T00:00:00.000Z"
+      "createdAt": "2026-11-23T11:47:44.383Z",
+      "updatedAt": "2026-11-23T11:47:44.383Z"
     },
     {
-      "id": "1ee5252c-f830-53ea-89d2-1366b0e0cad4",
+      "id": "01a20a9b-3f14-7288-a741-d3d0d22017b5",
+      "title": {
+        "uz": "Weekly Demo Day — 11-noyabr",
+        "en": "Weekly Demo Day — 11 November"
+      },
+      "dateFrom": "2026-11-11",
+      "dateTo": null,
+      "time": "17:00",
+      "place": {
+        "uz": "onlayn efir (YouTube)",
+        "en": "live online (YouTube)"
+      },
+      "summary": {
+        "uz": "Startup Garage Weekly Demo Day: startaplar Grand Demo Day saralash bosqichida mentorlar va ekspertlar oldida onlayn pitch qildi. Efir yozuvi YouTube'da.",
+        "en": "Startup Garage Weekly Demo Day: startups pitched online to mentors and experts in the Grand Demo Day selection round. The recording is on YouTube."
+      },
+      "url": "https://www.youtube.com/live/PdTLcLnAfmU",
+      "coverPhotoId": "01a20a99-078f-7396-a42c-8433a324db39",
+      "gddSeasonId": null,
+      "published": true,
+      "createdAt": "2026-11-23T22:51:16.116Z",
+      "updatedAt": "2026-11-23T22:52:24.999Z"
+    },
+    {
+      "id": "01a2083b-c2b8-704f-888d-4b802900143c",
       "title": {
         "uz": "Navoiyda Yoshlar Biznes Inkubatori ochilishi",
         "en": "Opening of the Youth Business Incubator in Navoi"
@@ -383,11 +407,131 @@
       "coverPhotoId": null,
       "gddSeasonId": null,
       "published": true,
-      "createdAt": "2026-11-12T00:00:00.000Z",
-      "updatedAt": "2026-11-12T00:00:00.000Z"
+      "createdAt": "2026-11-23T11:47:43.928Z",
+      "updatedAt": "2026-11-23T11:47:43.928Z"
     },
     {
-      "id": "11104017-5b26-5c5e-b981-95037dc3eca3",
+      "id": "01a20a9b-3ad1-74ce-aa7c-fef4f518a4c9",
+      "title": {
+        "uz": "Weekly Demo Day — 6-noyabr",
+        "en": "Weekly Demo Day — 6 November"
+      },
+      "dateFrom": "2026-11-06",
+      "dateTo": null,
+      "time": "17:00",
+      "place": {
+        "uz": "onlayn efir (YouTube)",
+        "en": "live online (YouTube)"
+      },
+      "summary": {
+        "uz": "Startup Garage Weekly Demo Day: startaplar Grand Demo Day saralash bosqichida mentorlar va ekspertlar oldida onlayn pitch qildi. Efir yozuvi YouTube'da.",
+        "en": "Startup Garage Weekly Demo Day: startups pitched online to mentors and experts in the Grand Demo Day selection round. The recording is on YouTube."
+      },
+      "url": "https://www.youtube.com/live/0V-ZIBIxbBg",
+      "coverPhotoId": "01a20a99-078f-7396-a42c-8433a324db39",
+      "gddSeasonId": null,
+      "published": true,
+      "createdAt": "2026-11-23T22:51:15.025Z",
+      "updatedAt": "2026-11-23T22:52:24.161Z"
+    },
+    {
+      "id": "01a20a9b-37c3-723c-b358-4f17d1875e1f",
+      "title": {
+        "uz": "Weekly Demo Day — 4-noyabr",
+        "en": "Weekly Demo Day — 4 November"
+      },
+      "dateFrom": "2026-11-04",
+      "dateTo": null,
+      "time": "17:00",
+      "place": {
+        "uz": "onlayn efir (YouTube)",
+        "en": "live online (YouTube)"
+      },
+      "summary": {
+        "uz": "Startup Garage Weekly Demo Day: startaplar Grand Demo Day saralash bosqichida mentorlar va ekspertlar oldida onlayn pitch qildi. Efir yozuvi YouTube'da.",
+        "en": "Startup Garage Weekly Demo Day: startups pitched online to mentors and experts in the Grand Demo Day selection round. The recording is on YouTube."
+      },
+      "url": "https://www.youtube.com/live/_kh4G-H0v7s",
+      "coverPhotoId": "01a20a99-078f-7396-a42c-8433a324db39",
+      "gddSeasonId": null,
+      "published": true,
+      "createdAt": "2026-11-23T22:51:14.243Z",
+      "updatedAt": "2026-11-23T22:52:23.147Z"
+    },
+    {
+      "id": "01a20a9b-3447-7487-ab66-f88210c6628a",
+      "title": {
+        "uz": "Weekly Demo Day — 30-oktabr",
+        "en": "Weekly Demo Day — 30 October"
+      },
+      "dateFrom": "2026-10-30",
+      "dateTo": null,
+      "time": "17:00",
+      "place": {
+        "uz": "onlayn efir (YouTube)",
+        "en": "live online (YouTube)"
+      },
+      "summary": {
+        "uz": "Startup Garage Weekly Demo Day: startaplar Grand Demo Day saralash bosqichida mentorlar va ekspertlar oldida onlayn pitch qildi. Efir yozuvi YouTube'da.",
+        "en": "Startup Garage Weekly Demo Day: startups pitched online to mentors and experts in the Grand Demo Day selection round. The recording is on YouTube."
+      },
+      "url": "https://www.youtube.com/live/l9_8NI9ebEs",
+      "coverPhotoId": "01a20a99-078f-7396-a42c-8433a324db39",
+      "gddSeasonId": null,
+      "published": true,
+      "createdAt": "2026-11-23T22:51:13.351Z",
+      "updatedAt": "2026-11-23T22:52:22.332Z"
+    },
+    {
+      "id": "01a20a9b-2fda-7003-a515-cc3c4cad536e",
+      "title": {
+        "uz": "Weekly Demo Day — 23-oktabr",
+        "en": "Weekly Demo Day — 23 October"
+      },
+      "dateFrom": "2026-10-23",
+      "dateTo": null,
+      "time": "17:00",
+      "place": {
+        "uz": "onlayn efir (YouTube)",
+        "en": "live online (YouTube)"
+      },
+      "summary": {
+        "uz": "Startup Garage Weekly Demo Day: startaplar Grand Demo Day saralash bosqichida mentorlar va ekspertlar oldida onlayn pitch qildi. Efir yozuvi YouTube'da.",
+        "en": "Startup Garage Weekly Demo Day: startups pitched online to mentors and experts in the Grand Demo Day selection round. The recording is on YouTube."
+      },
+      "url": "https://www.youtube.com/live/bRvfISU3m80",
+      "coverPhotoId": "01a20a99-078f-7396-a42c-8433a324db39",
+      "gddSeasonId": null,
+      "published": true,
+      "createdAt": "2026-11-23T22:51:12.218Z",
+      "updatedAt": "2026-11-23T22:52:21.346Z"
+    },
+    {
+      "id": "01a20a9b-2bab-71f8-bd92-df4f620e909e",
+      "title": {
+        "uz": "Weekly Demo Day — 16-oktabr",
+        "en": "Weekly Demo Day — 16 October"
+      },
+      "dateFrom": "2026-10-16",
+      "dateTo": null,
+      "time": "17:00",
+      "place": {
+        "uz": "onlayn efir (YouTube)",
+        "en": "live online (YouTube)"
+      },
+      "summary": {
+        "uz": "Startup Garage Weekly Demo Day: startaplar Grand Demo Day saralash bosqichida mentorlar va ekspertlar oldida onlayn pitch qildi. Efir yozuvi YouTube'da.",
+        "en": "Startup Garage Weekly Demo Day: startups pitched online to mentors and experts in the Grand Demo Day selection round. The recording is on YouTube."
+      },
+      "url": "https://www.youtube.com/live/q91LRljr4yc",
+      "coverPhotoId": "01a20a99-078f-7396-a42c-8433a324db39",
+      "gddSeasonId": null,
+      "published": true,
+      "createdAt": "2026-11-23T22:51:11.147Z",
+      "updatedAt": "2026-11-23T22:52:20.427Z"
+    },
+    {
+      "id": "01a2083b-c238-724b-b2d1-f3de793a4068",
       "title": {
         "uz": "Grand Demo Day 4-mavsum — saralash",
         "en": "Grand Demo Day Season 4 — selection round"
@@ -407,13 +551,277 @@
       "coverPhotoId": null,
       "gddSeasonId": null,
       "published": true,
-      "createdAt": "2026-11-12T00:00:00.000Z",
-      "updatedAt": "2026-11-12T00:00:00.000Z"
+      "createdAt": "2026-11-23T11:47:43.800Z",
+      "updatedAt": "2026-11-23T11:47:43.800Z"
+    },
+    {
+      "id": "01a20a9b-2869-76f3-9950-74ec45f82dc9",
+      "title": {
+        "uz": "Weekly Demo Day — 2-oktabr",
+        "en": "Weekly Demo Day — 2 October"
+      },
+      "dateFrom": "2026-10-02",
+      "dateTo": null,
+      "time": "17:00",
+      "place": {
+        "uz": "onlayn efir (YouTube)",
+        "en": "live online (YouTube)"
+      },
+      "summary": {
+        "uz": "Startup Garage Weekly Demo Day: startaplar Grand Demo Day saralash bosqichida mentorlar va ekspertlar oldida onlayn pitch qildi. Efir yozuvi YouTube'da.",
+        "en": "Startup Garage Weekly Demo Day: startups pitched online to mentors and experts in the Grand Demo Day selection round. The recording is on YouTube."
+      },
+      "url": "https://www.youtube.com/live/nu2_pl2HsBo",
+      "coverPhotoId": "01a20a99-078f-7396-a42c-8433a324db39",
+      "gddSeasonId": null,
+      "published": true,
+      "createdAt": "2026-11-23T22:51:10.313Z",
+      "updatedAt": "2026-11-23T22:52:19.443Z"
+    },
+    {
+      "id": "01a20a9b-24cf-70ad-8dbf-be2a02106bea",
+      "title": {
+        "uz": "Weekly Demo Day — 18-sentabr",
+        "en": "Weekly Demo Day — 18 September"
+      },
+      "dateFrom": "2026-09-18",
+      "dateTo": null,
+      "time": "17:00",
+      "place": {
+        "uz": "onlayn efir (YouTube)",
+        "en": "live online (YouTube)"
+      },
+      "summary": {
+        "uz": "Startup Garage Weekly Demo Day: startaplar Grand Demo Day saralash bosqichida mentorlar va ekspertlar oldida onlayn pitch qildi. Efir yozuvi YouTube'da.",
+        "en": "Startup Garage Weekly Demo Day: startups pitched online to mentors and experts in the Grand Demo Day selection round. The recording is on YouTube."
+      },
+      "url": "https://www.youtube.com/live/VlVngI42gPU",
+      "coverPhotoId": "01a20a99-078f-7396-a42c-8433a324db39",
+      "gddSeasonId": null,
+      "published": true,
+      "createdAt": "2026-11-23T22:51:09.391Z",
+      "updatedAt": "2026-11-23T22:52:18.550Z"
+    },
+    {
+      "id": "01a20a9b-20fd-77d6-93bf-4a50fa324470",
+      "title": {
+        "uz": "Weekly Demo Day — 11-sentabr",
+        "en": "Weekly Demo Day — 11 September"
+      },
+      "dateFrom": "2026-09-11",
+      "dateTo": null,
+      "time": "17:00",
+      "place": {
+        "uz": "onlayn efir (YouTube)",
+        "en": "live online (YouTube)"
+      },
+      "summary": {
+        "uz": "Startup Garage Weekly Demo Day: startaplar Grand Demo Day saralash bosqichida mentorlar va ekspertlar oldida onlayn pitch qildi. Efir yozuvi YouTube'da.",
+        "en": "Startup Garage Weekly Demo Day: startups pitched online to mentors and experts in the Grand Demo Day selection round. The recording is on YouTube."
+      },
+      "url": "https://www.youtube.com/live/vlj8eNx38LE",
+      "coverPhotoId": "01a20a99-078f-7396-a42c-8433a324db39",
+      "gddSeasonId": null,
+      "published": true,
+      "createdAt": "2026-11-23T22:51:08.413Z",
+      "updatedAt": "2026-11-23T22:52:17.527Z"
+    },
+    {
+      "id": "01a20a9b-1d1c-7238-8980-c619dafdb3af",
+      "title": {
+        "uz": "Weekly Demo Day — 3-sentabr",
+        "en": "Weekly Demo Day — 3 September"
+      },
+      "dateFrom": "2026-09-03",
+      "dateTo": null,
+      "time": "17:00",
+      "place": {
+        "uz": "onlayn efir (YouTube)",
+        "en": "live online (YouTube)"
+      },
+      "summary": {
+        "uz": "Startup Garage Weekly Demo Day: startaplar Grand Demo Day saralash bosqichida mentorlar va ekspertlar oldida onlayn pitch qildi. Efir yozuvi YouTube'da.",
+        "en": "Startup Garage Weekly Demo Day: startups pitched online to mentors and experts in the Grand Demo Day selection round. The recording is on YouTube."
+      },
+      "url": "https://www.youtube.com/live/DruobJcpGz8",
+      "coverPhotoId": "01a20a99-033b-702e-911e-d9e965a3a074",
+      "gddSeasonId": null,
+      "published": true,
+      "createdAt": "2026-11-23T22:51:07.420Z",
+      "updatedAt": "2026-11-23T22:52:16.154Z"
+    },
+    {
+      "id": "01a20a9b-193e-77f5-bc0b-b289d48a1351",
+      "title": {
+        "uz": "Weekly Demo Day — 28-avgust",
+        "en": "Weekly Demo Day — 28 August"
+      },
+      "dateFrom": "2026-08-28",
+      "dateTo": null,
+      "time": "17:00",
+      "place": {
+        "uz": "onlayn efir (YouTube)",
+        "en": "live online (YouTube)"
+      },
+      "summary": {
+        "uz": "Startup Garage Weekly Demo Day: startaplar Grand Demo Day saralash bosqichida mentorlar va ekspertlar oldida onlayn pitch qildi. Efir yozuvi YouTube'da.",
+        "en": "Startup Garage Weekly Demo Day: startups pitched online to mentors and experts in the Grand Demo Day selection round. The recording is on YouTube."
+      },
+      "url": "https://www.youtube.com/live/AcB_NeJQWcw",
+      "coverPhotoId": "01a20a98-fdab-76f8-88c8-f2ccc5ebb751",
+      "gddSeasonId": null,
+      "published": true,
+      "createdAt": "2026-11-23T22:51:06.430Z",
+      "updatedAt": "2026-11-23T22:52:15.069Z"
+    },
+    {
+      "id": "01a20a9b-14e5-7185-9986-fbe9875315f9",
+      "title": {
+        "uz": "Weekly Demo Day — 21-avgust",
+        "en": "Weekly Demo Day — 21 August"
+      },
+      "dateFrom": "2026-08-21",
+      "dateTo": null,
+      "time": "17:00",
+      "place": {
+        "uz": "onlayn efir (YouTube)",
+        "en": "live online (YouTube)"
+      },
+      "summary": {
+        "uz": "Startup Garage Weekly Demo Day: startaplar Grand Demo Day saralash bosqichida mentorlar va ekspertlar oldida onlayn pitch qildi. Efir yozuvi YouTube'da.",
+        "en": "Startup Garage Weekly Demo Day: startups pitched online to mentors and experts in the Grand Demo Day selection round. The recording is on YouTube."
+      },
+      "url": "https://www.youtube.com/live/Iew18hAa9_Q",
+      "coverPhotoId": "01a20a98-f98f-70d4-b64a-8ed58b8cac7b",
+      "gddSeasonId": null,
+      "published": true,
+      "createdAt": "2026-11-23T22:51:05.317Z",
+      "updatedAt": "2026-11-23T22:52:14.243Z"
+    },
+    {
+      "id": "01a20a9b-0d1c-7405-ad3f-2473119633b5",
+      "title": {
+        "uz": "Weekly Demo Day — 7-avgust",
+        "en": "Weekly Demo Day — 7 August"
+      },
+      "dateFrom": "2026-08-07",
+      "dateTo": null,
+      "time": "19:00",
+      "place": {
+        "uz": "onlayn efir (YouTube)",
+        "en": "live online (YouTube)"
+      },
+      "summary": {
+        "uz": "Startup Garage Weekly Demo Day: startaplar Grand Demo Day saralash bosqichida mentorlar va ekspertlar oldida onlayn pitch qildi. Efir yozuvi YouTube'da.",
+        "en": "Startup Garage Weekly Demo Day: startups pitched online to mentors and experts in the Grand Demo Day selection round. The recording is on YouTube."
+      },
+      "url": "https://www.youtube.com/live/Yl4q4ChzG7c",
+      "coverPhotoId": null,
+      "gddSeasonId": null,
+      "published": true,
+      "createdAt": "2026-11-23T22:51:03.324Z",
+      "updatedAt": "2026-11-23T22:52:13.327Z"
+    },
+    {
+      "id": "01a20a9b-08f9-74f3-96a7-8341f42fa06b",
+      "title": {
+        "uz": "Weekly Demo Day — 31-iyul",
+        "en": "Weekly Demo Day — 31 July"
+      },
+      "dateFrom": "2026-07-31",
+      "dateTo": null,
+      "time": "17:00",
+      "place": {
+        "uz": "onlayn efir (YouTube)",
+        "en": "live online (YouTube)"
+      },
+      "summary": {
+        "uz": "Startup Garage Weekly Demo Day: startaplar Grand Demo Day saralash bosqichida mentorlar va ekspertlar oldida onlayn pitch qildi. Efir yozuvi YouTube'da. Eng yuqori ball: Barakami — 20, Orto — 15, Birnihol — 15, Safarly — 13.",
+        "en": "Startup Garage Weekly Demo Day: startups pitched online to mentors and experts in the Grand Demo Day selection round. The recording is on YouTube. Top scores: Barakami — 20, Orto — 15, Birnihol — 15, Safarly — 13."
+      },
+      "url": "https://www.youtube.com/live/lJ_ceeWprRk",
+      "coverPhotoId": "01a20a98-f55b-76fe-9d36-42f8660e5b1d",
+      "gddSeasonId": null,
+      "published": true,
+      "createdAt": "2026-11-23T22:51:02.265Z",
+      "updatedAt": "2026-11-23T22:52:12.057Z"
+    },
+    {
+      "id": "01a20a9b-041e-70e3-b650-262da2ea8583",
+      "title": {
+        "uz": "Weekly Demo Day — 24-iyul",
+        "en": "Weekly Demo Day — 24 July"
+      },
+      "dateFrom": "2026-07-24",
+      "dateTo": null,
+      "time": "17:00",
+      "place": {
+        "uz": "onlayn efir (YouTube)",
+        "en": "live online (YouTube)"
+      },
+      "summary": {
+        "uz": "Startup Garage Weekly Demo Day: startaplar Grand Demo Day saralash bosqichida mentorlar va ekspertlar oldida onlayn pitch qildi. Efir yozuvi YouTube'da. Eng yuqori ball: WindFlower — 18, Shartli.uz — 16, Smart Driving — 12.",
+        "en": "Startup Garage Weekly Demo Day: startups pitched online to mentors and experts in the Grand Demo Day selection round. The recording is on YouTube. Top scores: WindFlower — 18, Shartli.uz — 16, Smart Driving — 12."
+      },
+      "url": "https://www.youtube.com/live/K-4cIdsanA0",
+      "coverPhotoId": "01a20a98-f14f-7262-bda6-ad74d0efe82d",
+      "gddSeasonId": null,
+      "published": true,
+      "createdAt": "2026-11-23T22:51:01.022Z",
+      "updatedAt": "2026-11-23T22:52:10.829Z"
+    },
+    {
+      "id": "01a20a9a-ff0b-726c-a5a1-e6ad09fd3d8f",
+      "title": {
+        "uz": "Weekly Demo Day — 17-iyul",
+        "en": "Weekly Demo Day — 17 July"
+      },
+      "dateFrom": "2026-07-17",
+      "dateTo": null,
+      "time": "17:00",
+      "place": {
+        "uz": "onlayn efir (YouTube)",
+        "en": "live online (YouTube)"
+      },
+      "summary": {
+        "uz": "Startup Garage Weekly Demo Day: startaplar Grand Demo Day saralash bosqichida mentorlar va ekspertlar oldida onlayn pitch qildi. Efir yozuvi YouTube'da. Eng yuqori ball: Uagro — 20, Darsli — 16, Ovoza — 15.",
+        "en": "Startup Garage Weekly Demo Day: startups pitched online to mentors and experts in the Grand Demo Day selection round. The recording is on YouTube. Top scores: Uagro — 20, Darsli — 16, Ovoza — 15."
+      },
+      "url": "https://www.youtube.com/live/t3_SNGAKii8",
+      "coverPhotoId": "01a20a98-ec1e-714f-814e-46e90c9cc56b",
+      "gddSeasonId": null,
+      "published": true,
+      "createdAt": "2026-11-23T22:50:59.724Z",
+      "updatedAt": "2026-11-23T22:52:09.717Z"
+    },
+    {
+      "id": "01a20a9a-fac2-75bd-8ee2-3b85344506d7",
+      "title": {
+        "uz": "Weekly Demo Day — 10-iyul",
+        "en": "Weekly Demo Day — 10 July"
+      },
+      "dateFrom": "2026-07-10",
+      "dateTo": null,
+      "time": "18:00",
+      "place": {
+        "uz": "onlayn efir (YouTube)",
+        "en": "live online (YouTube)"
+      },
+      "summary": {
+        "uz": "Startup Garage Weekly Demo Day: startaplar Grand Demo Day saralash bosqichida mentorlar va ekspertlar oldida onlayn pitch qildi. Efir yozuvi YouTube'da. Eng yuqori ball: Focus — 16, Ziyrak Machine — 15, Daftaron — 14.",
+        "en": "Startup Garage Weekly Demo Day: startups pitched online to mentors and experts in the Grand Demo Day selection round. The recording is on YouTube. Top scores: Focus — 16, Ziyrak Machine — 15, Daftaron — 14."
+      },
+      "url": "https://www.youtube.com/live/DB-CWGDqhpA",
+      "coverPhotoId": "01a20a98-e336-705d-be13-dbe801589ddc",
+      "gddSeasonId": null,
+      "published": true,
+      "createdAt": "2026-11-23T22:50:58.626Z",
+      "updatedAt": "2026-11-23T22:52:08.621Z"
     }
   ],
   "news": [
     {
-      "id": "1fba3bc4-1815-5449-8c6b-0726c05356f2",
+      "id": "01a2083b-c573-754c-8373-83e6d48dfef0",
       "slug": "grand-demo-day",
       "tag": {
         "uz": "Tadbir",
@@ -433,232 +841,406 @@
         "en": ""
       },
       "url": "/grand-demo-day",
-      "coverPhotoId": "5ee9e4c8-0b7c-59ad-add4-12c79547d5fe",
+      "coverPhotoId": "01a2083a-ed97-72f8-8f9e-1874e1659675",
       "published": true,
-      "createdAt": "2026-11-12T00:00:00.000Z",
-      "updatedAt": "2026-11-12T00:00:00.000Z"
+      "createdAt": "2026-11-23T11:47:44.627Z",
+      "updatedAt": "2026-11-23T11:47:44.627Z"
     }
   ],
   "photos": [
     {
-      "id": "5ee9e4c8-0b7c-59ad-add4-12c79547d5fe",
+      "id": "01a2083a-ed97-72f8-8f9e-1874e1659675",
       "width": 1400,
       "height": 1050,
       "alt": {
         "uz": "Grand Demo Day ishtirokchilari",
         "en": "Grand Demo Day participants"
       },
-      "url": "/assets/gdd/gdd-01.webp"
+      "url": "/v1/public/site/photos/01a2083a-ed97-72f8-8f9e-1874e1659675?v=1795434410096"
     },
     {
-      "id": "f8040ef3-4a7c-533e-9790-9740e5cea252",
+      "id": "01a2083a-f6c9-75bb-8642-ca41c8e4982e",
       "width": 1400,
       "height": 1050,
       "alt": {
         "uz": "Grand Demo Day, foto 2",
         "en": "Grand Demo Day, photo 2"
       },
-      "url": "/assets/gdd/gdd-02.webp"
+      "url": "/v1/public/site/photos/01a2083a-f6c9-75bb-8642-ca41c8e4982e?v=1795434411992"
     },
     {
-      "id": "1fe9512c-922f-5fe6-9409-4a70e22e625c",
+      "id": "01a2083b-0340-772a-ac76-ebc6ca54e932",
       "width": 1050,
       "height": 1400,
       "alt": {
         "uz": "Grand Demo Day, foto 3",
         "en": "Grand Demo Day, photo 3"
       },
-      "url": "/assets/gdd/gdd-03.webp"
+      "url": "/v1/public/site/photos/01a2083b-0340-772a-ac76-ebc6ca54e932?v=1795434415051"
     },
     {
-      "id": "0e0df450-0404-51d9-9bfb-e36b5dc40f4b",
+      "id": "01a2083b-0efe-74b4-bc96-d815a62d1aa8",
       "width": 1050,
       "height": 1400,
       "alt": {
         "uz": "Grand Demo Day, foto 4",
         "en": "Grand Demo Day, photo 4"
       },
-      "url": "/assets/gdd/gdd-04.webp"
+      "url": "/v1/public/site/photos/01a2083b-0efe-74b4-bc96-d815a62d1aa8?v=1795434418065"
     },
     {
-      "id": "42a82179-77b8-59e0-a874-fbac49f494c7",
+      "id": "01a2083b-154b-70a4-b715-2a4a44349c2c",
       "width": 1050,
       "height": 1400,
       "alt": {
         "uz": "Grand Demo Day, foto 5",
         "en": "Grand Demo Day, photo 5"
       },
-      "url": "/assets/gdd/gdd-05.webp"
+      "url": "/v1/public/site/photos/01a2083b-154b-70a4-b715-2a4a44349c2c?v=1795434419753"
     },
     {
-      "id": "1d385b45-aded-5623-afee-87981f03cdfc",
+      "id": "01a2083b-1a7f-747f-9974-c272859e299e",
       "width": 1050,
       "height": 1400,
       "alt": {
         "uz": "Grand Demo Day, foto 6",
         "en": "Grand Demo Day, photo 6"
       },
-      "url": "/assets/gdd/gdd-06.webp"
+      "url": "/v1/public/site/photos/01a2083b-1a7f-747f-9974-c272859e299e?v=1795434421006"
     },
     {
-      "id": "a812adf1-d698-5aae-a93e-af9873e74c50",
+      "id": "01a2083b-2517-7019-b7c6-60ea47b7a27e",
       "width": 1050,
       "height": 1400,
       "alt": {
         "uz": "Grand Demo Day, foto 7",
         "en": "Grand Demo Day, photo 7"
       },
-      "url": "/assets/gdd/gdd-07.webp"
+      "url": "/v1/public/site/photos/01a2083b-2517-7019-b7c6-60ea47b7a27e?v=1795434423715"
     },
     {
-      "id": "b119ebbd-b6e0-5ae1-83cd-ecb61daafb8d",
+      "id": "01a2083b-2eba-7676-a5dd-65c09e22fee9",
       "width": 1050,
       "height": 1400,
       "alt": {
         "uz": "Grand Demo Day, foto 8",
         "en": "Grand Demo Day, photo 8"
       },
-      "url": "/assets/gdd/gdd-08.webp"
+      "url": "/v1/public/site/photos/01a2083b-2eba-7676-a5dd-65c09e22fee9?v=1795434426188"
     },
     {
-      "id": "f8b58c6a-096b-5443-8004-14b26139d246",
+      "id": "01a2083b-39e7-713d-a22e-0946c22c735b",
       "width": 1050,
       "height": 1400,
       "alt": {
         "uz": "Grand Demo Day, foto 9",
         "en": "Grand Demo Day, photo 9"
       },
-      "url": "/assets/gdd/gdd-09.webp"
+      "url": "/v1/public/site/photos/01a2083b-39e7-713d-a22e-0946c22c735b?v=1795434429028"
     },
     {
-      "id": "d904eeff-32ce-5c0c-b8c3-1b14bf2e3b9d",
+      "id": "01a2083b-47fe-74eb-8668-8f5df2aa1299",
       "width": 1050,
       "height": 1400,
       "alt": {
         "uz": "Grand Demo Day, foto 10",
         "en": "Grand Demo Day, photo 10"
       },
-      "url": "/assets/gdd/gdd-10.webp"
+      "url": "/v1/public/site/photos/01a2083b-47fe-74eb-8668-8f5df2aa1299?v=1795434432952"
     },
     {
-      "id": "4d7c39b7-da8c-537c-aeaa-4d34944e67da",
+      "id": "01a2083b-5737-7199-a29c-8ba959b20b44",
       "width": 1050,
       "height": 1400,
       "alt": {
         "uz": "Grand Demo Day, foto 11",
         "en": "Grand Demo Day, photo 11"
       },
-      "url": "/assets/gdd/gdd-11.webp"
+      "url": "/v1/public/site/photos/01a2083b-5737-7199-a29c-8ba959b20b44?v=1795434436532"
     },
     {
-      "id": "b346364f-9d8b-5eef-979c-01168840f0cc",
+      "id": "01a2083b-6541-7027-bd88-6537b60fe31c",
       "width": 1050,
       "height": 1400,
       "alt": {
         "uz": "Grand Demo Day, foto 12",
         "en": "Grand Demo Day, photo 12"
       },
-      "url": "/assets/gdd/gdd-12.webp"
+      "url": "/v1/public/site/photos/01a2083b-6541-7027-bd88-6537b60fe31c?v=1795434440196"
     },
     {
-      "id": "77808845-3a2d-594b-b1c9-d07e46f0357e",
+      "id": "01a2083b-6e2c-7764-b1af-6a0c972a7927",
       "width": 1050,
       "height": 1400,
       "alt": {
         "uz": "Grand Demo Day, foto 13",
         "en": "Grand Demo Day, photo 13"
       },
-      "url": "/assets/gdd/gdd-13.webp"
+      "url": "/v1/public/site/photos/01a2083b-6e2c-7764-b1af-6a0c972a7927?v=1795434442438"
     },
     {
-      "id": "2344bc22-cdc7-5fd8-a427-a65d315a168a",
+      "id": "01a2083b-749e-7688-99d8-6c718bbb7960",
       "width": 1050,
       "height": 1400,
       "alt": {
         "uz": "Grand Demo Day, foto 14",
         "en": "Grand Demo Day, photo 14"
       },
-      "url": "/assets/gdd/gdd-14.webp"
+      "url": "/v1/public/site/photos/01a2083b-749e-7688-99d8-6c718bbb7960?v=1795434444077"
     },
     {
-      "id": "154ca53a-6aee-5e90-b18c-034d1989da8a",
+      "id": "01a2083b-7e55-70cd-9530-bb2bda8aca4d",
       "width": 1050,
       "height": 1400,
       "alt": {
         "uz": "Grand Demo Day, foto 15",
         "en": "Grand Demo Day, photo 15"
       },
-      "url": "/assets/gdd/gdd-15.webp"
+      "url": "/v1/public/site/photos/01a2083b-7e55-70cd-9530-bb2bda8aca4d?v=1795434446545"
     },
     {
-      "id": "8699b419-32ff-520c-8710-ba9828cbbe54",
+      "id": "01a2083b-896d-71ff-9101-e3e3c014a580",
       "width": 1050,
       "height": 1400,
       "alt": {
         "uz": "Grand Demo Day, foto 16",
         "en": "Grand Demo Day, photo 16"
       },
-      "url": "/assets/gdd/gdd-16.webp"
+      "url": "/v1/public/site/photos/01a2083b-896d-71ff-9101-e3e3c014a580?v=1795434449387"
     },
     {
-      "id": "56472e24-9f90-5d80-b122-b70763bdfd66",
+      "id": "01a2083b-91a0-738f-9c47-b6d8a565b314",
       "width": 1050,
       "height": 1400,
       "alt": {
         "uz": "Grand Demo Day, foto 17",
         "en": "Grand Demo Day, photo 17"
       },
-      "url": "/assets/gdd/gdd-17.webp"
+      "url": "/v1/public/site/photos/01a2083b-91a0-738f-9c47-b6d8a565b314?v=1795434451493"
     },
     {
-      "id": "b1a570c8-3c10-5c84-9021-0e41dc4e41f3",
+      "id": "01a2083b-9780-7619-bfa4-c2c9bdc8aba6",
       "width": 1050,
       "height": 1400,
       "alt": {
         "uz": "Grand Demo Day, foto 18",
         "en": "Grand Demo Day, photo 18"
       },
-      "url": "/assets/gdd/gdd-18.webp"
+      "url": "/v1/public/site/photos/01a2083b-9780-7619-bfa4-c2c9bdc8aba6?v=1795434452987"
     },
     {
-      "id": "602f837a-b034-5564-b4c1-ab5cac05e73b",
+      "id": "01a2083b-a10c-7565-b8b1-2cce2b355361",
       "width": 1050,
       "height": 1400,
       "alt": {
         "uz": "Grand Demo Day, foto 19",
         "en": "Grand Demo Day, photo 19"
       },
-      "url": "/assets/gdd/gdd-19.webp"
+      "url": "/v1/public/site/photos/01a2083b-a10c-7565-b8b1-2cce2b355361?v=1795434455433"
     },
     {
-      "id": "39e2f420-caa6-568c-abe2-1639c2012a76",
+      "id": "01a2083b-a853-7799-9c78-fe97c2024473",
       "width": 1050,
       "height": 1400,
       "alt": {
         "uz": "Grand Demo Day, foto 20",
         "en": "Grand Demo Day, photo 20"
       },
-      "url": "/assets/gdd/gdd-20.webp"
+      "url": "/v1/public/site/photos/01a2083b-a853-7799-9c78-fe97c2024473?v=1795434457316"
     },
     {
-      "id": "0102ef94-cd40-57cb-8914-0b1d82f1e156",
+      "id": "01a2083b-b2c7-74b9-b0b1-bb0b2686d3ca",
       "width": 1050,
       "height": 1400,
       "alt": {
         "uz": "Grand Demo Day, foto 21",
         "en": "Grand Demo Day, photo 21"
       },
-      "url": "/assets/gdd/gdd-21.webp"
+      "url": "/v1/public/site/photos/01a2083b-b2c7-74b9-b0b1-bb0b2686d3ca?v=1795434459973"
     },
     {
-      "id": "562c604a-d92e-56b2-9063-273021ac388d",
+      "id": "01a2083b-bca4-7659-8e9b-d4829c536307",
       "width": 1050,
       "height": 1400,
       "alt": {
         "uz": "Grand Demo Day, foto 22",
         "en": "Grand Demo Day, photo 22"
       },
-      "url": "/assets/gdd/gdd-22.webp"
+      "url": "/v1/public/site/photos/01a2083b-bca4-7659-8e9b-d4829c536307?v=1795434462497"
+    },
+    {
+      "id": "01a20a98-e336-705d-be13-dbe801589ddc",
+      "width": 640,
+      "height": 800,
+      "alt": {
+        "uz": "Weekly Demo Day 10-iyul natijalari",
+        "en": "Weekly Demo Day 10 July results"
+      },
+      "url": "/v1/public/site/photos/01a20a98-e336-705d-be13-dbe801589ddc?v=1795474121539"
+    },
+    {
+      "id": "01a20a98-ec1e-714f-814e-46e90c9cc56b",
+      "width": 640,
+      "height": 800,
+      "alt": {
+        "uz": "Weekly Demo Day 17-iyul natijalari",
+        "en": "Weekly Demo Day 17 July results"
+      },
+      "url": "/v1/public/site/photos/01a20a98-ec1e-714f-814e-46e90c9cc56b?v=1795474123823"
+    },
+    {
+      "id": "01a20a98-f14f-7262-bda6-ad74d0efe82d",
+      "width": 640,
+      "height": 800,
+      "alt": {
+        "uz": "Weekly Demo Day 24-iyul natijalari",
+        "en": "Weekly Demo Day 24 July results"
+      },
+      "url": "/v1/public/site/photos/01a20a98-f14f-7262-bda6-ad74d0efe82d?v=1795474125144"
+    },
+    {
+      "id": "01a20a98-f55b-76fe-9d36-42f8660e5b1d",
+      "width": 640,
+      "height": 800,
+      "alt": {
+        "uz": "Weekly Demo Day 31-iyul natijalari",
+        "en": "Weekly Demo Day 31 July results"
+      },
+      "url": "/v1/public/site/photos/01a20a98-f55b-76fe-9d36-42f8660e5b1d?v=1795474126179"
+    },
+    {
+      "id": "01a20a98-f98f-70d4-b64a-8ed58b8cac7b",
+      "width": 640,
+      "height": 800,
+      "alt": {
+        "uz": "Weekly Demo Day 21-avgust e'lon posteri",
+        "en": "Weekly Demo Day 21 August poster"
+      },
+      "url": "/v1/public/site/photos/01a20a98-f98f-70d4-b64a-8ed58b8cac7b?v=1795474127255"
+    },
+    {
+      "id": "01a20a98-fdab-76f8-88c8-f2ccc5ebb751",
+      "width": 640,
+      "height": 800,
+      "alt": {
+        "uz": "Weekly Demo Day 28-avgust e'lon posteri",
+        "en": "Weekly Demo Day 28 August poster"
+      },
+      "url": "/v1/public/site/photos/01a20a98-fdab-76f8-88c8-f2ccc5ebb751?v=1795474128310"
+    },
+    {
+      "id": "01a20a99-033b-702e-911e-d9e965a3a074",
+      "width": 640,
+      "height": 800,
+      "alt": {
+        "uz": "Weekly Demo Day 3-sentabr e'lon posteri",
+        "en": "Weekly Demo Day 3 September poster"
+      },
+      "url": "/v1/public/site/photos/01a20a99-033b-702e-911e-d9e965a3a074?v=1795474129734"
+    },
+    {
+      "id": "01a20a99-078f-7396-a42c-8433a324db39",
+      "width": 640,
+      "height": 800,
+      "alt": {
+        "uz": "Grand Demo Day saralash — Weekly Demo Day e'lon posteri",
+        "en": "Grand Demo Day selection — Weekly Demo Day poster"
+      },
+      "url": "/v1/public/site/photos/01a20a99-078f-7396-a42c-8433a324db39?v=1795474130838"
+    }
+  ],
+  "startups": [
+    {
+      "slug": "agrosense",
+      "name": "AgroSense",
+      "logoUrl": "/v1/public/logos/0c9b6f2e-3b1a-4f7e-9d61-2a4f5e8c7b10?v=2",
+      "tagline": {
+        "uz": "Fermerlar uchun sun’iy intellektli tuproq va suv monitoringi",
+        "en": "AI soil and water monitoring for farmers"
+      },
+      "description": {
+        "uz": "AgroSense dalaga o‘rnatiladigan arzon sensorlar va mobil ilova orqali tuproq namligi, harorat va o‘g‘it ehtiyojini kuzatadi.\n\nFermer qachon va qancha sug‘orish kerakligini Telegram orqali oladi: tajriba xo‘jaliklarida suv sarfi 30% gacha kamaydi.",
+        "en": "AgroSense tracks soil moisture, temperature and fertiliser needs with low-cost field sensors and a mobile app.\n\nFarmers get irrigation advice in Telegram: pilot farms cut water use by up to 30%."
+      },
+      "spheres": [
+        "AgriTech",
+        "AI"
+      ],
+      "stage": "growth",
+      "region": {
+        "uz": "Samarqand viloyati",
+        "en": "Samarkand Region"
+      },
+      "year": 2025,
+      "website": "https://agrosense.uz",
+      "telegram": "agrosense_uz",
+      "instagram": "agrosense.uz",
+      "founders": [],
+      "invested": true,
+      "gddSeasons": [
+        4
+      ]
+    },
+    {
+      "slug": "darsbor",
+      "name": "Darsbor",
+      "logoUrl": null,
+      "tagline": {
+        "uz": "Maktab o‘quvchilari uchun moslashuvchan onlayn mashg‘ulotlar",
+        "en": ""
+      },
+      "description": {
+        "uz": "Darsbor 5–11-sinf o‘quvchilariga matematika va ingliz tilidan har kuni 15 daqiqalik mashqlar beradi. Platforma o‘quvchining xatolaridan kelib chiqib keyingi topshiriqni tanlaydi.\n\nO‘qituvchi va ota-onalar haftalik hisobotni ko‘radi.",
+        "en": "Darsbor gives grade 5–11 students a daily 15-minute practice in maths and English, picking the next task from the student’s mistakes.\n\nTeachers and parents get a weekly report."
+      },
+      "spheres": [
+        "EdTech",
+        "AI"
+      ],
+      "stage": "mvp",
+      "region": {
+        "uz": "Toshkent shahri",
+        "en": "Tashkent"
+      },
+      "year": 2026,
+      "website": null,
+      "telegram": "darsbor",
+      "instagram": null,
+      "founders": [],
+      "invested": false,
+      "gddSeasons": []
+    },
+    {
+      "slug": "medqueue",
+      "name": "MedQueue",
+      "logoUrl": "/v1/public/logos/5d2e8a41-7c3f-4b2a-8e19-6f0b3c9d4a27?v=1",
+      "tagline": {
+        "uz": "",
+        "en": ""
+      },
+      "description": {
+        "uz": "MedQueue xususiy klinikalar uchun onlayn navbat va qabulni boshqarish tizimi. Bemor shifokorni tanlaydi, vaqtni band qiladi va eslatmani SMS orqali oladi; klinika esa bo‘sh vaqtlar va qabul statistikasini bitta panelda ko‘radi. Hozir Toshkentdagi 12 ta klinika foydalanmoqda.",
+        "en": "MedQueue is an online queue and appointment system for private clinics. Patients choose a doctor, book a time and get an SMS reminder; the clinic sees free slots and visit statistics in one dashboard. 12 clinics in Tashkent use it today."
+      },
+      "spheres": [
+        "HealthTech",
+        "SaaS"
+      ],
+      "stage": "scale",
+      "region": {
+        "uz": "Toshkent shahri",
+        "en": "Tashkent"
+      },
+      "year": 2024,
+      "website": "https://www.medqueue.uz",
+      "telegram": null,
+      "instagram": "medqueue_uz",
+      "founders": [
+        "Dilnoza Rahimova",
+        "Aziz Karimov"
+      ],
+      "invested": false,
+      "gddSeasons": []
     }
   ]
 }
